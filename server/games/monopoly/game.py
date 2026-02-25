@@ -508,6 +508,7 @@ class MonopolyGame(ActionGuardMixin, Game):
                 input_request=MenuInput(
                     prompt="monopoly-select-property-mortgage",
                     options="_options_for_mortgage_property",
+                    bot_select="_bot_select_mortgage_property",
                 ),
             )
         )
@@ -521,6 +522,7 @@ class MonopolyGame(ActionGuardMixin, Game):
                 input_request=MenuInput(
                     prompt="monopoly-select-property-unmortgage",
                     options="_options_for_unmortgage_property",
+                    bot_select="_bot_select_unmortgage_property",
                 ),
             )
         )
@@ -534,6 +536,7 @@ class MonopolyGame(ActionGuardMixin, Game):
                 input_request=MenuInput(
                     prompt="monopoly-select-property-build",
                     options="_options_for_build_house",
+                    bot_select="_bot_select_build_house",
                 ),
             )
         )
@@ -1130,6 +1133,50 @@ class MonopolyGame(ActionGuardMixin, Game):
         # Keep list stable and reasonably sized for menu navigation.
         deduped = sorted(dict.fromkeys(options))
         return deduped[:120]
+
+    def _bot_select_mortgage_property(
+        self, player: MonopolyPlayer, options: list[str]
+    ) -> str | None:
+        """Pick the mortgage option that raises the most cash."""
+        if not options:
+            return None
+        return max(options, key=lambda space_id: self._mortgage_value(SPACE_BY_ID[space_id]))
+
+    def _bot_select_unmortgage_property(
+        self, player: MonopolyPlayer, options: list[str]
+    ) -> str | None:
+        """Pick the cheapest affordable unmortgage option."""
+        affordable = [
+            space_id
+            for space_id in options
+            if player.cash >= self._unmortgage_cost(SPACE_BY_ID[space_id])
+        ]
+        if not affordable:
+            return options[0] if options else None
+        return min(affordable, key=lambda space_id: self._unmortgage_cost(SPACE_BY_ID[space_id]))
+
+    def _bot_select_build_house(
+        self, player: MonopolyPlayer, options: list[str]
+    ) -> str | None:
+        """Pick the build option with strongest rent gain for cost."""
+        if not options:
+            return None
+
+        def _score(space_id: str) -> tuple[int, int, str]:
+            space = SPACE_BY_ID[space_id]
+            level = self._building_level(space_id)
+            if space.rents:
+                current_rent = space.rents[min(level, len(space.rents) - 1)]
+                if level == 0 and self._owner_has_full_color_set(player.id, space.color_group):
+                    current_rent = space.rents[0] * 2
+                next_rent = space.rents[min(level + 1, len(space.rents) - 1)]
+            else:
+                current_rent = space.rent
+                next_rent = space.rent
+            gain = max(0, next_rent - current_rent)
+            return (gain, -space.house_cost, self._space_label(space_id))
+
+        return max(options, key=_score)
 
     def _count_owned_kind(self, owner_id: str, kind: str) -> int:
         """Count how many properties of a kind the owner controls."""
@@ -2427,6 +2474,14 @@ class MonopolyGame(ActionGuardMixin, Game):
                 return "use_jail_card"
             if player.cash >= BAIL_AMOUNT and player.jail_turns >= 2:
                 return "pay_bail"
+
+        if not self.turn_has_rolled and not self.turn_pending_purchase_space_id:
+            if player.cash < 100 and self._options_for_mortgage_property(player):
+                return "mortgage_property"
+            if player.cash >= 800 and self._options_for_unmortgage_property(player):
+                return "unmortgage_property"
+            if player.cash >= 450 and self._options_for_build_house(player):
+                return "build_house"
         if not self.turn_has_rolled:
             return "roll_dice"
         pending_space = self._pending_purchase_space()
@@ -2436,6 +2491,10 @@ class MonopolyGame(ActionGuardMixin, Game):
             return "auction_property"
         if self.turn_can_roll_again:
             return "roll_dice"
+        if player.cash >= 450 and self._options_for_build_house(player):
+            return "build_house"
+        if player.cash >= 900 and self._options_for_unmortgage_property(player):
+            return "unmortgage_property"
         return "end_turn"
 
     def on_start(self) -> None:

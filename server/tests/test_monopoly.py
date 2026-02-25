@@ -3,6 +3,7 @@
 from server.games.monopoly.game import (
     MonopolyGame,
     MonopolyOptions,
+    MonopolyTradeOffer,
     STARTING_CASH,
     PASS_GO_CASH,
     BAIL_AMOUNT,
@@ -554,6 +555,57 @@ def test_monopoly_trade_accept_invalid_offer_cancels_pending():
     assert game.pending_trade_offer is None
     assert game.property_owners["baltic_avenue"] == host.id
     assert host.cash == STARTING_CASH
+
+
+def test_monopoly_bot_accepts_favorable_pending_trade_offer():
+    game = _start_two_player_game()
+    host = game.players[0]
+    guest = game.players[1]
+
+    guest.owned_space_ids.append("mediterranean_avenue")
+    game.property_owners["mediterranean_avenue"] = guest.id
+    game.pending_trade_offer = MonopolyTradeOffer(
+        proposer_id=host.id,
+        target_id=guest.id,
+        give_cash=200,
+        receive_property_id="mediterranean_avenue",
+        summary="Buy Mediterranean Avenue from Guest for 200",
+    )
+
+    assert game.bot_think(guest) == "accept_trade"
+
+
+def test_monopoly_bot_declines_unfavorable_pending_trade_offer():
+    game = _start_two_player_game()
+    host = game.players[0]
+    guest = game.players[1]
+
+    guest.owned_space_ids.append("boardwalk")
+    game.property_owners["boardwalk"] = guest.id
+    game.pending_trade_offer = MonopolyTradeOffer(
+        proposer_id=host.id,
+        target_id=guest.id,
+        give_cash=50,
+        receive_property_id="boardwalk",
+        summary="Buy Boardwalk from Guest for 50",
+    )
+
+    assert game.bot_think(guest) == "decline_trade"
+
+
+def test_monopoly_bot_builds_when_cash_rich_and_build_options_exist():
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+
+    for space_id in ("mediterranean_avenue", "baltic_avenue"):
+        host.owned_space_ids.append(space_id)
+        game.property_owners[space_id] = host.id
+    host.cash = 1000
+    game.turn_has_rolled = False
+    game.turn_pending_purchase_space_id = ""
+
+    assert game.bot_think(host) == "build_house"
 
 
 def test_monopoly_build_house_obeys_even_building_rules():
