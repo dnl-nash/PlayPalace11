@@ -9,7 +9,7 @@ from ..base import Game, Player, GameOptions
 from ..registry import register_game
 from ...game_utils.action_guard_mixin import ActionGuardMixin
 from ...game_utils.bot_helper import BotHelper
-from ...game_utils.actions import Action, ActionSet, Visibility
+from ...game_utils.actions import Action, ActionSet, Visibility, MenuInput
 from ...game_utils.options import MenuOption, option_field
 from ...messages.localization import Localization
 from ...ui.keybinds import KeybindState
@@ -99,6 +99,34 @@ BOARD_SIZE = len(CLASSIC_STANDARD_BOARD)
 STARTING_CASH = 1500
 PASS_GO_CASH = 200
 TAX_AMOUNTS = {"income_tax": 200, "luxury_tax": 100}
+BAIL_AMOUNT = 50
+MIN_AUCTION_INCREMENT = 10
+
+CHANCE_CARD_IDS = [
+    "advance_to_go",
+    "bank_dividend_50",
+    "go_back_three",
+    "go_to_jail",
+    "poor_tax_15",
+]
+COMMUNITY_CHEST_CARD_IDS = [
+    "bank_error_collect_200",
+    "doctor_fee_pay_50",
+    "income_tax_refund_20",
+    "go_to_jail",
+    "get_out_of_jail_free",
+]
+CARD_DESCRIPTION_KEYS = {
+    "advance_to_go": "monopoly-card-advance-to-go",
+    "bank_dividend_50": "monopoly-card-bank-dividend-50",
+    "go_back_three": "monopoly-card-go-back-three",
+    "go_to_jail": "monopoly-card-go-to-jail",
+    "poor_tax_15": "monopoly-card-poor-tax-15",
+    "bank_error_collect_200": "monopoly-card-bank-error-200",
+    "doctor_fee_pay_50": "monopoly-card-doctor-fee-50",
+    "income_tax_refund_20": "monopoly-card-tax-refund-20",
+    "get_out_of_jail_free": "monopoly-card-get-out-of-jail",
+}
 
 
 @dataclass
@@ -109,6 +137,9 @@ class MonopolyPlayer(Player):
     cash: int = STARTING_CASH
     owned_space_ids: list[str] = field(default_factory=list)
     bankrupt: bool = False
+    in_jail: bool = False
+    jail_turns: int = 0
+    get_out_of_jail_cards: int = 0
 
 
 @dataclass
@@ -146,9 +177,20 @@ class MonopolyGame(ActionGuardMixin, Game):
     active_edition_ids: list[str] = field(default_factory=list)
     active_anchor_edition_id: str = ""
     property_owners: dict[str, str] = field(default_factory=dict)
+    mortgaged_space_ids: list[str] = field(default_factory=list)
+
     turn_has_rolled: bool = False
     turn_last_roll: list[int] = field(default_factory=list)
     turn_pending_purchase_space_id: str = ""
+    turn_doubles_count: int = 0
+    turn_can_roll_again: bool = False
+
+    chance_deck_order: list[str] = field(default_factory=lambda: CHANCE_CARD_IDS.copy())
+    chance_deck_index: int = 0
+    community_chest_deck_order: list[str] = field(
+        default_factory=lambda: COMMUNITY_CHEST_CARD_IDS.copy()
+    )
+    community_chest_deck_index: int = 0
 
     @classmethod
     def get_name(cls) -> str:
@@ -202,6 +244,59 @@ class MonopolyGame(ActionGuardMixin, Game):
         )
         action_set.add(
             Action(
+                id="auction_property",
+                label=Localization.get(locale, "monopoly-auction-property"),
+                handler="_action_auction_property",
+                is_enabled="_is_auction_property_enabled",
+                is_hidden="_is_auction_property_hidden",
+            )
+        )
+        action_set.add(
+            Action(
+                id="mortgage_property",
+                label=Localization.get(locale, "monopoly-mortgage-property"),
+                handler="_action_mortgage_property",
+                is_enabled="_is_mortgage_property_enabled",
+                is_hidden="_is_mortgage_property_hidden",
+                input_request=MenuInput(
+                    prompt="monopoly-select-property-mortgage",
+                    options="_options_for_mortgage_property",
+                ),
+            )
+        )
+        action_set.add(
+            Action(
+                id="unmortgage_property",
+                label=Localization.get(locale, "monopoly-unmortgage-property"),
+                handler="_action_unmortgage_property",
+                is_enabled="_is_unmortgage_property_enabled",
+                is_hidden="_is_unmortgage_property_hidden",
+                input_request=MenuInput(
+                    prompt="monopoly-select-property-unmortgage",
+                    options="_options_for_unmortgage_property",
+                ),
+            )
+        )
+        action_set.add(
+            Action(
+                id="pay_bail",
+                label=Localization.get(locale, "monopoly-pay-bail"),
+                handler="_action_pay_bail",
+                is_enabled="_is_pay_bail_enabled",
+                is_hidden="_is_pay_bail_hidden",
+            )
+        )
+        action_set.add(
+            Action(
+                id="use_jail_card",
+                label=Localization.get(locale, "monopoly-use-jail-card"),
+                handler="_action_use_jail_card",
+                is_enabled="_is_use_jail_card_enabled",
+                is_hidden="_is_use_jail_card_hidden",
+            )
+        )
+        action_set.add(
+            Action(
                 id="end_turn",
                 label=Localization.get(locale, "monopoly-end-turn"),
                 handler="_action_end_turn",
@@ -216,6 +311,15 @@ class MonopolyGame(ActionGuardMixin, Game):
         super().setup_keybinds()
         self.define_keybind("r", "Roll dice", ["roll_dice"], state=KeybindState.ACTIVE)
         self.define_keybind("b", "Buy property", ["buy_property"], state=KeybindState.ACTIVE)
+        self.define_keybind("a", "Auction property", ["auction_property"], state=KeybindState.ACTIVE)
+        self.define_keybind("m", "Mortgage property", ["mortgage_property"], state=KeybindState.ACTIVE)
+        self.define_keybind(
+            "shift+m",
+            "Unmortgage property",
+            ["unmortgage_property"],
+            state=KeybindState.ACTIVE,
+        )
+        self.define_keybind("j", "Pay bail", ["pay_bail"], state=KeybindState.ACTIVE)
         self.define_keybind("e", "End turn", ["end_turn"], state=KeybindState.ACTIVE)
         self.define_keybind(
             "p",
@@ -305,6 +409,24 @@ class MonopolyGame(ActionGuardMixin, Game):
         """Get board space by board index."""
         return CLASSIC_STANDARD_BOARD[position % BOARD_SIZE]
 
+    def _space_label(self, space_id: str) -> str:
+        """Return display label for a space id."""
+        space = SPACE_BY_ID.get(space_id)
+        return space.name if space else space_id
+
+    def _mortgage_value(self, space: MonopolySpace) -> int:
+        """Get mortgage value for a space."""
+        return max(1, space.price // 2)
+
+    def _unmortgage_cost(self, space: MonopolySpace) -> int:
+        """Get unmortgage cost for a space."""
+        mortgage_value = self._mortgage_value(space)
+        return (mortgage_value * 11 + 9) // 10
+
+    def _is_space_mortgaged(self, space_id: str) -> bool:
+        """Check whether a space is currently mortgaged."""
+        return space_id in self.mortgaged_space_ids
+
     def _pending_purchase_space(self) -> MonopolySpace | None:
         """Get the currently pending purchasable space for this turn."""
         if not self.turn_pending_purchase_space_id:
@@ -322,11 +444,110 @@ class MonopolyGame(ActionGuardMixin, Game):
             return False
         return player.cash >= space.price > 0
 
-    def _reset_turn_state(self) -> None:
+    def _reset_turn_state(self, *, reset_doubles: bool = True) -> None:
         """Reset transient per-turn state."""
         self.turn_has_rolled = False
         self.turn_last_roll.clear()
         self.turn_pending_purchase_space_id = ""
+        self.turn_can_roll_again = False
+        if reset_doubles:
+            self.turn_doubles_count = 0
+
+    def _prepare_next_roll_after_doubles(self, player: MonopolyPlayer) -> None:
+        """Unlock another roll for doubles chain turns."""
+        self.turn_has_rolled = False
+        self.turn_last_roll.clear()
+        self.turn_pending_purchase_space_id = ""
+        self.turn_can_roll_again = False
+        self.broadcast_l("monopoly-roll-again", player=player.name)
+
+    def _move_player(
+        self, player: MonopolyPlayer, steps: int, *, collect_pass_go: bool
+    ) -> MonopolySpace:
+        """Move player by steps and return landed space."""
+        old_position = player.position
+        absolute_position = old_position + steps
+        player.position = absolute_position % BOARD_SIZE
+
+        if collect_pass_go and absolute_position >= BOARD_SIZE:
+            player.cash += PASS_GO_CASH
+            self.broadcast_l(
+                "monopoly-pass-go",
+                player=player.name,
+                amount=PASS_GO_CASH,
+                cash=player.cash,
+            )
+        return self._space_at(player.position)
+
+    def _draw_card(self, deck_type: str) -> str:
+        """Draw the next card from a deck in cyclic order."""
+        if deck_type == "chance":
+            if not self.chance_deck_order:
+                self.chance_deck_order = CHANCE_CARD_IDS.copy()
+                random.shuffle(self.chance_deck_order)
+            card = self.chance_deck_order[self.chance_deck_index % len(self.chance_deck_order)]
+            self.chance_deck_index += 1
+            return card
+
+        if not self.community_chest_deck_order:
+            self.community_chest_deck_order = COMMUNITY_CHEST_CARD_IDS.copy()
+            random.shuffle(self.community_chest_deck_order)
+        card = self.community_chest_deck_order[
+            self.community_chest_deck_index % len(self.community_chest_deck_order)
+        ]
+        self.community_chest_deck_index += 1
+        return card
+
+    def _send_to_jail(self, player: MonopolyPlayer, *, by_triple_doubles: bool = False) -> None:
+        """Send a player to jail and clear unresolved landing state."""
+        player.position = 10
+        player.in_jail = True
+        player.jail_turns = 0
+        self.turn_pending_purchase_space_id = ""
+        self.turn_can_roll_again = False
+
+        if by_triple_doubles:
+            self.broadcast_l("monopoly-three-doubles-jail", player=player.name)
+        else:
+            jail_space = self._space_at(10)
+            self.broadcast_l(
+                "monopoly-go-to-jail",
+                player=player.name,
+                space=jail_space.name,
+            )
+
+    def _apply_bank_payment(
+        self,
+        player: MonopolyPlayer,
+        amount: int,
+        *,
+        tax_name: str | None = None,
+        card_reason_key: str | None = None,
+    ) -> bool:
+        """Charge player money to bank; return False if player bankrupt."""
+        paid = min(player.cash, amount)
+        player.cash -= paid
+
+        if tax_name:
+            self.broadcast_l(
+                "monopoly-tax-paid",
+                player=player.name,
+                amount=paid,
+                tax=tax_name,
+                cash=player.cash,
+            )
+        elif card_reason_key:
+            self.broadcast_l(
+                card_reason_key,
+                player=player.name,
+                amount=paid,
+                cash=player.cash,
+            )
+
+        if paid < amount:
+            self._declare_bankrupt(player)
+            return False
+        return True
 
     def _sync_cash_scores(self) -> None:
         """Mirror player cash into team scores for score actions."""
@@ -350,7 +571,11 @@ class MonopolyGame(ActionGuardMixin, Game):
         for space_id in list(player.owned_space_ids):
             if self.property_owners.get(space_id) == player.id:
                 del self.property_owners[space_id]
+            if space_id in self.mortgaged_space_ids:
+                self.mortgaged_space_ids.remove(space_id)
         player.owned_space_ids.clear()
+        player.in_jail = False
+        player.jail_turns = 0
 
         self.broadcast_l(
             "monopoly-player-bankrupt",
@@ -386,6 +611,234 @@ class MonopolyGame(ActionGuardMixin, Game):
         if current and current.is_bot:
             BotHelper.jolt_bot(current, ticks=random.randint(8, 14))
 
+    def _resolve_card_effect(
+        self,
+        player: MonopolyPlayer,
+        deck_type: str,
+        card_id: str,
+        *,
+        depth: int,
+    ) -> str:
+        """Apply one Chance/Community Chest card and return resolution state."""
+        deck_label = "Chance" if deck_type == "chance" else "Community Chest"
+        card_text_key = CARD_DESCRIPTION_KEYS.get(card_id, card_id)
+        card_text = Localization.get("en", card_text_key)
+        self.broadcast_l(
+            "monopoly-card-drawn",
+            player=player.name,
+            deck=deck_label,
+            card=card_text,
+        )
+
+        if card_id == "advance_to_go":
+            player.position = 0
+            player.cash += PASS_GO_CASH
+            self.broadcast_l(
+                "monopoly-pass-go",
+                player=player.name,
+                amount=PASS_GO_CASH,
+                cash=player.cash,
+            )
+            return "resolved"
+
+        if card_id == "bank_dividend_50":
+            player.cash += 50
+            self.broadcast_l("monopoly-card-collect", player=player.name, amount=50, cash=player.cash)
+            return "resolved"
+
+        if card_id == "go_back_three":
+            player.position = (player.position - 3) % BOARD_SIZE
+            landed_space = self._space_at(player.position)
+            self.broadcast_l(
+                "monopoly-card-move",
+                player=player.name,
+                space=landed_space.name,
+            )
+            return self._resolve_space(player, landed_space, depth=depth + 1)
+
+        if card_id == "go_to_jail":
+            self._send_to_jail(player)
+            return "forced_end"
+
+        if card_id == "poor_tax_15":
+            if not self._apply_bank_payment(
+                player,
+                15,
+                card_reason_key="monopoly-card-pay",
+            ):
+                return "bankrupt"
+            return "resolved"
+
+        if card_id == "bank_error_collect_200":
+            player.cash += 200
+            self.broadcast_l(
+                "monopoly-card-collect",
+                player=player.name,
+                amount=200,
+                cash=player.cash,
+            )
+            return "resolved"
+
+        if card_id == "doctor_fee_pay_50":
+            if not self._apply_bank_payment(
+                player,
+                50,
+                card_reason_key="monopoly-card-pay",
+            ):
+                return "bankrupt"
+            return "resolved"
+
+        if card_id == "income_tax_refund_20":
+            player.cash += 20
+            self.broadcast_l(
+                "monopoly-card-collect",
+                player=player.name,
+                amount=20,
+                cash=player.cash,
+            )
+            return "resolved"
+
+        if card_id == "get_out_of_jail_free":
+            player.get_out_of_jail_cards += 1
+            self.broadcast_l(
+                "monopoly-card-jail-free",
+                player=player.name,
+                cards=player.get_out_of_jail_cards,
+            )
+            return "resolved"
+
+        return "resolved"
+
+    def _resolve_space(
+        self,
+        player: MonopolyPlayer,
+        landed_space: MonopolySpace,
+        *,
+        depth: int = 0,
+    ) -> str:
+        """Resolve effects for the landed space.
+
+        Returns:
+            "pending_purchase" when buy/auction decision is required,
+            "forced_end" when player was sent to jail,
+            "bankrupt" when player went bankrupt,
+            "resolved" otherwise.
+        """
+        if depth > 4:
+            return "resolved"
+
+        if landed_space.kind in PURCHASABLE_KINDS:
+            owner_id = self.property_owners.get(landed_space.space_id)
+            if owner_id is None:
+                self.turn_pending_purchase_space_id = landed_space.space_id
+                self.broadcast_l(
+                    "monopoly-property-available",
+                    player=player.name,
+                    property=landed_space.name,
+                    price=landed_space.price,
+                )
+                return "pending_purchase"
+
+            if owner_id == player.id:
+                self.broadcast_l(
+                    "monopoly-landed-owned",
+                    player=player.name,
+                    property=landed_space.name,
+                )
+                return "resolved"
+
+            if self._is_space_mortgaged(landed_space.space_id):
+                self.broadcast_l(
+                    "monopoly-mortgaged-no-rent",
+                    player=player.name,
+                    property=landed_space.name,
+                )
+                return "resolved"
+
+            owner = self.get_player_by_id(owner_id)
+            rent_due = landed_space.rent
+            paid = min(player.cash, rent_due)
+            player.cash -= paid
+            if owner and isinstance(owner, MonopolyPlayer):
+                owner.cash += paid
+
+            self.broadcast_l(
+                "monopoly-rent-paid",
+                player=player.name,
+                owner=owner.name if owner else "Bank",
+                amount=paid,
+                property=landed_space.name,
+            )
+            if paid < rent_due:
+                creditor_name = owner.name if owner else "Bank"
+                self._declare_bankrupt(player, creditor_name=creditor_name)
+                return "bankrupt"
+            return "resolved"
+
+        if landed_space.space_id in TAX_AMOUNTS:
+            if not self._apply_bank_payment(
+                player,
+                TAX_AMOUNTS[landed_space.space_id],
+                tax_name=landed_space.name,
+            ):
+                return "bankrupt"
+            return "resolved"
+
+        if landed_space.kind == "go_to_jail":
+            self._send_to_jail(player)
+            return "forced_end"
+
+        if landed_space.kind == "chance":
+            card = self._draw_card("chance")
+            return self._resolve_card_effect(player, "chance", card, depth=depth)
+
+        if landed_space.kind == "community_chest":
+            card = self._draw_card("community_chest")
+            return self._resolve_card_effect(player, "community_chest", card, depth=depth)
+
+        return "resolved"
+
+    def _run_property_auction(self, space: MonopolySpace, declined_by: MonopolyPlayer) -> None:
+        """Run a simple automatic auction for an unpurchased space."""
+        bidders: list[tuple[MonopolyPlayer, int]] = []
+        order = [p for p in self.turn_players if isinstance(p, MonopolyPlayer)]
+        for bidder in order:
+            if bidder.bankrupt:
+                continue
+            weight = 0.75 if bidder.id == declined_by.id else 0.9
+            max_bid = min(space.price, int(bidder.cash * weight))
+            if max_bid >= MIN_AUCTION_INCREMENT:
+                bidders.append((bidder, max_bid))
+
+        if not bidders:
+            self.broadcast_l("monopoly-auction-no-bids", property=space.name)
+            return
+
+        bidders.sort(key=lambda row: row[1], reverse=True)
+        winner, winner_cap = bidders[0]
+        second_cap = bidders[1][1] if len(bidders) > 1 else 0
+        reserve = max(1, space.price // 2)
+        if len(bidders) == 1:
+            winning_bid = min(winner_cap, reserve)
+        else:
+            winning_bid = min(winner_cap, second_cap + MIN_AUCTION_INCREMENT)
+        winning_bid = max(1, winning_bid)
+
+        winner.cash -= winning_bid
+        if space.space_id not in winner.owned_space_ids:
+            winner.owned_space_ids.append(space.space_id)
+        self.property_owners[space.space_id] = winner.id
+        if space.space_id in self.mortgaged_space_ids:
+            self.mortgaged_space_ids.remove(space.space_id)
+
+        self.broadcast_l(
+            "monopoly-auction-won",
+            player=winner.name,
+            property=space.name,
+            amount=winning_bid,
+            cash=winner.cash,
+        )
+
     def _is_roll_dice_enabled(self, player: Player) -> str | None:
         """Enable roll action for active player before rolling."""
         error = self.guard_turn_action_enabled(player)
@@ -394,13 +847,18 @@ class MonopolyGame(ActionGuardMixin, Game):
         mono_player: MonopolyPlayer = player  # type: ignore
         if mono_player.bankrupt:
             return "monopoly-bankrupt-player"
+        if self.turn_pending_purchase_space_id:
+            return "monopoly-resolve-property-first"
         if self.turn_has_rolled:
             return "monopoly-already-rolled"
         return None
 
     def _is_roll_dice_hidden(self, player: Player) -> Visibility:
         """Hide roll once a roll has been made this turn."""
-        return self.turn_action_visibility(player, extra_condition=not self.turn_has_rolled)
+        return self.turn_action_visibility(
+            player,
+            extra_condition=not self.turn_has_rolled and not self.turn_pending_purchase_space_id,
+        )
 
     def _is_buy_property_enabled(self, player: Player) -> str | None:
         """Enable buy action when current player can buy landed property."""
@@ -426,6 +884,130 @@ class MonopolyGame(ActionGuardMixin, Game):
             extra_condition=self.turn_has_rolled and self._pending_purchase_space() is not None,
         )
 
+    def _is_auction_property_enabled(self, player: Player) -> str | None:
+        """Enable auction action for pending unpurchased property."""
+        error = self.guard_turn_action_enabled(player)
+        if error:
+            return error
+        if not self.turn_has_rolled:
+            return "monopoly-roll-first"
+        if self._pending_purchase_space() is None:
+            return "monopoly-no-property-to-auction"
+        return None
+
+    def _is_auction_property_hidden(self, player: Player) -> Visibility:
+        """Show auction only when property purchase is pending."""
+        return self.turn_action_visibility(
+            player,
+            extra_condition=self.turn_has_rolled and self._pending_purchase_space() is not None,
+        )
+
+    def _options_for_mortgage_property(self, player: Player) -> list[str]:
+        """Menu options for unmortgaged owned properties."""
+        mono_player: MonopolyPlayer = player  # type: ignore
+        return sorted(
+            [
+                space_id
+                for space_id in mono_player.owned_space_ids
+                if self.property_owners.get(space_id) == mono_player.id
+                and space_id not in self.mortgaged_space_ids
+            ]
+        )
+
+    def _options_for_unmortgage_property(self, player: Player) -> list[str]:
+        """Menu options for mortgaged owned properties."""
+        mono_player: MonopolyPlayer = player  # type: ignore
+        return sorted(
+            [
+                space_id
+                for space_id in mono_player.owned_space_ids
+                if self.property_owners.get(space_id) == mono_player.id
+                and space_id in self.mortgaged_space_ids
+            ]
+        )
+
+    def _is_mortgage_property_enabled(self, player: Player) -> str | None:
+        """Enable mortgage action when player owns eligible properties."""
+        error = self.guard_turn_action_enabled(player)
+        if error:
+            return error
+        mono_player: MonopolyPlayer = player  # type: ignore
+        if mono_player.bankrupt:
+            return "monopoly-bankrupt-player"
+        if not self._options_for_mortgage_property(player):
+            return "monopoly-no-mortgage-options"
+        return None
+
+    def _is_mortgage_property_hidden(self, player: Player) -> Visibility:
+        """Show mortgage action when options exist."""
+        return self.turn_action_visibility(
+            player, extra_condition=bool(self._options_for_mortgage_property(player))
+        )
+
+    def _is_unmortgage_property_enabled(self, player: Player) -> str | None:
+        """Enable unmortgage action when player has mortgaged properties."""
+        error = self.guard_turn_action_enabled(player)
+        if error:
+            return error
+        mono_player: MonopolyPlayer = player  # type: ignore
+        if mono_player.bankrupt:
+            return "monopoly-bankrupt-player"
+        if not self._options_for_unmortgage_property(player):
+            return "monopoly-no-unmortgage-options"
+        return None
+
+    def _is_unmortgage_property_hidden(self, player: Player) -> Visibility:
+        """Show unmortgage action only when options exist."""
+        return self.turn_action_visibility(
+            player, extra_condition=bool(self._options_for_unmortgage_property(player))
+        )
+
+    def _is_pay_bail_enabled(self, player: Player) -> str | None:
+        """Enable paying bail while in jail before rolling."""
+        error = self.guard_turn_action_enabled(player)
+        if error:
+            return error
+        mono_player: MonopolyPlayer = player  # type: ignore
+        if not mono_player.in_jail:
+            return "monopoly-not-in-jail"
+        if self.turn_has_rolled:
+            return "monopoly-already-rolled"
+        if mono_player.cash < BAIL_AMOUNT:
+            return "monopoly-not-enough-cash"
+        return None
+
+    def _is_pay_bail_hidden(self, player: Player) -> Visibility:
+        """Show pay bail only while player is jailed and has not rolled."""
+        mono_player: MonopolyPlayer = player  # type: ignore
+        return self.turn_action_visibility(
+            player,
+            extra_condition=mono_player.in_jail and not self.turn_has_rolled,
+        )
+
+    def _is_use_jail_card_enabled(self, player: Player) -> str | None:
+        """Enable jail-card use while in jail before rolling."""
+        error = self.guard_turn_action_enabled(player)
+        if error:
+            return error
+        mono_player: MonopolyPlayer = player  # type: ignore
+        if not mono_player.in_jail:
+            return "monopoly-not-in-jail"
+        if self.turn_has_rolled:
+            return "monopoly-already-rolled"
+        if mono_player.get_out_of_jail_cards <= 0:
+            return "monopoly-no-jail-card"
+        return None
+
+    def _is_use_jail_card_hidden(self, player: Player) -> Visibility:
+        """Show jail-card action only while usable."""
+        mono_player: MonopolyPlayer = player  # type: ignore
+        return self.turn_action_visibility(
+            player,
+            extra_condition=mono_player.in_jail
+            and not self.turn_has_rolled
+            and mono_player.get_out_of_jail_cards > 0,
+        )
+
     def _is_end_turn_enabled(self, player: Player) -> str | None:
         """Enable end-turn after rolling."""
         error = self.guard_turn_action_enabled(player)
@@ -433,42 +1015,111 @@ class MonopolyGame(ActionGuardMixin, Game):
             return error
         if not self.turn_has_rolled:
             return "monopoly-roll-first"
+        if self.turn_pending_purchase_space_id:
+            return "monopoly-resolve-property-first"
+        if self.turn_can_roll_again:
+            return "monopoly-roll-again-required"
         return None
 
     def _is_end_turn_hidden(self, player: Player) -> Visibility:
         """Hide end-turn until player has rolled."""
-        return self.turn_action_visibility(player, extra_condition=self.turn_has_rolled)
+        return self.turn_action_visibility(
+            player,
+            extra_condition=self.turn_has_rolled
+            and not self.turn_pending_purchase_space_id
+            and not self.turn_can_roll_again,
+        )
 
     def _action_roll_dice(self, player: Player, action_id: str) -> None:
         """Handle rolling and landing logic for classic scaffold."""
         mono_player: MonopolyPlayer = player  # type: ignore
 
-        if self.turn_has_rolled or mono_player.bankrupt:
+        if self.turn_has_rolled or mono_player.bankrupt or self.turn_pending_purchase_space_id:
             return
 
         die_1 = random.randint(1, 6)
         die_2 = random.randint(1, 6)
         total = die_1 + die_2
-
-        old_position = mono_player.position
-        absolute_position = old_position + total
-        mono_player.position = absolute_position % BOARD_SIZE
-        passed_go = absolute_position >= BOARD_SIZE
-        landed_space = self._space_at(mono_player.position)
+        is_doubles = die_1 == die_2
 
         self.turn_has_rolled = True
         self.turn_last_roll = [die_1, die_2]
         self.turn_pending_purchase_space_id = ""
+        if mono_player.in_jail:
+            if is_doubles:
+                mono_player.in_jail = False
+                mono_player.jail_turns = 0
+                self.broadcast_l(
+                    "monopoly-jail-roll-doubles",
+                    player=mono_player.name,
+                    die1=die_1,
+                    die2=die_2,
+                )
+                landed_space = self._move_player(
+                    mono_player, total, collect_pass_go=False
+                )
+                self.broadcast_l(
+                    "monopoly-roll-result",
+                    player=mono_player.name,
+                    die1=die_1,
+                    die2=die_2,
+                    total=total,
+                    space=landed_space.name,
+                )
+                self._resolve_space(mono_player, landed_space)
+            else:
+                mono_player.jail_turns += 1
+                self.broadcast_l(
+                    "monopoly-jail-roll-failed",
+                    player=mono_player.name,
+                    die1=die_1,
+                    die2=die_2,
+                    attempts=mono_player.jail_turns,
+                )
+                if mono_player.jail_turns >= 3:
+                    if mono_player.cash < BAIL_AMOUNT:
+                        self._declare_bankrupt(mono_player)
+                        self._sync_cash_scores()
+                        self.rebuild_all_menus()
+                        return
+                    mono_player.cash -= BAIL_AMOUNT
+                    mono_player.in_jail = False
+                    mono_player.jail_turns = 0
+                    self.broadcast_l(
+                        "monopoly-bail-paid",
+                        player=mono_player.name,
+                        amount=BAIL_AMOUNT,
+                        cash=mono_player.cash,
+                    )
+                    landed_space = self._move_player(
+                        mono_player, total, collect_pass_go=False
+                    )
+                    self.broadcast_l(
+                        "monopoly-roll-result",
+                        player=mono_player.name,
+                        die1=die_1,
+                        die2=die_2,
+                        total=total,
+                        space=landed_space.name,
+                    )
+                    self._resolve_space(mono_player, landed_space)
+            self.turn_doubles_count = 0
+            self._sync_cash_scores()
+            self.rebuild_all_menus()
+            return
 
-        if passed_go:
-            mono_player.cash += PASS_GO_CASH
-            self.broadcast_l(
-                "monopoly-pass-go",
-                player=mono_player.name,
-                amount=PASS_GO_CASH,
-                cash=mono_player.cash,
-            )
+        if is_doubles:
+            self.turn_doubles_count += 1
+        else:
+            self.turn_doubles_count = 0
 
+        if self.turn_doubles_count >= 3:
+            self._send_to_jail(mono_player, by_triple_doubles=True)
+            self._sync_cash_scores()
+            self.rebuild_all_menus()
+            return
+
+        landed_space = self._move_player(mono_player, total, collect_pass_go=True)
         self.broadcast_l(
             "monopoly-roll-result",
             player=mono_player.name,
@@ -477,67 +1128,12 @@ class MonopolyGame(ActionGuardMixin, Game):
             total=total,
             space=landed_space.name,
         )
+        resolution = self._resolve_space(mono_player, landed_space)
 
-        if landed_space.kind in PURCHASABLE_KINDS:
-            owner_id = self.property_owners.get(landed_space.space_id)
-            if owner_id is None:
-                self.turn_pending_purchase_space_id = landed_space.space_id
-                self.broadcast_l(
-                    "monopoly-property-available",
-                    player=mono_player.name,
-                    property=landed_space.name,
-                    price=landed_space.price,
-                )
-            elif owner_id == mono_player.id:
-                self.broadcast_l(
-                    "monopoly-landed-owned",
-                    player=mono_player.name,
-                    property=landed_space.name,
-                )
-            else:
-                owner = self.get_player_by_id(owner_id)
-                rent_due = landed_space.rent
-                paid = min(mono_player.cash, rent_due)
-                mono_player.cash -= paid
-                if owner and isinstance(owner, MonopolyPlayer):
-                    owner.cash += paid
-                self.broadcast_l(
-                    "monopoly-rent-paid",
-                    player=mono_player.name,
-                    owner=owner.name if owner else "Bank",
-                    amount=paid,
-                    property=landed_space.name,
-                )
-                if paid < rent_due:
-                    creditor_name = owner.name if owner else "Bank"
-                    self._declare_bankrupt(mono_player, creditor_name=creditor_name)
-                    self._sync_cash_scores()
-                    self.rebuild_all_menus()
-                    return
-        elif landed_space.space_id in TAX_AMOUNTS:
-            tax_due = TAX_AMOUNTS[landed_space.space_id]
-            paid = min(mono_player.cash, tax_due)
-            mono_player.cash -= paid
-            self.broadcast_l(
-                "monopoly-tax-paid",
-                player=mono_player.name,
-                amount=paid,
-                tax=landed_space.name,
-                cash=mono_player.cash,
-            )
-            if paid < tax_due:
-                self._declare_bankrupt(mono_player)
-                self._sync_cash_scores()
-                self.rebuild_all_menus()
-                return
-        elif landed_space.kind == "go_to_jail":
-            jail_space = self._space_at(10)
-            mono_player.position = jail_space.index
-            self.broadcast_l(
-                "monopoly-go-to-jail",
-                player=mono_player.name,
-                space=jail_space.name,
-            )
+        if not mono_player.bankrupt and resolution == "resolved" and is_doubles:
+            self._prepare_next_roll_after_doubles(mono_player)
+        elif not mono_player.bankrupt and resolution == "pending_purchase" and is_doubles:
+            self.turn_can_roll_again = True
 
         self._sync_cash_scores()
         self.rebuild_all_menus()
@@ -557,6 +1153,8 @@ class MonopolyGame(ActionGuardMixin, Game):
         mono_player.cash -= space.price
         mono_player.owned_space_ids.append(space.space_id)
         self.property_owners[space.space_id] = mono_player.id
+        if space.space_id in self.mortgaged_space_ids:
+            self.mortgaged_space_ids.remove(space.space_id)
         self.turn_pending_purchase_space_id = ""
 
         self.broadcast_l(
@@ -565,6 +1163,113 @@ class MonopolyGame(ActionGuardMixin, Game):
             property=space.name,
             price=space.price,
             cash=mono_player.cash,
+        )
+
+        if self.turn_can_roll_again:
+            self._prepare_next_roll_after_doubles(mono_player)
+
+        self._sync_cash_scores()
+        self.rebuild_all_menus()
+
+    def _action_auction_property(self, player: Player, action_id: str) -> None:
+        """Resolve pending property via automatic auction."""
+        mono_player: MonopolyPlayer = player  # type: ignore
+        space = self._pending_purchase_space()
+        if not space:
+            return
+
+        self.turn_pending_purchase_space_id = ""
+        self._run_property_auction(space, mono_player)
+        if self.turn_can_roll_again and not mono_player.bankrupt:
+            self._prepare_next_roll_after_doubles(mono_player)
+
+        self._sync_cash_scores()
+        self.rebuild_all_menus()
+
+    def _action_mortgage_property(
+        self, player: Player, space_id: str, action_id: str
+    ) -> None:
+        """Mortgage one owned property to raise cash."""
+        mono_player: MonopolyPlayer = player  # type: ignore
+        if space_id not in self._options_for_mortgage_property(player):
+            return
+        space = SPACE_BY_ID.get(space_id)
+        if not space:
+            return
+
+        value = self._mortgage_value(space)
+        mono_player.cash += value
+        self.mortgaged_space_ids.append(space_id)
+        self.broadcast_l(
+            "monopoly-property-mortgaged",
+            player=mono_player.name,
+            property=space.name,
+            amount=value,
+            cash=mono_player.cash,
+        )
+
+        self._sync_cash_scores()
+        self.rebuild_all_menus()
+
+    def _action_unmortgage_property(
+        self, player: Player, space_id: str, action_id: str
+    ) -> None:
+        """Unmortgage one owned property."""
+        mono_player: MonopolyPlayer = player  # type: ignore
+        if space_id not in self._options_for_unmortgage_property(player):
+            return
+        space = SPACE_BY_ID.get(space_id)
+        if not space:
+            return
+
+        cost = self._unmortgage_cost(space)
+        if mono_player.cash < cost:
+            return
+        mono_player.cash -= cost
+        self.mortgaged_space_ids.remove(space_id)
+        self.broadcast_l(
+            "monopoly-property-unmortgaged",
+            player=mono_player.name,
+            property=space.name,
+            amount=cost,
+            cash=mono_player.cash,
+        )
+
+        self._sync_cash_scores()
+        self.rebuild_all_menus()
+
+    def _action_pay_bail(self, player: Player, action_id: str) -> None:
+        """Pay bail to leave jail before rolling."""
+        mono_player: MonopolyPlayer = player  # type: ignore
+        if not mono_player.in_jail or self.turn_has_rolled or mono_player.cash < BAIL_AMOUNT:
+            return
+
+        mono_player.cash -= BAIL_AMOUNT
+        mono_player.in_jail = False
+        mono_player.jail_turns = 0
+        self.broadcast_l(
+            "monopoly-bail-paid",
+            player=mono_player.name,
+            amount=BAIL_AMOUNT,
+            cash=mono_player.cash,
+        )
+
+        self._sync_cash_scores()
+        self.rebuild_all_menus()
+
+    def _action_use_jail_card(self, player: Player, action_id: str) -> None:
+        """Use a get-out-of-jail-free card."""
+        mono_player: MonopolyPlayer = player  # type: ignore
+        if not mono_player.in_jail or self.turn_has_rolled or mono_player.get_out_of_jail_cards <= 0:
+            return
+
+        mono_player.get_out_of_jail_cards -= 1
+        mono_player.in_jail = False
+        mono_player.jail_turns = 0
+        self.broadcast_l(
+            "monopoly-jail-card-used",
+            player=mono_player.name,
+            cards=mono_player.get_out_of_jail_cards,
         )
 
         self._sync_cash_scores()
@@ -584,15 +1289,20 @@ class MonopolyGame(ActionGuardMixin, Game):
 
     def bot_think(self, player: MonopolyPlayer) -> str | None:
         """Simple scaffold bot logic."""
+        if player.in_jail and not self.turn_has_rolled:
+            if player.get_out_of_jail_cards > 0:
+                return "use_jail_card"
+            if player.cash >= BAIL_AMOUNT and player.jail_turns >= 2:
+                return "pay_bail"
         if not self.turn_has_rolled:
             return "roll_dice"
         pending_space = self._pending_purchase_space()
-        if (
-            pending_space
-            and self._can_buy_pending_space(player)
-            and player.cash - pending_space.price >= 200
-        ):
-            return "buy_property"
+        if pending_space:
+            if self._can_buy_pending_space(player) and player.cash - pending_space.price >= 200:
+                return "buy_property"
+            return "auction_property"
+        if self.turn_can_roll_again:
+            return "roll_dice"
         return "end_turn"
 
     def on_start(self) -> None:
@@ -613,7 +1323,16 @@ class MonopolyGame(ActionGuardMixin, Game):
         self.active_edition_ids = list(preset.edition_ids)
         self.active_anchor_edition_id = preset.anchor_edition_id
         self.property_owners.clear()
+        self.mortgaged_space_ids.clear()
         self._reset_turn_state()
+        self.turn_doubles_count = 0
+
+        self.chance_deck_order = CHANCE_CARD_IDS.copy()
+        self.community_chest_deck_order = COMMUNITY_CHEST_CARD_IDS.copy()
+        random.shuffle(self.chance_deck_order)
+        random.shuffle(self.community_chest_deck_order)
+        self.chance_deck_index = 0
+        self.community_chest_deck_index = 0
 
         for player in active_players:
             if isinstance(player, MonopolyPlayer):
@@ -621,6 +1340,9 @@ class MonopolyGame(ActionGuardMixin, Game):
                 player.cash = STARTING_CASH
                 player.owned_space_ids.clear()
                 player.bankrupt = False
+                player.in_jail = False
+                player.jail_turns = 0
+                player.get_out_of_jail_cards = 0
 
         self._sync_cash_scores()
 

@@ -52,3 +52,56 @@ monopoly-go-to-jail = { $player } goes to jail (moved to { $space }).
 monopoly-bankrupt-player = You are bankrupt and out of the game.
 monopoly-player-bankrupt = { $player } is bankrupt. Creditor: { $creditor }.
 monopoly-winner-by-bankruptcy = { $player } wins by bankruptcy with { $cash } cash remaining.
+
+# Additional actions
+monopoly-auction-property = Auction property
+monopoly-mortgage-property = Mortgage property
+monopoly-unmortgage-property = Unmortgage property
+monopoly-pay-bail = Pay bail
+monopoly-use-jail-card = Use get-out-of-jail card
+
+# Additional prompts
+monopoly-select-property-mortgage = Select a property to mortgage
+monopoly-select-property-unmortgage = Select a property to unmortgage
+
+# Additional validation
+monopoly-no-property-to-auction = There is no property to auction right now.
+monopoly-no-mortgage-options = You do not have properties available to mortgage.
+monopoly-no-unmortgage-options = You do not have mortgaged properties to unmortgage.
+monopoly-not-in-jail = You are not in jail.
+monopoly-no-jail-card = You do not have a get-out-of-jail card.
+monopoly-roll-again-required = You rolled doubles and must roll again.
+monopoly-resolve-property-first = Resolve the pending property decision first.
+
+# Additional turn events
+monopoly-roll-again = { $player } rolled doubles and gets another roll.
+monopoly-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
+monopoly-jail-roll-failed = { $player } rolled { $die1 } and { $die2 } in jail (attempt { $attempts }).
+monopoly-bail-paid = { $player } paid { $amount } bail (cash: { $cash }).
+monopoly-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
+monopoly-jail-card-used = { $player } used a get-out-of-jail card ({ $cards } remaining).
+
+# Auctions and mortgages
+monopoly-auction-no-bids = No bids for { $property }. It remains unsold.
+monopoly-auction-won = { $player } won the auction for { $property } at { $amount } (cash: { $cash }).
+monopoly-property-mortgaged = { $player } mortgaged { $property } for { $amount } (cash: { $cash }).
+monopoly-property-unmortgaged = { $player } unmortgaged { $property } for { $amount } (cash: { $cash }).
+monopoly-mortgaged-no-rent = { $player } landed on mortgaged { $property }; no rent is due.
+
+# Card engine
+monopoly-card-drawn = { $player } drew a { $deck } card: { $card }.
+monopoly-card-collect = { $player } collected { $amount } (cash: { $cash }).
+monopoly-card-pay = { $player } paid { $amount } (cash: { $cash }).
+monopoly-card-move = { $player } moved to { $space }.
+monopoly-card-jail-free = { $player } received a get-out-of-jail card ({ $cards } total).
+
+# Card descriptions
+monopoly-card-advance-to-go = Advance to GO and collect 200
+monopoly-card-bank-dividend-50 = Bank pays you dividend of 50
+monopoly-card-go-back-three = Go back 3 spaces
+monopoly-card-go-to-jail = Go directly to jail
+monopoly-card-poor-tax-15 = Pay poor tax of 15
+monopoly-card-bank-error-200 = Bank error in your favor, collect 200
+monopoly-card-doctor-fee-50 = Doctor's fee, pay 50
+monopoly-card-tax-refund-20 = Income tax refund, collect 20
+monopoly-card-get-out-of-jail = Get out of jail free

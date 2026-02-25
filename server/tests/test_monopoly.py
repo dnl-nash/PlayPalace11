@@ -5,6 +5,7 @@ from server.games.monopoly.game import (
     MonopolyOptions,
     STARTING_CASH,
     PASS_GO_CASH,
+    BAIL_AMOUNT,
 )
 from server.games.monopoly.presets import (
     DEFAULT_PRESET_ID,
@@ -148,8 +149,10 @@ def test_monopoly_end_turn_advances_and_resets_turn_state(monkeypatch):
     game = _start_two_player_game()
     host = game.current_player
     assert host is not None
+    game.chance_deck_order = ["bank_dividend_50"]
+    game.chance_deck_index = 0
 
-    rolls = iter([1, 2])
+    rolls = iter([3, 4])  # total = 7 -> chance (safe card)
     monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
     game.execute_action(host, "roll_dice")
     assert game.turn_has_rolled is True
@@ -257,3 +260,168 @@ def test_monopoly_partial_rent_payment_causes_bankruptcy_and_ends_game(monkeypat
     assert game.current_player.name == "Host"
     assert host.cash == STARTING_CASH + 30
     assert "baltic_avenue" not in game.property_owners
+
+
+def test_monopoly_doubles_grant_extra_roll(monkeypatch):
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+
+    rolls = iter([2, 2])  # total = 4 (income tax), doubles
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+    game.execute_action(host, "roll_dice")
+
+    assert game.current_player is host
+    assert game.turn_has_rolled is False
+    assert game.turn_doubles_count == 1
+    assert host.position == 4
+
+
+def test_monopoly_three_doubles_send_player_to_jail(monkeypatch):
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+    game.chance_deck_order = ["bank_dividend_50"]
+    game.community_chest_deck_order = ["income_tax_refund_20"]
+    game.chance_deck_index = 0
+    game.community_chest_deck_index = 0
+
+    rolls = iter([2, 2, 3, 3, 4, 4])
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+    game.execute_action(host, "roll_dice")
+    game.execute_action(host, "roll_dice")
+    game.execute_action(host, "roll_dice")
+
+    assert host.in_jail is True
+    assert host.position == 10
+    assert game.turn_has_rolled is True
+
+
+def test_monopoly_pay_bail_allows_normal_roll_after(monkeypatch):
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+    host.in_jail = True
+    host.position = 10
+
+    game.execute_action(host, "pay_bail")
+    assert host.in_jail is False
+    assert host.cash == STARTING_CASH - BAIL_AMOUNT
+    assert game.turn_has_rolled is False
+
+    rolls = iter([1, 2])
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+    game.execute_action(host, "roll_dice")
+
+    assert host.position == 13
+
+
+def test_monopoly_failed_jail_roll_increments_attempts(monkeypatch):
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+    host.in_jail = True
+    host.position = 10
+
+    rolls = iter([1, 2])
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+    game.execute_action(host, "roll_dice")
+
+    assert host.in_jail is True
+    assert host.jail_turns == 1
+    assert host.position == 10
+    assert game.turn_has_rolled is True
+
+
+def test_monopoly_community_chest_can_grant_jail_card(monkeypatch):
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+    game.community_chest_deck_order = ["get_out_of_jail_free"]
+    game.community_chest_deck_index = 0
+
+    rolls = iter([1, 1])  # total = 2 -> community chest
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+    game.execute_action(host, "roll_dice")
+
+    assert host.get_out_of_jail_cards == 1
+
+
+def test_monopoly_chance_go_back_three_resolves_destination(monkeypatch):
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+    host.position = 4
+    game.chance_deck_order = ["go_back_three"]
+    game.chance_deck_index = 0
+
+    rolls = iter([1, 2])  # total = 3 -> chance at 7, then back to 4 income tax
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+    game.execute_action(host, "roll_dice")
+
+    assert host.position == 4
+    assert host.cash == STARTING_CASH - 200
+
+
+def test_monopoly_auction_sells_pending_property(monkeypatch):
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+
+    rolls = iter([1, 2])  # total = 3 -> Baltic
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+    game.execute_action(host, "roll_dice")
+    game.execute_action(host, "auction_property")
+
+    assert game.turn_pending_purchase_space_id == ""
+    assert game.property_owners.get("baltic_avenue") is not None
+
+
+def test_monopoly_auction_respects_doubles_roll_chain(monkeypatch):
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+
+    rolls = iter([3, 3])  # total = 6 -> Oriental (property), doubles
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+    game.execute_action(host, "roll_dice")
+    assert game.turn_can_roll_again is True
+    game.execute_action(host, "auction_property")
+
+    assert game.turn_has_rolled is False
+    assert game.turn_can_roll_again is False
+
+
+def test_monopoly_mortgage_and_unmortgage_cycle():
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+    host.owned_space_ids.append("boardwalk")
+    game.property_owners["boardwalk"] = host.id
+
+    game.execute_action(host, "mortgage_property", input_value="boardwalk")
+    assert "boardwalk" in game.mortgaged_space_ids
+    assert host.cash == STARTING_CASH + 200
+
+    game.execute_action(host, "unmortgage_property", input_value="boardwalk")
+    assert "boardwalk" not in game.mortgaged_space_ids
+    assert host.cash == STARTING_CASH - 20
+
+
+def test_monopoly_mortgaged_property_charges_no_rent(monkeypatch):
+    game = _start_two_player_game()
+    host = game.current_player
+    assert host is not None
+    guest = game.players[1]
+
+    host.owned_space_ids.append("baltic_avenue")
+    game.property_owners["baltic_avenue"] = host.id
+    game.mortgaged_space_ids.append("baltic_avenue")
+    game.execute_action(host, "end_turn")
+
+    rolls = iter([1, 2])  # guest to Baltic
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+    game.execute_action(guest, "roll_dice")
+
+    assert host.cash == STARTING_CASH
+    assert guest.cash == STARTING_CASH
