@@ -7,7 +7,8 @@ from .models import RawInstructionRecord, RawManual
 
 
 _NEXT_DATA_RE = re.compile(
-    r'<script id=?"?__NEXT_DATA__"? type=?"application/json"?>(.*?)</script>',
+    r"<script[^>]*id=['\"]?__NEXT_DATA__['\"]?[^>]*"
+    r"type=['\"]?application/json['\"]?[^>]*>(.*?)</script>",
     re.DOTALL,
 )
 
@@ -52,4 +53,3 @@ def extract_raw_records(payload: dict, instruction_url: str) -> list[RawInstruct
             )
         )
     return records
-
