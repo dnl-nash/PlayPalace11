@@ -2272,6 +2272,73 @@ class MonopolyGame(ActionGuardMixin, Game):
             if isinstance(player, MonopolyPlayer):
                 player.cash = starting_cash
 
+    def _resolve_junior_super_mario_powerup_sound_outcome(self, power_up_die: int) -> str | None:
+        """Resolve sound-specific power-up outcome when future sound mode is enabled."""
+        if not self._is_junior_super_mario_manual_core_active():
+            return None
+        if not self.active_board_rule_pack_id:
+            return None
+        if not supports_capability(self.active_board_rule_pack_id, "junior_powerup_sound_ready"):
+            return None
+        return None
+
+    def _resolve_junior_super_mario_powerup_outcome(self, power_up_die: int) -> str:
+        """Resolve no-sound power-up outcome for junior Super Mario board."""
+        sound_outcome = self._resolve_junior_super_mario_powerup_sound_outcome(power_up_die)
+        if isinstance(sound_outcome, str) and sound_outcome:
+            return sound_outcome
+        default_map = {
+            1: "roll_numbered_die_again",
+            2: "collect_1",
+            3: "collect_2",
+            4: "collect_2",
+            5: "collect_3",
+            6: "nothing",
+        }
+        return default_map.get(power_up_die, "nothing")
+
+    def _apply_junior_super_mario_powerup(
+        self,
+        player: MonopolyPlayer,
+        power_up_die: int,
+    ) -> str:
+        """Apply one junior Super Mario power-up die outcome."""
+        if not self._is_junior_super_mario_manual_core_active():
+            return "resolved"
+
+        outcome = self._resolve_junior_super_mario_powerup_outcome(power_up_die)
+        if outcome == "nothing":
+            return "resolved"
+
+        if outcome == "roll_numbered_die_again":
+            extra_steps = random.randint(1, 6)
+            landed_space = self._move_player(player, extra_steps, collect_pass_go=True)
+            self.broadcast_l(
+                "monopoly-roll-result",
+                player=player.name,
+                die1=extra_steps,
+                die2=0,
+                total=extra_steps,
+                space=landed_space.name,
+            )
+            return self._resolve_space(player, landed_space, dice_total=extra_steps)
+
+        if outcome.startswith("collect_"):
+            try:
+                amount = max(0, int(outcome.split("_", 1)[1]))
+            except (TypeError, ValueError):
+                return "resolved"
+            credited = self._credit_player(player, amount, "junior_super_mario_powerup_collect")
+            self.broadcast_l(
+                "monopoly-card-collect",
+                player=player.name,
+                amount=credited,
+                cash=player.cash,
+            )
+            return "resolved"
+
+        return "resolved"
+
     def _move_player(
         self, player: MonopolyPlayer, steps: int, *, collect_pass_go: bool
     ) -> MonopolySpace:
@@ -3737,7 +3804,9 @@ class MonopolyGame(ActionGuardMixin, Game):
                     total=total,
                     space=landed_space.name,
                 )
-                self._resolve_space(mono_player, landed_space, dice_total=total)
+                resolution = self._resolve_space(mono_player, landed_space, dice_total=total)
+                if not mono_player.bankrupt and resolution == "resolved":
+                    self._apply_junior_super_mario_powerup(mono_player, die_2)
                 self.turn_doubles_count = 0
                 self._sync_cash_scores()
                 self.rebuild_all_menus()
@@ -3833,6 +3902,9 @@ class MonopolyGame(ActionGuardMixin, Game):
             space=landed_space.name,
         )
         resolution = self._resolve_space(mono_player, landed_space, dice_total=total)
+        if self._is_junior_super_mario_manual_core_active() and not mono_player.bankrupt:
+            if resolution == "resolved":
+                resolution = self._apply_junior_super_mario_powerup(mono_player, die_2)
 
         if self.rule_profile.doubles_grant_extra_roll and not mono_player.bankrupt and is_doubles:
             if resolution == "resolved":

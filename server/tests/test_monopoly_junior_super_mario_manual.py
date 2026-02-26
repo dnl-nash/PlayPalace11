@@ -69,7 +69,7 @@ def test_junior_super_mario_zero_coin_player_does_not_enter_timeout(monkeypatch)
 
     host.cash = 0
     host.position = 29
-    rolls = iter([1, 5])  # land on go_to_jail space, then unused power-up
+    rolls = iter([1, 6])  # land on go_to_jail space, no power-up effect
     monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
 
     game.execute_action(host, "roll_dice")
@@ -86,7 +86,7 @@ def test_junior_super_mario_timeout_exit_by_one_coin_then_roll(monkeypatch):
     host.in_jail = True
     host.position = 10
     host.cash = 3
-    rolls = iter([2, 1])  # numbered die, power-up die
+    rolls = iter([2, 6])  # numbered die, no power-up effect
     monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
 
     game.execute_action(host, "roll_dice")
@@ -103,7 +103,7 @@ def test_junior_super_mario_auto_buys_affordable_property(monkeypatch):
 
     host.position = 0
     host.cash = 500
-    rolls = iter([1, 1])  # Mediterranean Avenue
+    rolls = iter([1, 6])  # Mediterranean Avenue, no power-up effect
     monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
 
     game.execute_action(host, "roll_dice")
@@ -120,7 +120,7 @@ def test_junior_super_mario_no_auction_when_unaffordable(monkeypatch):
 
     host.position = 0
     host.cash = 1
-    rolls = iter([1, 1])  # Mediterranean Avenue
+    rolls = iter([1, 6])  # Mediterranean Avenue, no power-up effect
     monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
 
     game.execute_action(host, "roll_dice")
@@ -143,7 +143,7 @@ def test_junior_super_mario_rent_partial_pay_does_not_bankrupt(monkeypatch):
     game.turn_has_rolled = False
     game.turn_pending_purchase_space_id = ""
 
-    rolls = iter([1, 1])  # land on Mediterranean Avenue
+    rolls = iter([1, 6])  # land on Mediterranean Avenue, no power-up effect
     monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
 
     game.execute_action(guest, "roll_dice")
@@ -161,7 +161,7 @@ def test_junior_super_mario_card_fee_partial_pay_does_not_bankrupt(monkeypatch):
     host.cash = 1
     host.position = 0
     monkeypatch.setattr(game, "_draw_card", lambda deck_type: "doctor_fee_pay_50")
-    rolls = iter([2, 1])  # Community Chest
+    rolls = iter([2, 6])  # Community Chest, no power-up effect
     monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
 
     game.execute_action(host, "roll_dice")
@@ -206,3 +206,25 @@ def test_junior_super_mario_tie_break_uses_property_count():
     assert game._check_junior_endgame() is True
     assert game.current_player is not None
     assert game.current_player.name == "P1"
+
+
+def test_junior_super_mario_powerup_no_sound_mapping_collects_coins(monkeypatch):
+    game = _start_manual_board_game(2)
+    host = game.current_player
+    assert host is not None
+
+    host.position = 9
+    host.cash = 20
+    rolls = iter([4, 2])  # numbered die, power-up die collect-1
+    monkeypatch.setattr("server.games.monopoly.game.random.randint", lambda a, b: next(rolls))
+
+    game.execute_action(host, "roll_dice")
+
+    assert host.position == 13
+    assert host.cash == 21
+
+
+def test_junior_super_mario_powerup_sound_hook_is_inert_by_default():
+    game = _start_manual_board_game(2)
+
+    assert game._resolve_junior_super_mario_powerup_sound_outcome(4) is None
