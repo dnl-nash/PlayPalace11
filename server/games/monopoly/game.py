@@ -1264,6 +1264,81 @@ class MonopolyGame(ActionGuardMixin, Game):
             deck_ids.append(card_id)
         return deck_ids
 
+    def _manual_card_definition(self, deck_type: str, card_id: str) -> dict[str, object] | None:
+        """Resolve one manual card definition by deck type and id."""
+        if self.active_manual_rule_set is None:
+            return None
+        cards_payload = self.active_manual_rule_set.cards
+        deck_rows = cards_payload.get(deck_type, [])
+        if not isinstance(deck_rows, list):
+            return None
+        for row in deck_rows:
+            if not isinstance(row, dict):
+                continue
+            row_id = row.get("id")
+            if isinstance(row_id, str) and row_id == card_id:
+                return row
+        return None
+
+    def _apply_manual_card_effect(
+        self,
+        player: MonopolyPlayer,
+        effect_spec: dict[str, object],
+        *,
+        depth: int,
+        dice_total: int | None,
+    ) -> str | None:
+        """Apply one manual card effect spec and return resolution state when handled."""
+        effect_type = effect_spec.get("type")
+        if not isinstance(effect_type, str):
+            return None
+
+        if effect_type == "credit":
+            amount = max(0, int(effect_spec.get("amount", 0)))
+            credited = self._credit_player(player, amount, "manual_card_credit")
+            self.broadcast_l(
+                "monopoly-card-collect",
+                player=player.name,
+                amount=credited,
+                cash=player.cash,
+            )
+            return "resolved"
+
+        if effect_type == "debit":
+            amount = max(0, int(effect_spec.get("amount", 0)))
+            if not self._apply_bank_payment(player, amount, card_reason_key="monopoly-card-pay"):
+                return "bankrupt"
+            return "resolved"
+
+        if effect_type == "go_to_jail":
+            self._send_to_jail(player)
+            return "forced_end"
+
+        if effect_type == "move_relative":
+            steps = int(effect_spec.get("steps", 0))
+            collect_pass_go = bool(effect_spec.get("collect_pass_go", steps > 0))
+            landed_space = self._move_player(player, steps, collect_pass_go=collect_pass_go)
+            return self._resolve_space(player, landed_space, depth=depth + 1, dice_total=dice_total)
+
+        if effect_type == "move_absolute":
+            destination = int(effect_spec.get("position", player.position))
+            old_position = player.position
+            player.position = destination % self.active_board_size
+            collect_pass_go = bool(effect_spec.get("collect_pass_go", False))
+            if collect_pass_go and player.position < old_position:
+                pass_go_cash = max(0, self.rule_profile.pass_go_cash)
+                credited = self._credit_player(player, pass_go_cash, "manual_card_move_absolute_pass_go")
+                self.broadcast_l(
+                    "monopoly-pass-go",
+                    player=player.name,
+                    amount=credited,
+                    cash=player.cash,
+                )
+            landed_space = self._space_at(player.position)
+            return self._resolve_space(player, landed_space, depth=depth + 1, dice_total=dice_total)
+
+        return None
+
     def _space_at(self, position: int) -> MonopolySpace:
         """Get board space by board index."""
         return self.active_board_spaces[position % self.active_board_size]
@@ -2937,8 +3012,12 @@ class MonopolyGame(ActionGuardMixin, Game):
     ) -> str:
         """Apply one Chance/Community Chest card and return resolution state."""
         card_id = self._resolve_board_card_id(deck_type, card_id)
+        manual_card = self._manual_card_definition(deck_type, card_id)
         deck_label = "Chance" if deck_type == "chance" else "Community Chest"
-        card_text_key = CARD_DESCRIPTION_KEYS.get(card_id, card_id)
+        if manual_card is not None and isinstance(manual_card.get("text_key"), str):
+            card_text_key = manual_card["text_key"]
+        else:
+            card_text_key = CARD_DESCRIPTION_KEYS.get(card_id, card_id)
         card_text = Localization.get("en", card_text_key)
         self.broadcast_l(
             "monopoly-card-drawn",
@@ -2952,6 +3031,18 @@ class MonopolyGame(ActionGuardMixin, Game):
                 hardware_event_id,
                 payload={"deck_type": deck_type, "card_id": card_id},
             )
+
+        if manual_card is not None:
+            effect_spec = manual_card.get("effect")
+            if isinstance(effect_spec, dict):
+                manual_result = self._apply_manual_card_effect(
+                    player,
+                    effect_spec,
+                    depth=depth,
+                    dice_total=dice_total,
+                )
+                if manual_result is not None:
+                    return manual_result
 
         if card_id == "advance_to_go":
             player.position = 0
