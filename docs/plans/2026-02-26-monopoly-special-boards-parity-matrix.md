@@ -15,16 +15,16 @@ Source: `server/games/monopoly/catalog/special_board_anchor_index.json` (generat
 | `disney_lightyear` | `disney` | `monopoly-f8046` | `partial` | `classic` | 0 |
 | `disney_lion_king` | `disney` | `monopoly-e6707` | `partial` | `classic` | 0 |
 | `disney_mickey_friends` | `disney` | `monopoly-f5267` | `partial` | `classic` | 0 |
-| `disney_princesses` | `disney` | `monopoly-b4644` | `partial` | `classic` | 0 |
+| `disney_princesses` | `disney` | `monopoly-b4644` | `partial_plus` | `board_specific` | 0 |
 | `disney_star_wars_dark_side` | `disney` | `monopoly-f6167` | `partial` | `classic` | 0 |
 | `disney_the_edition` | `disney` | `monopoly-40224` | `partial` | `classic` | 0 |
 | `disney_villains` | `disney` | `monopoly-f0091` | `partial` | `classic` | 0 |
-| `fortnite` | `fortnite` | `monopoly-e6603` | `partial` | `classic` | 0 |
+| `fortnite` | `fortnite` | `monopoly-e6603` | `partial_plus` | `board_specific` | 0 |
 | `fortnite_collectors` | `fortnite` | `monopoly-f2546` | `partial` | `classic` | 0 |
 | `fortnite_flip` | `fortnite` | `monopoly-f7774` | `partial` | `classic` | 0 |
 | `game_of_thrones` | `game` | `monopoly-e3278` | `partial` | `classic` | 0 |
 | `ghostbusters` | `ghostbusters` | `monopoly-e9479` | `partial` | `classic` | 0 |
-| `harry_potter` | `harry` | `monopoly-f9422` | `partial` | `classic` | 0 |
+| `harry_potter` | `harry` | `monopoly-f9422` | `partial_plus` | `board_specific` | 0 |
 | `junior_super_mario` | `mario` | `monopoly-f4817` | `manual_core` | `board_specific` | 1 |
 | `jurassic_park` | `jurassic` | `monopoly-f1662` | `partial` | `classic` | 0 |
 | `lord_of_the_rings` | `lord_of_the_rings` | `monopoly-f1663` | `partial` | `classic` | 0 |
@@ -34,7 +34,7 @@ Source: `server/games/monopoly/catalog/special_board_anchor_index.json` (generat
 | `mario_kart` | `mario` | `monopoly-e1870` | `partial_plus` | `board_specific` | 0 |
 | `mario_movie` | `mario` | `monopoly-f6818` | `partial_plus` | `board_specific` | 0 |
 | `marvel_80_years` | `marvel` | `monopoly-e7866` | `partial` | `classic` | 0 |
-| `marvel_avengers` | `marvel` | `monopoly-e6504` | `partial` | `classic` | 0 |
+| `marvel_avengers` | `marvel` | `monopoly-e6504` | `partial_plus` | `board_specific` | 0 |
 | `marvel_avengers_legacy` | `marvel` | `monopoly-b0323` | `partial` | `classic` | 0 |
 | `marvel_black_panther_wf` | `marvel` | `monopoly-f5405` | `partial` | `classic` | 0 |
 | `marvel_deadpool` | `marvel` | `monopoly-e2033` | `partial` | `classic` | 0 |
@@ -47,15 +47,15 @@ Source: `server/games/monopoly/catalog/special_board_anchor_index.json` (generat
 | `star_wars_40th` | `star_wars` | `monopoly-c1990` | `partial` | `classic` | 0 |
 | `star_wars_boba_fett` | `star_wars` | `monopoly-f5394` | `partial` | `classic` | 0 |
 | `star_wars_classic_edition` | `star_wars` | `monopoly-b8613` | `partial` | `classic` | 0 |
-| `star_wars_complete_saga` | `star_wars` | `monopoly-e8066` | `partial` | `classic` | 0 |
+| `star_wars_complete_saga` | `star_wars` | `monopoly-e8066` | `partial_plus` | `board_specific` | 0 |
 | `star_wars_legacy` | `star_wars` | `monopoly-b0324` | `partial` | `classic` | 0 |
 | `star_wars_light_side` | `star_wars` | `monopoly-f8383` | `partial` | `classic` | 0 |
-| `star_wars_mandalorian` | `star_wars` | `monopoly-f1276` | `partial` | `classic` | 0 |
+| `star_wars_mandalorian` | `star_wars` | `monopoly-f1276` | `partial_plus` | `board_specific` | 1 |
 | `star_wars_mandalorian_s2` | `star_wars` | `monopoly-f4257` | `partial` | `classic` | 0 |
 | `star_wars_saga` | `star_wars` | `monopoly-42452` | `partial` | `classic` | 0 |
 | `star_wars_solo` | `star_wars` | `monopoly-e1702` | `partial` | `classic` | 0 |
 | `star_wars_the_child` | `star_wars` | `monopoly-f2013` | `partial` | `classic` | 0 |
-| `stranger_things` | `stranger_things` | `monopoly-c4550` | `partial` | `classic` | 0 |
+| `stranger_things` | `stranger_things` | `monopoly-c4550` | `partial_plus` | `board_specific` | 0 |
 | `stranger_things_collectors` | `stranger_things` | `monopoly-e8194` | `partial` | `classic` | 0 |
 | `stranger_things_netflix` | `stranger_things` | `monopoly-f2544` | `partial` | `classic` | 0 |
 | `toy_story` | `toy` | `monopoly-e5065` | `partial` | `classic` | 0 |
@@ -67,6 +67,6 @@ Source: `server/games/monopoly/catalog/special_board_anchor_index.json` (generat
 - Canonical manual policy is anchor-first per board.
 
 ## Next Promotion Targets
-1. Star Wars family wave for board-specific card parity.
-2. Marvel and Disney core wave.
-3. Remaining long-tail special boards.
+1. Extend long-tail board-specific card coverage beyond the first trio.
+2. Add additional hardware/audio event mappings where manual evidence supports it.
+3. Continue raising boards from `partial_plus` toward `manual_core`/`near_full`.

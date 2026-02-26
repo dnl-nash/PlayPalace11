@@ -278,6 +278,8 @@ RULE_PACKS: dict[str, BoardRulePack] = {
         capability_ids=(
             "pass_go_credit_override",
             "startup_board_announcement",
+            "card_id_remap",
+            "card_cash_override",
         ),
     ),
     "fortnite": BoardRulePack(
@@ -286,6 +288,8 @@ RULE_PACKS: dict[str, BoardRulePack] = {
         capability_ids=(
             "pass_go_credit_override",
             "startup_board_announcement",
+            "card_id_remap",
+            "card_cash_override",
         ),
     ),
     "stranger_things": BoardRulePack(
@@ -294,6 +298,7 @@ RULE_PACKS: dict[str, BoardRulePack] = {
         capability_ids=(
             "pass_go_credit_override",
             "startup_board_announcement",
+            "card_id_remap",
         ),
     ),
     "jurassic_park": BoardRulePack(

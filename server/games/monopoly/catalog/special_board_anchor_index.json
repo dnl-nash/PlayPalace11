@@ -95,8 +95,8 @@
     "rule_pack_id": "disney_princesses",
     "anchor_edition_id": "monopoly-b4644",
     "canonical_manual_edition_id": "monopoly-b4644",
-    "fidelity_status": "partial",
-    "deck_mode": "classic",
+    "fidelity_status": "partial_plus",
+    "deck_mode": "board_specific",
     "hardware_capability_ids": []
   },
   {
@@ -135,8 +135,8 @@
     "rule_pack_id": "fortnite",
     "anchor_edition_id": "monopoly-e6603",
     "canonical_manual_edition_id": "monopoly-e6603",
-    "fidelity_status": "partial",
-    "deck_mode": "classic",
+    "fidelity_status": "partial_plus",
+    "deck_mode": "board_specific",
     "hardware_capability_ids": []
   },
   {
@@ -185,8 +185,8 @@
     "rule_pack_id": "harry_potter",
     "anchor_edition_id": "monopoly-f9422",
     "canonical_manual_edition_id": "monopoly-f9422",
-    "fidelity_status": "partial",
-    "deck_mode": "classic",
+    "fidelity_status": "partial_plus",
+    "deck_mode": "board_specific",
     "hardware_capability_ids": []
   },
   {
@@ -287,8 +287,8 @@
     "rule_pack_id": "marvel_avengers",
     "anchor_edition_id": "monopoly-e6504",
     "canonical_manual_edition_id": "monopoly-e6504",
-    "fidelity_status": "partial",
-    "deck_mode": "classic",
+    "fidelity_status": "partial_plus",
+    "deck_mode": "board_specific",
     "hardware_capability_ids": []
   },
   {
@@ -417,8 +417,8 @@
     "rule_pack_id": "star_wars_complete_saga",
     "anchor_edition_id": "monopoly-e8066",
     "canonical_manual_edition_id": "monopoly-e8066",
-    "fidelity_status": "partial",
-    "deck_mode": "classic",
+    "fidelity_status": "partial_plus",
+    "deck_mode": "board_specific",
     "hardware_capability_ids": []
   },
   {
@@ -447,9 +447,11 @@
     "rule_pack_id": "star_wars_mandalorian",
     "anchor_edition_id": "monopoly-f1276",
     "canonical_manual_edition_id": "monopoly-f1276",
-    "fidelity_status": "partial",
-    "deck_mode": "classic",
-    "hardware_capability_ids": []
+    "fidelity_status": "partial_plus",
+    "deck_mode": "board_specific",
+    "hardware_capability_ids": [
+      "audio_theme_event"
+    ]
   },
   {
     "board_id": "star_wars_mandalorian_s2",
@@ -497,8 +499,8 @@
     "rule_pack_id": "stranger_things",
     "anchor_edition_id": "monopoly-c4550",
     "canonical_manual_edition_id": "monopoly-c4550",
-    "fidelity_status": "partial",
-    "deck_mode": "classic",
+    "fidelity_status": "partial_plus",
+    "deck_mode": "board_specific",
     "hardware_capability_ids": []
   },
   {

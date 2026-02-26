@@ -32,6 +32,9 @@ _FIDELITY_OVERRIDES: dict[str, str] = {
     "star_wars_complete_saga": "partial_plus",
     "disney_princesses": "partial_plus",
     "marvel_avengers": "partial_plus",
+    "harry_potter": "partial_plus",
+    "fortnite": "partial_plus",
+    "stranger_things": "partial_plus",
 }
 
 

@@ -96,3 +96,26 @@ def test_marvel_avengers_card_id_remap_contract():
 
 def test_marvel_avengers_card_cash_override_contract():
     assert get_card_cash_override("marvel_avengers", "bank_error_collect_200") == 220
+
+
+def test_harry_potter_card_id_remap_contract():
+    assert get_card_id_remap("harry_potter", "chance", "go_back_three") == "bank_dividend_50"
+
+
+def test_harry_potter_card_cash_override_contract():
+    assert get_card_cash_override("harry_potter", "bank_dividend_50") == 70
+
+
+def test_fortnite_card_id_remap_contract():
+    assert (
+        get_card_id_remap("fortnite", "community_chest", "doctor_fee_pay_50")
+        == "income_tax_refund_20"
+    )
+
+
+def test_fortnite_card_cash_override_contract():
+    assert get_card_cash_override("fortnite", "income_tax_refund_20") == 65
+
+
+def test_stranger_things_card_id_remap_contract():
+    assert get_card_id_remap("stranger_things", "chance", "bank_dividend_50") == "go_to_jail"
