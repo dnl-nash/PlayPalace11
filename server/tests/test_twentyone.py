@@ -147,7 +147,7 @@ def test_twentyone_break_shields_requires_three_defense_effects() -> None:
     p1.table_modifiers = [MODIFIER_GUARD, MODIFIER_GUARD_PLUS]
 
     assert game._is_single_modifier_playable(p1, MODIFIER_BREAK_SHIELDS) is False
-    assert game._is_play_modifier_enabled(p1) == "action-not-available"
+    assert game._is_play_modifier_enabled(p1) is None
 
     p1.table_modifiers.append(MODIFIER_GUARD)
     assert game._is_single_modifier_playable(p1, MODIFIER_BREAK_SHIELDS) is True
@@ -165,7 +165,7 @@ def test_twentyone_break_shields_enhanced_requires_two_defense_effects() -> None
     p1.table_modifiers = [MODIFIER_GUARD]
 
     assert game._is_single_modifier_playable(p1, MODIFIER_BREAK_SHIELDS_PLUS) is False
-    assert game._is_play_modifier_enabled(p1) == "action-not-available"
+    assert game._is_play_modifier_enabled(p1) is None
 
     p1.table_modifiers.append(MODIFIER_GUARD_PLUS)
     assert game._is_single_modifier_playable(p1, MODIFIER_BREAK_SHIELDS_PLUS) is True
@@ -958,7 +958,7 @@ def test_twentyone_target_card_matching_current_target_is_not_playable() -> None
 
     assert game._current_target() == 24
     assert game._is_single_modifier_playable(p1, MODIFIER_TARGET_24) is False
-    assert game._is_play_modifier_enabled(p1) == "action-not-available"
+    assert game._is_play_modifier_enabled(p1) is None
 
 
 def test_twentyone_effect_expire_plays_expire_sound() -> None:
@@ -1263,7 +1263,7 @@ def test_twentyone_round_outcome_plays_private_win_lose_sounds() -> None:
     assert twentyone_module.SOUND_ROUND_LOSE in guest_user.get_sounds_played()
 
 
-def test_twentyone_play_modifier_unavailable_when_no_playable_change_cards() -> None:
+def test_twentyone_play_modifier_available_when_change_cards_exist_but_none_playable() -> None:
     game, p1, p2 = setup_game()
     game.status = "playing"
     game.game_active = True
@@ -1273,6 +1273,19 @@ def test_twentyone_play_modifier_unavailable_when_no_playable_change_cards() -> 
     p2.hp = 10
     p1.modifiers = [MODIFIER_GUARD]
     p1.table_modifiers = [MODIFIER_GUARD] * 5
+
+    assert game._is_play_modifier_enabled(p1) is None
+
+
+def test_twentyone_play_modifier_unavailable_when_no_change_cards() -> None:
+    game, p1, p2 = setup_game()
+    game.status = "playing"
+    game.game_active = True
+    game.phase = "turns"
+    game.set_turn_players([p1, p2], reset_index=True)
+    p1.hp = 10
+    p2.hp = 10
+    p1.modifiers = []
 
     assert game._is_play_modifier_enabled(p1) == "action-not-available"
 

@@ -308,17 +308,13 @@ class TwentyOneGame(ActionGuardMixin, Game):
         p = player if isinstance(player, TwentyOnePlayer) else None
         if not p:
             return "action-not-available"
-        if self._modifiers_locked_for(p):
-            return "action-not-available"
-        if not self._playable_modifiers(p):
+        if not p.modifiers:
             return "action-not-available"
         return None
 
     def _is_play_modifier_hidden(self, player: Player) -> Visibility:
         p = player if isinstance(player, TwentyOnePlayer) else None
-        if not p or not self._playable_modifiers(p):
-            return Visibility.HIDDEN
-        if self._modifiers_locked_for(p):
+        if not p or not p.modifiers:
             return Visibility.HIDDEN
         return self._is_turn_action_hidden(player)
 
