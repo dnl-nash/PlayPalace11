@@ -19,7 +19,7 @@ Head: `35be7d3`
 - `cd server && ../.venv/bin/pytest tests/test_monopoly_manual_rule_payload_completeness.py -v`
   - Result: `55 passed`
 - `cd server && ../.venv/bin/pytest -k monopoly -q`
-  - Result: `1111 passed, 598 deselected`
+  - Result: `1132 passed, 598 deselected`
 
 ## New Progress: Manual Source Extraction (All Special Boards)
 
@@ -53,7 +53,7 @@ Head: `35be7d3`
   - `mario_movie`: `Question Block`, `Bowser's Fury`
 - Added seed verification tests:
   - `server/tests/test_monopoly_manual_extraction_seed.py`
-  - Includes extraction metadata coverage for all 55 boards plus Star/Marvel/Disney/Mario label assertions.
+  - Includes extraction metadata coverage for all 55 boards plus Star/Marvel/Disney/Mario/long-tail label assertions.
 
 ## New Progress: Marvel Set Coverage
 
@@ -83,6 +83,32 @@ Head: `35be7d3`
   - `disney_villains`: `Chance`, `Poison Apple`
 - Known extraction-limited Disney exception:
   - `disney_the_edition`
+
+## New Progress: Long-Tail Set Coverage
+
+- Added manual-derived action/deck labels for:
+  - `animal_crossing`: `Chance`, `Nook Miles`
+  - `barbie`: `Dream Career`, `Dream Closet`
+  - `black_panther`: `Kimoyo Beads`, `Heart-Shaped Herb`
+  - `deadpool_collectors`: `Dumb Luck`, `Pouches`
+  - `fortnite_collectors`: `Storm`, `Loot Chest`
+  - `fortnite_flip`: `Game Mode`, `Loot Chest`
+  - `jurassic_park`: `Impact Tremor`, `Cold Storage`
+  - `pokemon`: `Adventure`, `Challenge`
+  - `stranger_things`: `Walkie-Talkie`, `Blinking Lights`
+  - `stranger_things_collectors`: `Transmission`, `Upside Down`
+  - `stranger_things_netflix`: `Cerebro`, `Hellfire Club`
+  - `toy_story`: `Toy Chest`, `The Claw`
+  - `transformers`: `Autobot`, `Decepticon`
+  - `transformers_beast_wars`: `Maximal`, `Predacon`
+- Expanded Star Wars label/deck coverage beyond the original 4 boards:
+  - `star_wars_40th`, `star_wars_boba_fett`, `star_wars_complete_saga`,
+    `star_wars_light_side`, `star_wars_solo`, `star_wars_the_child`.
+- Remaining boards without deck-label seeding are now reduced to 11:
+  - `disney_the_edition`, `fortnite`, `game_of_thrones`, `ghostbusters`,
+    `harry_potter`, `junior_super_mario`, `lord_of_the_rings`,
+    `lord_of_the_rings_trilogy`, `marvel_avengers_legacy`,
+    `marvel_flip`, `star_wars_saga`
 
 ## What Has Been Done (Whole Rollout to Date)
 

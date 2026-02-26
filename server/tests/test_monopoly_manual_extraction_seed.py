@@ -51,6 +51,36 @@ def test_special_board_rules_include_extraction_seed_metadata() -> None:
     ("board_id", "expected_names", "expected_decks"),
     [
         (
+            "star_wars_40th",
+            {
+                "chance_1": "Force",
+                "chance_2": "Force",
+                "chance_3": "Force",
+                "community_chest_1": "Smuggler's Cargo",
+                "community_chest_2": "Smuggler's Cargo",
+                "community_chest_3": "Smuggler's Cargo",
+            },
+            {
+                "chance": "Force",
+                "community_chest": "Smuggler's Cargo",
+            },
+        ),
+        (
+            "star_wars_boba_fett",
+            {
+                "chance_1": "Bounty Hunter",
+                "chance_2": "Bounty Hunter",
+                "chance_3": "Bounty Hunter",
+                "community_chest_1": "Pursuit Craft",
+                "community_chest_2": "Pursuit Craft",
+                "community_chest_3": "Pursuit Craft",
+            },
+            {
+                "chance": "Bounty Hunter",
+                "community_chest": "Pursuit Craft",
+            },
+        ),
+        (
             "star_wars_classic_edition",
             {
                 "chance_1": "Use the Force",
@@ -68,6 +98,21 @@ def test_special_board_rules_include_extraction_seed_metadata() -> None:
             },
         ),
         (
+            "star_wars_complete_saga",
+            {
+                "chance_1": "Holocron",
+                "chance_2": "Holocron",
+                "chance_3": "Holocron",
+                "community_chest_1": "Jedi Training",
+                "community_chest_2": "Jedi Training",
+                "community_chest_3": "Jedi Training",
+            },
+            {
+                "chance": "Holocron",
+                "community_chest": "Jedi Training",
+            },
+        ),
+        (
             "star_wars_legacy",
             {
                 "chance_1": "Use the Force",
@@ -82,6 +127,21 @@ def test_special_board_rules_include_extraction_seed_metadata() -> None:
             {
                 "chance": "Use the Force",
                 "community_chest": "Hyperspace",
+            },
+        ),
+        (
+            "star_wars_light_side",
+            {
+                "chance_1": "The Force",
+                "chance_2": "The Force",
+                "chance_3": "The Force",
+                "community_chest_1": "The Dark Side",
+                "community_chest_2": "The Dark Side",
+                "community_chest_3": "The Dark Side",
+            },
+            {
+                "chance": "The Force",
+                "community_chest": "The Dark Side",
             },
         ),
         (
@@ -116,6 +176,36 @@ def test_special_board_rules_include_extraction_seed_metadata() -> None:
             {
                 "chance": "Signet",
                 "community_chest": "Hyperspace Jump",
+            },
+        ),
+        (
+            "star_wars_solo",
+            {
+                "chance_1": "Scoundrel",
+                "chance_2": "Scoundrel",
+                "chance_3": "Scoundrel",
+                "community_chest_1": "Smuggler",
+                "community_chest_2": "Smuggler",
+                "community_chest_3": "Smuggler",
+            },
+            {
+                "chance": "Scoundrel",
+                "community_chest": "Smuggler",
+            },
+        ),
+        (
+            "star_wars_the_child",
+            {
+                "chance_1": "Bounty Puck",
+                "chance_2": "Bounty Puck",
+                "chance_3": "Bounty Puck",
+                "community_chest_1": "Camtono",
+                "community_chest_2": "Camtono",
+                "community_chest_3": "Camtono",
+            },
+            {
+                "chance": "Bounty Puck",
+                "community_chest": "Camtono",
             },
         ),
     ],
@@ -515,6 +605,45 @@ def test_mario_seed_applies_manual_action_labels_and_deck_metadata(
     assert rule_set.mechanics.get("decks") == expected_decks
 
 
+@pytest.mark.parametrize(
+    ("board_id", "expected_chance", "expected_community"),
+    [
+        ("animal_crossing", "Chance", "Nook Miles"),
+        ("barbie", "Dream Career", "Dream Closet"),
+        ("black_panther", "Kimoyo Beads", "Heart-Shaped Herb"),
+        ("deadpool_collectors", "Dumb Luck", "Pouches"),
+        ("fortnite_collectors", "Storm", "Loot Chest"),
+        ("fortnite_flip", "Game Mode", "Loot Chest"),
+        ("jurassic_park", "Impact Tremor", "Cold Storage"),
+        ("pokemon", "Adventure", "Challenge"),
+        ("stranger_things", "Walkie-Talkie", "Blinking Lights"),
+        ("stranger_things_collectors", "Transmission", "Upside Down"),
+        ("stranger_things_netflix", "Cerebro", "Hellfire Club"),
+        ("toy_story", "Toy Chest", "The Claw"),
+        ("transformers", "Autobot", "Decepticon"),
+        ("transformers_beast_wars", "Maximal", "Predacon"),
+    ],
+)
+def test_long_tail_seed_applies_manual_deck_labels(
+    board_id: str,
+    expected_chance: str,
+    expected_community: str,
+) -> None:
+    rule_set = load_manual_rule_set(board_id)
+    by_space_id = {
+        row["space_id"]: row["name"]
+        for row in rule_set.board.get("spaces", [])
+    }
+    for space_id in ("chance_1", "chance_2", "chance_3"):
+        assert by_space_id.get(space_id) == expected_chance
+    for space_id in ("community_chest_1", "community_chest_2", "community_chest_3"):
+        assert by_space_id.get(space_id) == expected_community
+    assert rule_set.mechanics.get("decks") == {
+        "chance": expected_chance,
+        "community_chest": expected_community,
+    }
+
+
 def test_remaining_marvel_boards_without_deck_labels_are_known_exceptions() -> None:
     anchor_rows = _load_json(ANCHOR_INDEX_PATH)
     marvel_board_ids = sorted(
@@ -558,3 +687,30 @@ def test_all_mario_boards_have_seeded_deck_labels() -> None:
         if not isinstance(rule_set.mechanics.get("decks"), dict):
             missing_deck_ids.append(board_id)
     assert missing_deck_ids == []
+
+
+def test_remaining_special_boards_without_deck_labels_are_known_exceptions() -> None:
+    anchor_rows = _load_json(ANCHOR_INDEX_PATH)
+    board_ids = sorted(
+        row["board_id"]
+        for row in anchor_rows
+        if row.get("board_id")
+    )
+    missing_deck_ids: list[str] = []
+    for board_id in board_ids:
+        rule_set = load_manual_rule_set(board_id)
+        if not isinstance(rule_set.mechanics.get("decks"), dict):
+            missing_deck_ids.append(board_id)
+    assert missing_deck_ids == [
+        "disney_the_edition",
+        "fortnite",
+        "game_of_thrones",
+        "ghostbusters",
+        "harry_potter",
+        "junior_super_mario",
+        "lord_of_the_rings",
+        "lord_of_the_rings_trilogy",
+        "marvel_avengers_legacy",
+        "marvel_flip",
+        "star_wars_saga",
+    ]

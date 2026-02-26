@@ -215,6 +215,22 @@ DISNEY_DECK_METADATA_OVERRIDES: dict[str, dict[str, str]] = {
 }
 
 STAR_WARS_ACTION_SPACE_NAME_OVERRIDES: dict[str, dict[str, str]] = {
+    "star_wars_40th": {
+        "chance_1": "Force",
+        "chance_2": "Force",
+        "chance_3": "Force",
+        "community_chest_1": "Smuggler's Cargo",
+        "community_chest_2": "Smuggler's Cargo",
+        "community_chest_3": "Smuggler's Cargo",
+    },
+    "star_wars_boba_fett": {
+        "chance_1": "Bounty Hunter",
+        "chance_2": "Bounty Hunter",
+        "chance_3": "Bounty Hunter",
+        "community_chest_1": "Pursuit Craft",
+        "community_chest_2": "Pursuit Craft",
+        "community_chest_3": "Pursuit Craft",
+    },
     "star_wars_classic_edition": {
         "chance_1": "Use the Force",
         "chance_2": "Use the Force",
@@ -225,6 +241,14 @@ STAR_WARS_ACTION_SPACE_NAME_OVERRIDES: dict[str, dict[str, str]] = {
         "income_tax": "Galactic Empire Tax",
         "luxury_tax": "Galactic Empire Tax",
     },
+    "star_wars_complete_saga": {
+        "chance_1": "Holocron",
+        "chance_2": "Holocron",
+        "chance_3": "Holocron",
+        "community_chest_1": "Jedi Training",
+        "community_chest_2": "Jedi Training",
+        "community_chest_3": "Jedi Training",
+    },
     "star_wars_legacy": {
         "chance_1": "Use the Force",
         "chance_2": "Use the Force",
@@ -234,6 +258,14 @@ STAR_WARS_ACTION_SPACE_NAME_OVERRIDES: dict[str, dict[str, str]] = {
         "community_chest_3": "Hyperspace",
         "income_tax": "Galactic Empire Tax",
         "luxury_tax": "Galactic Empire Tax",
+    },
+    "star_wars_light_side": {
+        "chance_1": "The Force",
+        "chance_2": "The Force",
+        "chance_3": "The Force",
+        "community_chest_1": "The Dark Side",
+        "community_chest_2": "The Dark Side",
+        "community_chest_3": "The Dark Side",
     },
     "star_wars_mandalorian": {
         "chance_1": "Signet",
@@ -254,17 +286,49 @@ STAR_WARS_ACTION_SPACE_NAME_OVERRIDES: dict[str, dict[str, str]] = {
         "community_chest_3": "Hyperspace Jump",
         "income_tax": "Imperial Credits",
         "luxury_tax": "Imperial Advance",
+    },
+    "star_wars_solo": {
+        "chance_1": "Scoundrel",
+        "chance_2": "Scoundrel",
+        "chance_3": "Scoundrel",
+        "community_chest_1": "Smuggler",
+        "community_chest_2": "Smuggler",
+        "community_chest_3": "Smuggler",
+    },
+    "star_wars_the_child": {
+        "chance_1": "Bounty Puck",
+        "chance_2": "Bounty Puck",
+        "chance_3": "Bounty Puck",
+        "community_chest_1": "Camtono",
+        "community_chest_2": "Camtono",
+        "community_chest_3": "Camtono",
     },
 }
 
 STAR_WARS_DECK_METADATA_OVERRIDES: dict[str, dict[str, str]] = {
+    "star_wars_40th": {
+        "chance": "Force",
+        "community_chest": "Smuggler's Cargo",
+    },
+    "star_wars_boba_fett": {
+        "chance": "Bounty Hunter",
+        "community_chest": "Pursuit Craft",
+    },
     "star_wars_classic_edition": {
         "chance": "Use the Force",
         "community_chest": "Hyperspace",
     },
+    "star_wars_complete_saga": {
+        "chance": "Holocron",
+        "community_chest": "Jedi Training",
+    },
     "star_wars_legacy": {
         "chance": "Use the Force",
         "community_chest": "Hyperspace",
+    },
+    "star_wars_light_side": {
+        "chance": "The Force",
+        "community_chest": "The Dark Side",
     },
     "star_wars_mandalorian": {
         "chance": "Signet",
@@ -273,6 +337,14 @@ STAR_WARS_DECK_METADATA_OVERRIDES: dict[str, dict[str, str]] = {
     "star_wars_mandalorian_s2": {
         "chance": "Signet",
         "community_chest": "Hyperspace Jump",
+    },
+    "star_wars_solo": {
+        "chance": "Scoundrel",
+        "community_chest": "Smuggler",
+    },
+    "star_wars_the_child": {
+        "chance": "Bounty Puck",
+        "community_chest": "Camtono",
     },
 }
 
@@ -332,6 +404,180 @@ MARIO_DECK_METADATA_OVERRIDES: dict[str, dict[str, str]] = {
     },
 }
 
+LONG_TAIL_ACTION_SPACE_NAME_OVERRIDES: dict[str, dict[str, str]] = {
+    "animal_crossing": {
+        "chance_1": "Chance",
+        "chance_2": "Chance",
+        "chance_3": "Chance",
+        "community_chest_1": "Nook Miles",
+        "community_chest_2": "Nook Miles",
+        "community_chest_3": "Nook Miles",
+    },
+    "barbie": {
+        "chance_1": "Dream Career",
+        "chance_2": "Dream Career",
+        "chance_3": "Dream Career",
+        "community_chest_1": "Dream Closet",
+        "community_chest_2": "Dream Closet",
+        "community_chest_3": "Dream Closet",
+    },
+    "black_panther": {
+        "chance_1": "Kimoyo Beads",
+        "chance_2": "Kimoyo Beads",
+        "chance_3": "Kimoyo Beads",
+        "community_chest_1": "Heart-Shaped Herb",
+        "community_chest_2": "Heart-Shaped Herb",
+        "community_chest_3": "Heart-Shaped Herb",
+    },
+    "deadpool_collectors": {
+        "chance_1": "Dumb Luck",
+        "chance_2": "Dumb Luck",
+        "chance_3": "Dumb Luck",
+        "community_chest_1": "Pouches",
+        "community_chest_2": "Pouches",
+        "community_chest_3": "Pouches",
+    },
+    "fortnite_collectors": {
+        "chance_1": "Storm",
+        "chance_2": "Storm",
+        "chance_3": "Storm",
+        "community_chest_1": "Loot Chest",
+        "community_chest_2": "Loot Chest",
+        "community_chest_3": "Loot Chest",
+    },
+    "fortnite_flip": {
+        "chance_1": "Game Mode",
+        "chance_2": "Game Mode",
+        "chance_3": "Game Mode",
+        "community_chest_1": "Loot Chest",
+        "community_chest_2": "Loot Chest",
+        "community_chest_3": "Loot Chest",
+    },
+    "jurassic_park": {
+        "chance_1": "Impact Tremor",
+        "chance_2": "Impact Tremor",
+        "chance_3": "Impact Tremor",
+        "community_chest_1": "Cold Storage",
+        "community_chest_2": "Cold Storage",
+        "community_chest_3": "Cold Storage",
+    },
+    "pokemon": {
+        "chance_1": "Adventure",
+        "chance_2": "Adventure",
+        "chance_3": "Adventure",
+        "community_chest_1": "Challenge",
+        "community_chest_2": "Challenge",
+        "community_chest_3": "Challenge",
+    },
+    "stranger_things": {
+        "chance_1": "Walkie-Talkie",
+        "chance_2": "Walkie-Talkie",
+        "chance_3": "Walkie-Talkie",
+        "community_chest_1": "Blinking Lights",
+        "community_chest_2": "Blinking Lights",
+        "community_chest_3": "Blinking Lights",
+    },
+    "stranger_things_collectors": {
+        "chance_1": "Transmission",
+        "chance_2": "Transmission",
+        "chance_3": "Transmission",
+        "community_chest_1": "Upside Down",
+        "community_chest_2": "Upside Down",
+        "community_chest_3": "Upside Down",
+    },
+    "stranger_things_netflix": {
+        "chance_1": "Cerebro",
+        "chance_2": "Cerebro",
+        "chance_3": "Cerebro",
+        "community_chest_1": "Hellfire Club",
+        "community_chest_2": "Hellfire Club",
+        "community_chest_3": "Hellfire Club",
+    },
+    "toy_story": {
+        "chance_1": "Toy Chest",
+        "chance_2": "Toy Chest",
+        "chance_3": "Toy Chest",
+        "community_chest_1": "The Claw",
+        "community_chest_2": "The Claw",
+        "community_chest_3": "The Claw",
+    },
+    "transformers": {
+        "chance_1": "Autobot",
+        "chance_2": "Autobot",
+        "chance_3": "Autobot",
+        "community_chest_1": "Decepticon",
+        "community_chest_2": "Decepticon",
+        "community_chest_3": "Decepticon",
+    },
+    "transformers_beast_wars": {
+        "chance_1": "Maximal",
+        "chance_2": "Maximal",
+        "chance_3": "Maximal",
+        "community_chest_1": "Predacon",
+        "community_chest_2": "Predacon",
+        "community_chest_3": "Predacon",
+    },
+}
+
+LONG_TAIL_DECK_METADATA_OVERRIDES: dict[str, dict[str, str]] = {
+    "animal_crossing": {
+        "chance": "Chance",
+        "community_chest": "Nook Miles",
+    },
+    "barbie": {
+        "chance": "Dream Career",
+        "community_chest": "Dream Closet",
+    },
+    "black_panther": {
+        "chance": "Kimoyo Beads",
+        "community_chest": "Heart-Shaped Herb",
+    },
+    "deadpool_collectors": {
+        "chance": "Dumb Luck",
+        "community_chest": "Pouches",
+    },
+    "fortnite_collectors": {
+        "chance": "Storm",
+        "community_chest": "Loot Chest",
+    },
+    "fortnite_flip": {
+        "chance": "Game Mode",
+        "community_chest": "Loot Chest",
+    },
+    "jurassic_park": {
+        "chance": "Impact Tremor",
+        "community_chest": "Cold Storage",
+    },
+    "pokemon": {
+        "chance": "Adventure",
+        "community_chest": "Challenge",
+    },
+    "stranger_things": {
+        "chance": "Walkie-Talkie",
+        "community_chest": "Blinking Lights",
+    },
+    "stranger_things_collectors": {
+        "chance": "Transmission",
+        "community_chest": "Upside Down",
+    },
+    "stranger_things_netflix": {
+        "chance": "Cerebro",
+        "community_chest": "Hellfire Club",
+    },
+    "toy_story": {
+        "chance": "Toy Chest",
+        "community_chest": "The Claw",
+    },
+    "transformers": {
+        "chance": "Autobot",
+        "community_chest": "Decepticon",
+    },
+    "transformers_beast_wars": {
+        "chance": "Maximal",
+        "community_chest": "Predacon",
+    },
+}
+
 
 def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -351,6 +597,7 @@ def _resolve_action_space_overrides(board_id: str) -> dict[str, str]:
         DISNEY_ACTION_SPACE_NAME_OVERRIDES,
         STAR_WARS_ACTION_SPACE_NAME_OVERRIDES,
         MARIO_ACTION_SPACE_NAME_OVERRIDES,
+        LONG_TAIL_ACTION_SPACE_NAME_OVERRIDES,
     ):
         overrides = table.get(board_id)
         if overrides:
@@ -364,6 +611,7 @@ def _resolve_deck_overrides(board_id: str) -> dict[str, str]:
         DISNEY_DECK_METADATA_OVERRIDES,
         STAR_WARS_DECK_METADATA_OVERRIDES,
         MARIO_DECK_METADATA_OVERRIDES,
+        LONG_TAIL_DECK_METADATA_OVERRIDES,
     ):
         overrides = table.get(board_id)
         if overrides:
