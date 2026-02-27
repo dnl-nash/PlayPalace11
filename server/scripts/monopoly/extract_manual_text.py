@@ -40,7 +40,7 @@ BOARD_ZLIB_RETRY_LIMITS: dict[str, int] = {
 def _stable_dump(path: Path, data: Any) -> None:
     tmp_path = path.with_suffix(path.suffix + ".tmp")
     tmp_path.write_text(
-        json.dumps(data, indent=2, sort_keys=True, ensure_ascii=False),
+        json.dumps(data, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
     tmp_path.replace(path)
@@ -232,6 +232,28 @@ def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _load_cached_extraction_meta(board_id: str, output_dir: Path) -> dict[str, Any] | None:
+    """Return previously extracted board metadata when still structurally valid."""
+    meta_path = output_dir / f"{board_id}.json"
+    if not meta_path.exists():
+        return None
+    try:
+        cached = _load_json(meta_path)
+    except Exception:
+        return None
+    if not isinstance(cached, dict):
+        return None
+    if str(cached.get("status", "")) != "ok":
+        return None
+    text_path_value = str(cached.get("text_path", "")).strip()
+    if not text_path_value:
+        return None
+    text_path = Path(text_path_value)
+    if not text_path.exists():
+        return None
+    return _attach_preferred_text_metadata(dict(cached), output_dir=output_dir)
+
+
 def _select_targets(
     anchor_rows: list[dict[str, Any]],
     families: set[str],
@@ -325,6 +347,13 @@ def run_extraction(
                 base_zlib_limit=zlib_max_output_length,
             )
         except Exception as error:  # pragma: no cover - network/runtime failure path
+            cached_meta = _load_cached_extraction_meta(board_id, output_dir=output_dir)
+            if cached_meta is not None:
+                cached_meta["status"] = "ok"
+                manifest_rows.append(cached_meta)
+                print(f"[cache-fallback] {board_id}: {error}")
+                continue
+
             print(f"[fail] {board_id}: {error}")
             manifest_rows.append(
                 {
