@@ -557,6 +557,17 @@ class BlackjackGame(Game):
             return Visibility.VISIBLE
         return Visibility.HIDDEN
 
+    def _is_read_bets_enabled(self, player: Player) -> str | None:
+        if self.status != "playing":
+            return "action-not-playing"
+        if player.is_spectator:
+            return "action-spectator"
+        if not isinstance(player, BlackjackPlayer):
+            return "action-not-available"
+        if self._is_between_hands():
+            return "action-not-available"
+        return None
+
     def _is_check_hidden(self, player: Player) -> Visibility:
         return Visibility.HIDDEN
 
@@ -670,6 +681,13 @@ class BlackjackGame(Game):
                 is_hidden="_is_check_hidden",
             ),
             Action(
+                id="read_bets",
+                label=Localization.get(locale, "blackjack-table-status"),
+                handler="_action_read_bets",
+                is_enabled="_is_read_bets_enabled",
+                is_hidden="_is_check_hidden",
+            ),
+            Action(
                 id="read_dealer",
                 label=Localization.get(locale, "blackjack-read-dealer"),
                 handler="_action_read_dealer",
@@ -713,7 +731,7 @@ class BlackjackGame(Game):
         self.define_keybind("d", "Double down", ["double_down"], state=KeybindState.ACTIVE)
         self.define_keybind("p", "Split", ["split"], state=KeybindState.ACTIVE)
         self.define_keybind("u", "Surrender", ["surrender"], state=KeybindState.ACTIVE)
-        self.define_keybind("b", "Set next bet", ["set_next_bet"], state=KeybindState.ACTIVE)
+        self.define_keybind("b", "Set next bet / Read bets", ["set_next_bet", "read_bets"], state=KeybindState.ACTIVE)
         self.define_keybind("i", "Insurance", ["take_insurance"], state=KeybindState.ACTIVE)
         self.define_keybind("n", "Decline insurance", ["decline_insurance"], state=KeybindState.ACTIVE)
         self.define_keybind("m", "Even money", ["even_money"], state=KeybindState.ACTIVE)
@@ -1326,6 +1344,32 @@ class BlackjackGame(Game):
             cards=read_cards(p.hand, user.locale),
             total=self._total_text(user.locale, total, is_soft),
         )
+
+    def _action_read_bets(self, player: Player, action_id: str) -> None:
+        p = player if isinstance(player, BlackjackPlayer) else None
+        if not p or self._is_read_bets_enabled(p):
+            return
+
+        user = self.get_user(player)
+        if not user:
+            return
+
+        lines: list[str] = []
+        for other in self.get_active_players():
+            if not isinstance(other, BlackjackPlayer):
+                continue
+            total_bet = other.bet + other.split_bet + other.insurance_bet
+            lines.append(
+                Localization.get(
+                    user.locale,
+                    "blackjack-status-line-bet",
+                    player=other.name,
+                    chips=other.chips,
+                    bet=total_bet,
+                )
+            )
+
+        user.speak(". ".join(lines) if lines else Localization.get(user.locale, "blackjack-no-active-players"))
 
     def _action_read_dealer(self, player: Player, action_id: str) -> None:
         user = self.get_user(player)

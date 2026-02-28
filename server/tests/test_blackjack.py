@@ -386,6 +386,42 @@ def test_blackjack_set_next_bet_ignored_during_player_phase() -> None:
     assert host_player.next_bet == 10
 
 
+def test_blackjack_b_keybind_reads_current_bets_during_round() -> None:
+    game, host_player, host_user = create_game_with_host()
+    guest_user = MockUser("Guest")
+    guest_player = game.add_player("Guest", guest_user)
+    game.setup_keybinds()
+    game.status = "playing"
+    game.game_active = True
+    game.phase = "players"
+
+    host_player.chips = 100
+    host_player.bet = 10
+    guest_player.chips = 80
+    guest_player.bet = 20
+
+    game._handle_keybind_event(host_player, {"key": "b"})
+
+    spoken = host_user.get_last_spoken() or ""
+    assert "Host: 100 chips, bet 10" in spoken
+    assert "Guest: 80 chips, bet 20" in spoken
+    assert host_player.id not in game._pending_actions
+
+
+def test_blackjack_b_keybind_between_hands_opens_set_next_bet_input() -> None:
+    game, host_player, host_user = create_game_with_host()
+    game.setup_keybinds()
+    game.status = "playing"
+    game.game_active = True
+    game.phase = "settle"
+    game.next_hand_wait_ticks = 100
+
+    game._handle_keybind_event(host_player, {"key": "b"})
+
+    assert game._pending_actions.get(host_player.id) == "set_next_bet"
+    assert "action_input_editbox" in host_user.editboxes
+
+
 def test_blackjack_insurance_wins_when_dealer_has_blackjack() -> None:
     game, host_player, host_user = create_game_with_host()
     game.status = "playing"
