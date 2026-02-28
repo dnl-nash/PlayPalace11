@@ -163,7 +163,7 @@ def test_blackjack_settle_single_player_continues_when_player_has_chips() -> Non
     game._settle_hand()
 
     assert game.status == "playing"
-    assert game.next_hand_wait_ticks == 40
+    assert game.next_hand_wait_ticks == 100
     assert host_player.chips == 110
 
 
