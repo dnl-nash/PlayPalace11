@@ -99,6 +99,7 @@ RULE_PACKS: dict[str, BoardRulePack] = {
             "startup_board_announcement",
             "card_id_remap",
             "card_cash_override",
+            "question_block_sound_unit",
         ),
     ),
     "mario_movie": BoardRulePack(

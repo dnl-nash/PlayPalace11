@@ -39,3 +39,11 @@ def test_parity_manifest_exposes_star_wars_audio_hardware_capability_subset():
     assert profile is not None
     assert "audio_theme_event" in profile.capability_ids
     assert "audio_theme_event" in profile.hardware_capability_ids
+
+
+def test_parity_manifest_exposes_mario_question_block_hardware_capability_subset():
+    profile = get_board_parity_profile("mario_celebration")
+
+    assert profile is not None
+    assert "question_block_sound_unit" in profile.capability_ids
+    assert "question_block_sound_unit" in profile.hardware_capability_ids

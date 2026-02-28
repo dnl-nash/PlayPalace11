@@ -11,7 +11,7 @@ Head: tracked via git history on `monopoly`
 - Fidelity statuses:
   - `manual_core`: `55`
   - `near_full`: `0`
-- Boards with hardware capability flags: `junior_super_mario`, `star_wars_mandalorian`
+- Boards with hardware capability flags: `junior_super_mario`, `mario_celebration`, `star_wars_mandalorian`
 - Pac-Man game-unit behavior remains intentionally out of scope.
 
 ## Verification Evidence (2026-02-27)
@@ -27,10 +27,10 @@ Head: tracked via git history on `monopoly`
 
 ## Verification Evidence (2026-02-28)
 
-- `cd server && nix shell nixpkgs#uv -c uv run --extra dev pytest tests/test_monopoly_hardware_emulation.py tests/test_monopoly_wave_special_audio_star_wars.py tests/test_monopoly_wave_special_audio_junior.py -q`
-  - Result: `12 passed`
+- `cd server && nix shell nixpkgs#uv -c uv run --extra dev pytest tests/test_monopoly_hardware_emulation.py tests/test_monopoly_wave_special_audio_star_wars.py tests/test_monopoly_wave_special_audio_junior.py tests/test_monopoly_wave_special_audio_mario_celebration.py -q`
+  - Result: `16 passed`
 - `cd server && nix shell nixpkgs#uv -c uv run --extra dev pytest -k monopoly -q`
-  - Result: `1288 passed, 598 deselected`
+  - Result: `1295 passed, 598 deselected`
 
 ## New Progress: Hardware/Audio Mapping Expansion
 
@@ -38,11 +38,15 @@ Head: tracked via git history on `monopoly`
   - Runtime emits `junior_coin_sound_powerup` from `_apply_junior_super_mario_powerup(...)` when `junior_powerup_sound_ready` capability is active.
   - Event payload records `power_up_die` and resolved no-sound `outcome` for future emulated-sound parity work.
 - Expanded hardware resolver support:
-  - `server/games/monopoly/hardware_emulation.py` now recognizes `junior_coin_sound_powerup`.
+  - `server/games/monopoly/hardware_emulation.py` now recognizes `junior_coin_sound_powerup` and `mario_question_block_sound`.
   - Emulated events now include placeholder client sound asset paths:
     - `play_theme` -> `game_monopoly_hardware/play_theme_placeholder.ogg`
     - `star_wars_theme` -> `game_monopoly_hardware/star_wars_theme_placeholder.ogg`
     - `junior_coin_sound_powerup` -> `game_monopoly_hardware/junior_coin_sound_placeholder.ogg`
+    - `mario_question_block_sound` -> `game_monopoly_hardware/mario_question_block_sound_placeholder.ogg`
+  - Added Mario Celebration hardware event wiring:
+    - Runtime emits `mario_question_block_sound` on Question Block (`chance`) draws when `question_block_sound_unit` capability is active.
+    - Manual evidence source: `server/games/monopoly/manual_rules/extracted/mario_celebration.txt` (`Question Block Sound Unit` and explicit "What sound did you hear?" rules).
   - Placeholder provenance is tracked in `client/sounds/game_monopoly_hardware/README.md` and all entries are flagged for replacement with original captures later.
 - Added verification coverage:
   - `server/tests/test_monopoly_wave_special_audio_junior.py`
@@ -54,6 +58,7 @@ Head: tracked via git history on `monopoly`
   - `play_theme.ogg` (OpenGameArt `electric-sound-effects-library`, `SpaceEngine_Start_01.mp3` transcoded to OGG, author Little Robot Sound Factory)
   - `star_wars_theme.ogg` (OpenGameArt `sci-fi-sound-effects-library`, `Jingle_Win_01.mp3` transcoded to OGG, author Little Robot Sound Factory)
   - `junior_coin_sound_powerup.ogg` (OpenGameArt `8-bit-sound-effects-library`, `Collect_Point_00.mp3` transcoded to OGG, author Little Robot Sound Factory)
+  - `mario_question_block_sound.ogg` (OpenGameArt `8-bit-sound-effects-library`, `Collect_Point_00.mp3` transcoded to OGG, author Little Robot Sound Factory)
 - Resolver behavior now actively uses `original/` assets when present and falls back to placeholders when absent.
 - Provenance, source URLs, licenses, and SHA256 hashes are recorded in:
   - `client/sounds/game_monopoly_hardware/README.md`

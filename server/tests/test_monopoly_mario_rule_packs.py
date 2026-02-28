@@ -43,6 +43,10 @@ def test_mario_celebration_exports_card_cash_override_mapping():
     assert mario_celebration.CARD_CASH_OVERRIDES["income_tax_refund_20"] == 60
 
 
+def test_mario_celebration_exports_question_block_sound_capability():
+    assert "question_block_sound_unit" in mario_celebration.CAPABILITY_IDS
+
+
 def test_junior_super_mario_exports_manual_core_capability():
     assert "junior_manual_core" in junior_super_mario.CAPABILITY_IDS
 

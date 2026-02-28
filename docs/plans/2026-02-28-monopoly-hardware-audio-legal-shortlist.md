@@ -10,6 +10,7 @@ Target event IDs:
 - `play_theme`
 - `star_wars_theme`
 - `junior_coin_sound_powerup`
+- `mario_question_block_sound`
 
 This pass focuses on "closest-to-board feel" while keeping redistributable licensing clear.
 
@@ -48,6 +49,31 @@ This pass focuses on "closest-to-board feel" while keeping redistributable licen
    - Status: `ship_now_attribution`
 5. Question Block unit recordings from actual Super Mario Monopoly boards/videos
    - Fit notes: best authenticity
+   - Licensing note: Nintendo/Hasbro owned IP and branded SFX references
+   - Status: `reference_only`
+
+### `mario_question_block_sound`
+
+1. `8-Bit Sound Library/Mp3/Collect_Point_00.mp3` (currently installed, transcoded to OGG)
+   - Source pack: OpenGameArt 8-Bit Sound Effects Library
+   - License: CC-BY 3.0
+   - Fit notes: short pickup cue that matches Question Block "coin ping" behavior in the Celebration manual
+   - Sample duration: ~0.68s (source MP3)
+   - Status: `ship_now_attribution`
+2. `8-Bit Sound Library/Mp3/Pickup_01.mp3`
+   - Source pack: OpenGameArt 8-Bit Sound Effects Library
+   - License: CC-BY 3.0
+   - Fit notes: alternate shorter cue for lower playback latency
+   - Sample duration: ~0.31s
+   - Status: `ship_now_attribution`
+3. `Coins Sound Library/Mp3/Coins_Single/Coins_Single_12.mp3`
+   - Source pack: OpenGameArt Coins Sound Effects Library
+   - License: CC-BY 3.0
+   - Fit notes: realistic metallic coin variant
+   - Sample duration: ~0.26s
+   - Status: `ship_now_attribution`
+4. Direct recordings from Monopoly Super Mario Celebration Question Block unit
+   - Fit notes: highest authenticity
    - Licensing note: Nintendo/Hasbro owned IP and branded SFX references
    - Status: `reference_only`
 
@@ -114,9 +140,10 @@ Recommended legal swap set (closest fit + lowest license friction):
 1. Keep `junior_coin_sound_powerup` as current `Collect_Point_00` mapping.
 2. Use `star_wars_theme` from Sci-Fi pack `Jingle_Win_01`.
 3. Use `play_theme` from Electric pack `SpaceEngine_Start_01`.
+4. Use `mario_question_block_sound` from 8-bit pack `Collect_Point_00`.
 
 Status on this branch: applied.  
-All three live mappings now resolve to CC-BY 3.0 stand-ins from the same author/publisher family (Little Robot Sound Factory), which simplifies attribution and keeps a coherent synthesis style.
+All four live mappings now resolve to CC-BY 3.0 stand-ins from the same author/publisher family (Little Robot Sound Factory), which simplifies attribution and keeps a coherent synthesis style.
 
 ## Sources
 

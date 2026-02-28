@@ -60,6 +60,26 @@ def test_junior_coin_sound_event_is_emulatable_when_sound_mode_emulated(monkeypa
     assert result.sound_asset_source == "placeholder"
 
 
+def test_mario_question_block_event_is_emulatable_when_sound_mode_emulated(monkeypatch):
+    monkeypatch.setattr(
+        "server.games.monopoly.hardware_emulation._sound_asset_exists",
+        lambda _relative_asset: False,
+    )
+
+    event = HardwareEvent(
+        board_id="mario_celebration",
+        event_id="mario_question_block_sound",
+        payload={"deck_type": "chance", "card_id": "bank_dividend_50"},
+    )
+
+    result = resolve_hardware_event(event, sound_mode="emulated")
+
+    assert result.status == "emulated"
+    assert result.details == "mario_question_block_sound"
+    assert result.sound_asset == "game_monopoly_hardware/mario_question_block_sound_placeholder.ogg"
+    assert result.sound_asset_source == "placeholder"
+
+
 def test_hardware_event_excludes_pacman_game_unit_emulation():
     event = HardwareEvent(
         board_id="pacman",

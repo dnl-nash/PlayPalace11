@@ -9,6 +9,7 @@ CAPABILITY_IDS = (
     "startup_board_announcement",
     "card_id_remap",
     "card_cash_override",
+    "question_block_sound_unit",
 )
 CARD_ID_REMAPS = {
     ("chance", "poor_tax_15"): "bank_dividend_50",

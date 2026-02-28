@@ -1071,7 +1071,9 @@
   "mechanics": {
     "mode": "manual_payload_seed_v2",
     "rule_pack_id": "mario_celebration",
-    "hardware_capability_ids": [],
+    "hardware_capability_ids": [
+      "question_block_sound_unit"
+    ],
     "manual_source": {
       "instruction_url": "https://instructions.hasbro.com/en-us/instruction/monopoly-super-mario-celebration-edition-board-game-instructions",
       "pdf_url": "https://assets-us-01.kc-usercontent.com:443/500e0a65-283d-00ef-33b2-7f1f20488fe2/6583f8cd-113c-461f-9f7f-92ac10c3a579/E95170000_INST_MN_SuperMario_F20_P1_FFR.pdf",

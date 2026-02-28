@@ -29,7 +29,7 @@ Source: `server/games/monopoly/catalog/special_board_anchor_index.json` (generat
 | `jurassic_park` | `jurassic` | `monopoly-f1662` | `manual_core` | `board_specific` | 0 |
 | `lord_of_the_rings` | `lord` | `monopoly-f1663` | `manual_core` | `board_specific` | 0 |
 | `lord_of_the_rings_trilogy` | `lord` | `monopoly-41603` | `manual_core` | `board_specific` | 0 |
-| `mario_celebration` | `mario` | `monopoly-e9517` | `manual_core` | `board_specific` | 0 |
+| `mario_celebration` | `mario` | `monopoly-e9517` | `manual_core` | `board_specific` | 1 |
 | `mario_collectors` | `mario` | `monopoly-c4382` | `manual_core` | `board_specific` | 0 |
 | `mario_kart` | `mario` | `monopoly-e1870` | `manual_core` | `board_specific` | 0 |
 | `mario_movie` | `mario` | `monopoly-f6818` | `manual_core` | `board_specific` | 0 |

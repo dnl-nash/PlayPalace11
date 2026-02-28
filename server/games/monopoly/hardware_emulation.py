@@ -18,6 +18,10 @@ HARDWARE_EVENT_SOUND_PROFILES: dict[str, dict[str, str]] = {
         "placeholder_asset": "game_monopoly_hardware/junior_coin_sound_placeholder.ogg",
         "original_asset": "game_monopoly_hardware/original/junior_coin_sound_powerup.ogg",
     },
+    "mario_question_block_sound": {
+        "placeholder_asset": "game_monopoly_hardware/mario_question_block_sound_placeholder.ogg",
+        "original_asset": "game_monopoly_hardware/original/mario_question_block_sound.ogg",
+    },
 }
 SUPPORTED_EVENT_IDS = set(HARDWARE_EVENT_SOUND_PROFILES)
 

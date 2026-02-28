@@ -2580,6 +2580,8 @@ class MonopolyGame(ActionGuardMixin, Game):
             return None
         if self.active_board_id.startswith("star_wars"):
             return "star_wars_theme"
+        if self.active_board_id == "mario_celebration" and deck_type == "chance":
+            return "mario_question_block_sound"
         return None
 
     def _resolve_junior_super_mario_powerup_sound_outcome(self, power_up_die: int) -> str | None:

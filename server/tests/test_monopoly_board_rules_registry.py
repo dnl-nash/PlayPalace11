@@ -51,6 +51,10 @@ def test_mario_celebration_card_cash_override_contract():
     assert get_card_cash_override("mario_celebration", "income_tax_refund_20") == 60
 
 
+def test_mario_celebration_question_block_sound_capability_contract():
+    assert supports_capability("mario_celebration", "question_block_sound_unit") is True
+
+
 def test_junior_super_mario_manual_core_capability_contract():
     assert supports_capability("junior_super_mario", "junior_manual_core") is True
 
