@@ -4,224 +4,224 @@
 game-name-monopoly = Monopoly
 
 # Lobby options
-monopoly-set-preset = Preset: { $preset }
-monopoly-select-preset = Select a Monopoly preset
-monopoly-option-changed-preset = Preset set to { $preset }.
+monopoly-set-preset = الإعداد المسبق: { $preset }
+monopoly-select-preset = حدد إعدادًا مسبقًا للاحتكار
+monopoly-option-changed-preset = تم ضبطه مسبقًا على { $preset }.
 
 # Preset labels
-monopoly-preset-classic-standard = Classic and Themed Standard
-monopoly-preset-junior = Monopoly Junior
-monopoly-preset-junior-modern = Monopoly Junior (Modern)
-monopoly-preset-junior-legacy = Monopoly Junior (Legacy)
-monopoly-preset-cheaters = Monopoly Cheaters Edition
-monopoly-preset-electronic-banking = Electronic Banking
-monopoly-preset-voice-banking = Voice Banking
-monopoly-preset-sore-losers = Monopoly for Sore Losers
-monopoly-preset-speed = Monopoly Speed
-monopoly-preset-builder = Monopoly Builder
-monopoly-preset-city = Monopoly City
-monopoly-preset-bid-card-game = Monopoly Bid
-monopoly-preset-deal-card-game = Monopoly Deal
-monopoly-preset-knockout = Monopoly Knockout
-monopoly-preset-free-parking-jackpot = Free Parking Jackpot
+monopoly-preset-classic-standard = معيار كلاسيكي وموضوعي
+monopoly-preset-junior = مونوبولي جونيور
+monopoly-preset-junior-modern = مونوبولي جونيور (حديث)
+monopoly-preset-junior-legacy = مونوبولي جونيور (تراث)
+monopoly-preset-cheaters = طبعة الغشاشين الاحتكارية
+monopoly-preset-electronic-banking = الخدمات المصرفية الإلكترونية
+monopoly-preset-voice-banking = الخدمات المصرفية الصوتية
+monopoly-preset-sore-losers = احتكار الخاسرين المؤلمين
+monopoly-preset-speed = سرعة الاحتكار
+monopoly-preset-builder = منشئ الاحتكار
+monopoly-preset-city = مدينة الاحتكار
+monopoly-preset-bid-card-game = عرض الاحتكار
+monopoly-preset-deal-card-game = صفقة الاحتكار
+monopoly-preset-knockout = الضربة القاضية الاحتكارية
+monopoly-preset-free-parking-jackpot = مواقف مجانية للسيارات
 
 # Scaffold status
-monopoly-announce-preset = Announce current preset
-monopoly-current-preset = Current preset: { $preset } ({ $count } editions).
-monopoly-scaffold-started = Monopoly scaffold started with { $preset } ({ $count } editions).
+monopoly-announce-preset = الإعلان عن الإعداد المسبق الحالي
+monopoly-current-preset = الإعداد المسبق الحالي: { $preset } (إصدارات { $count }).
+monopoly-scaffold-started = بدأت سقالة الاحتكار بـ { $preset } (إصدارات { $count }).
 
 # Turn actions
-monopoly-roll-dice = Roll dice
-monopoly-buy-property = Buy property
-monopoly-banking-balance = Check bank balance
-monopoly-banking-transfer = Transfer funds
-monopoly-banking-ledger = Review bank ledger
-monopoly-voice-command = Voice command
-monopoly-cheaters-claim-reward = Claim cheat reward
-monopoly-end-turn = End turn
+monopoly-roll-dice = لفة النرد
+monopoly-buy-property = شراء العقارات
+monopoly-banking-balance = التحقق من الرصيد البنكي
+monopoly-banking-transfer = تحويل الأموال
+monopoly-banking-ledger = مراجعة دفتر الأستاذ البنكي
+monopoly-voice-command = أمر صوتي
+monopoly-cheaters-claim-reward = المطالبة بمكافأة الغش
+monopoly-end-turn = نهاية بدوره
 
 # Turn validation
-monopoly-roll-first = You need to roll first.
-monopoly-already-rolled = You already rolled this turn.
-monopoly-no-property-to-buy = There is no property to buy right now.
-monopoly-property-owned = That property is already owned.
-monopoly-not-enough-cash = You don't have enough cash.
-monopoly-action-disabled-for-preset = This action is disabled for the selected preset.
-monopoly-buy-disabled = Buying property directly is disabled for this preset.
+monopoly-roll-first = تحتاج إلى التدحرج أولاً.
+monopoly-already-rolled = لقد توالت بالفعل هذا المنعطف.
+monopoly-no-property-to-buy = لا يوجد عقار للشراء في الوقت الحالي.
+monopoly-property-owned = هذا العقار مملوك بالفعل.
+monopoly-not-enough-cash = ليس لديك ما يكفي من النقود.
+monopoly-action-disabled-for-preset = تم تعطيل هذا الإجراء للإعداد المسبق المحدد.
+monopoly-buy-disabled = تم تعطيل شراء العقارات مباشرة لهذا الإعداد المسبق.
 
 # Turn events
-monopoly-pass-go = { $player } passed GO and collected { $amount }.
-monopoly-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-result = You rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-player-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-you-roll-only = You rolled { $die1 } + { $die2 } = { $total }.
-monopoly-player-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-only-doubles = You rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-player-roll-only-doubles = { $player } rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-property-available = { $property } is available for { $price }.
-monopoly-property-bought = { $player } bought { $property } for { $price }.
-monopoly-rent-paid = { $player } paid { $amount } in rent to { $owner } for { $property }.
-monopoly-player-paid-player = { $player } paid { $amount } to { $target }.
-monopoly-you-completed-color-set = You now own all of the { $group } properties.
-monopoly-player-completed-color-set = { $player } now owns all of the { $group } properties.
-monopoly-you-completed-railroads = You now own all of the railroads.
-monopoly-player-completed-railroads = { $player } now owns all of the railroads.
-monopoly-you-completed-utilities = You now own all of the utilities.
-monopoly-player-completed-utilities = { $player } now owns all of the utilities.
-monopoly-landed-owned = { $player } landed on their own property: { $property }.
-monopoly-tax-paid = { $player } paid { $amount } for { $tax }.
-monopoly-go-to-jail = { $player } goes to jail (moved to { $space }).
-monopoly-bankrupt-player = You are bankrupt and out of the game.
-monopoly-player-bankrupt = { $player } is bankrupt. Creditor: { $creditor }.
-monopoly-winner-by-bankruptcy = { $player } wins by bankruptcy with { $cash } cash remaining.
-monopoly-winner-by-cash = { $player } wins with the highest cash total: { $cash }.
-monopoly-city-winner-by-value = { $player } wins Monopoly City with final value { $total }.
+monopoly-pass-go = اجتاز { $player } GO وجمع { $amount }.
+monopoly-roll-result = تدحرجت { $player } على { $die1 } + { $die2 } = { $total } وهبطت على { $space }.
+monopoly-roll-only = { $player } توالت { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-result = لقد تدحرجت { $die1 } + { $die2 } = { $total } وهبطت على { $space }.
+monopoly-player-roll-result = تدحرجت { $player } على { $die1 } + { $die2 } = { $total } وهبطت على { $space }.
+monopoly-you-roll-only = لقد قمت بتدوير { $die1 } + { $die2 } = { $total }.
+monopoly-player-roll-only = { $player } توالت { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-only-doubles = لقد قمت بتدوير { $die1 } + { $die2 } = { $total }. الزوجي!
+monopoly-player-roll-only-doubles = { $player } توالت { $die1 } + { $die2 } = { $total }. الزوجي!
+monopoly-property-available = { $property } متاح لـ { $price }.
+monopoly-property-bought = اشترت { $player } { $property } مقابل { $price }.
+monopoly-rent-paid = دفعت { $player } إيجار { $amount } إلى { $owner } مقابل { $property }.
+monopoly-player-paid-player = دفعت { $player } { $amount } إلى { $target }.
+monopoly-you-completed-color-set = أنت الآن تمتلك كافة خصائص { $group }.
+monopoly-player-completed-color-set = تمتلك { $player } الآن جميع خصائص { $group }.
+monopoly-you-completed-railroads = أنت الآن تملك كل خطوط السكك الحديدية.
+monopoly-player-completed-railroads = تمتلك { $player } الآن جميع خطوط السكك الحديدية.
+monopoly-you-completed-utilities = أنت الآن تملك كافة المرافق.
+monopoly-player-completed-utilities = تمتلك { $player } الآن كافة المرافق.
+monopoly-landed-owned = هبطت { $player } على ممتلكاتهم الخاصة: { $property }.
+monopoly-tax-paid = دفعت { $player } { $amount } مقابل { $tax }.
+monopoly-go-to-jail = يذهب { $player } إلى السجن (تم نقله إلى { $space }).
+monopoly-bankrupt-player = أنت مفلس وخرج من اللعبة.
+monopoly-player-bankrupt = { $player } مفلسة. الدائن: { $creditor }.
+monopoly-winner-by-bankruptcy = { $player } يفوز بالإفلاس مع بقاء أموال { $cash }.
+monopoly-winner-by-cash = { $player } يفوز بأعلى إجمالي نقدي: { $cash }.
+monopoly-city-winner-by-value = { $player } يفوز بـ Monopoly City بالقيمة النهائية { $total }.
 
 # Additional actions
-monopoly-auction-property = Auction property
-monopoly-auction-bid = Place auction bid
-monopoly-auction-pass = Pass in auction
-monopoly-mortgage-property = Mortgage property
-monopoly-unmortgage-property = Unmortgage property
-monopoly-build-house = Build house or hotel
-monopoly-sell-house = Sell house or hotel
-monopoly-offer-trade = Offer trade
-monopoly-accept-trade = Accept trade
-monopoly-decline-trade = Decline trade
-monopoly-read-cash = Read cash
-monopoly-pay-bail = Pay bail
-monopoly-use-jail-card = Use get-out-of-jail card
-monopoly-cash-report = { $cash } in cash.
-monopoly-property-amount-option = { $property } for { $amount }
-monopoly-banking-transfer-option = Transfer { $amount } to { $target }
+monopoly-auction-property = خاصية المزاد
+monopoly-auction-bid = مكان عرض المزاد
+monopoly-auction-pass = تمر في المزاد
+monopoly-mortgage-property = ملكية الرهن العقاري
+monopoly-unmortgage-property = الممتلكات غير الرهن العقاري
+monopoly-build-house = بناء منزل أو فندق
+monopoly-sell-house = بيع منزل أو فندق
+monopoly-offer-trade = عرض التجارة
+monopoly-accept-trade = قبول التجارة
+monopoly-decline-trade = تراجع التجارة
+monopoly-read-cash = قراءة النقدية
+monopoly-pay-bail = دفع الكفالة
+monopoly-use-jail-card = استخدم بطاقة الخروج من السجن
+monopoly-cash-report = { $cash } نقدا.
+monopoly-property-amount-option = { $property } لـ { $amount }
+monopoly-banking-transfer-option = نقل { $amount } إلى { $target }
 
 # Additional prompts
-monopoly-select-property-mortgage = Select a property to mortgage
-monopoly-select-property-unmortgage = Select a property to unmortgage
-monopoly-select-property-build = Select a property to build on
-monopoly-select-property-sell = Select a property to sell from
-monopoly-select-trade-offer = Select a trade offer
-monopoly-select-auction-bid = Select your auction bid
-monopoly-select-banking-transfer = Select a transfer
-monopoly-select-voice-command = Enter a voice command beginning with voice:
+monopoly-select-property-mortgage = اختر عقارًا للرهن العقاري
+monopoly-select-property-unmortgage = حدد خاصية لإلغاء الرهن العقاري
+monopoly-select-property-build = اختر عقارًا للبناء عليه
+monopoly-select-property-sell = اختر عقارًا للبيع منه
+monopoly-select-trade-offer = حدد عرضًا تجاريًا
+monopoly-select-auction-bid = حدد عرض المزاد الخاص بك
+monopoly-select-banking-transfer = حدد النقل
+monopoly-select-voice-command = أدخل أمرًا صوتيًا يبدأ بـ voice:
 
 # Additional validation
-monopoly-no-property-to-auction = There is no property to auction right now.
-monopoly-auction-active = Resolve the active auction first.
-monopoly-no-auction-active = There is no auction in progress.
-monopoly-not-your-auction-turn = It is not your turn in the auction.
-monopoly-no-mortgage-options = You do not have properties available to mortgage.
-monopoly-no-unmortgage-options = You do not have mortgaged properties to unmortgage.
-monopoly-no-build-options = You do not have properties available to build on.
-monopoly-no-sell-options = You do not have properties with buildings available to sell.
-monopoly-no-trade-options = You do not have any valid trades to offer right now.
-monopoly-no-trade-pending = There is no pending trade for you.
-monopoly-trade-pending = A trade is already pending.
-monopoly-trade-no-longer-valid = That trade is no longer valid.
-monopoly-not-in-jail = You are not in jail.
-monopoly-no-jail-card = You do not have a get-out-of-jail card.
-monopoly-roll-again-required = You rolled doubles and must roll again.
-monopoly-resolve-property-first = Resolve the pending property decision first.
+monopoly-no-property-to-auction = لا يوجد عقار للمزاد في الوقت الحالي.
+monopoly-auction-active = قم بحل المزاد النشط أولاً.
+monopoly-no-auction-active = لا يوجد مزاد في التقدم.
+monopoly-not-your-auction-turn = ليس دورك في المزاد.
+monopoly-no-mortgage-options = ليس لديك عقارات متاحة للرهن العقاري.
+monopoly-no-unmortgage-options = ليس لديك عقارات مرهونة لفك رهنها.
+monopoly-no-build-options = ليس لديك خصائص متاحة للبناء عليها.
+monopoly-no-sell-options = ليس لديك عقارات ومباني متاحة للبيع.
+monopoly-no-trade-options = ليس لديك أي صفقات صالحة لعرضها الآن.
+monopoly-no-trade-pending = لا توجد تجارة معلقة بالنسبة لك.
+monopoly-trade-pending = التجارة معلقة بالفعل.
+monopoly-trade-no-longer-valid = هذه التجارة لم تعد صالحة.
+monopoly-not-in-jail = أنت لست في السجن.
+monopoly-no-jail-card = ليس لديك بطاقة خروج من السجن.
+monopoly-roll-again-required = لقد تدحرجت الزوجي ويجب أن تتدحرج مرة أخرى.
+monopoly-resolve-property-first = حل قرار الملكية المعلق أولاً.
 
 # Additional turn events
-monopoly-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-you-roll-again = You rolled doubles and get another roll.
-monopoly-player-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-you-jail-roll-doubles = You rolled doubles ({ $die1 } and { $die2 }) and leave jail.
-monopoly-player-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-jail-roll-failed = { $player } rolled { $die1 } and { $die2 } in jail (attempt { $attempts }).
-monopoly-bail-paid = { $player } paid { $amount } bail.
-monopoly-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-you-three-doubles-jail = You rolled three doubles in one turn and are sent to jail.
-monopoly-player-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-jail-card-used = { $player } used a get-out-of-jail card.
-monopoly-sore-loser-rebate = { $player } received a sore loser rebate of { $amount }.
-monopoly-cheaters-early-end-turn-blocked = { $player } tried to end the turn early and paid a cheating penalty of { $amount }.
-monopoly-cheaters-payment-avoidance-blocked = { $player } triggered a cheaters payment penalty of { $amount }.
-monopoly-cheaters-reward-granted = { $player } claimed a cheaters reward of { $amount }.
-monopoly-cheaters-reward-unavailable = { $player } already claimed the cheaters reward this turn.
+monopoly-roll-again = تم تدحرج { $player } بشكل مزدوج ويحصل على لفة أخرى.
+monopoly-you-roll-again = لقد تدحرجت الزوجي وحصلت على لفة أخرى.
+monopoly-player-roll-again = تم تدحرج { $player } بشكل مزدوج ويحصل على لفة أخرى.
+monopoly-jail-roll-doubles = تدحرجت { $player } الزوجي ({ $die1 } و { $die2 }) وغادرت السجن.
+monopoly-you-jail-roll-doubles = لقد تدحرجت الزوجي ({ $die1 } و{ $die2 }) وخرجت من السجن.
+monopoly-player-jail-roll-doubles = تدحرجت { $player } الزوجي ({ $die1 } و { $die2 }) وغادرت السجن.
+monopoly-jail-roll-failed = قام { $player } بتدوير { $die1 } و{ $die2 } في السجن (محاولة { $attempts }).
+monopoly-bail-paid = دفعت { $player } كفالة { $amount }.
+monopoly-three-doubles-jail = قام { $player } بتدوير ثلاث ثنائيات في دورة واحدة وتم إرساله إلى السجن.
+monopoly-you-three-doubles-jail = لقد رميت ثلاث ثنائيات في دورة واحدة وتم إرسالك إلى السجن.
+monopoly-player-three-doubles-jail = قام { $player } بتدوير ثلاث ثنائيات في دورة واحدة وتم إرساله إلى السجن.
+monopoly-jail-card-used = استخدم { $player } بطاقة الخروج من السجن.
+monopoly-sore-loser-rebate = تلقى { $player } خصمًا خاسرًا مؤلمًا بقيمة { $amount }.
+monopoly-cheaters-early-end-turn-blocked = حاول { $player } إنهاء الدور مبكرًا ودفع عقوبة الغش { $amount }.
+monopoly-cheaters-payment-avoidance-blocked = تسبب { $player } في فرض عقوبة دفع الغشاشين بقيمة { $amount }.
+monopoly-cheaters-reward-granted = حصل { $player } على مكافأة الغشاشين وهي { $amount }.
+monopoly-cheaters-reward-unavailable = لقد ادعى { $player } بالفعل أن الغشاشين يكافئون هذا الدور.
 
 # Auctions and mortgages
-monopoly-auction-no-bids = No bids for { $property }. It remains unsold.
-monopoly-auction-started = Auction started for { $property } (opening bid: { $amount }).
-monopoly-auction-turn = Auction turn: { $player } to act on { $property } (current bid: { $amount }).
-monopoly-auction-bid-placed = { $player } bid { $amount } for { $property }.
-monopoly-auction-pass-event = { $player } passed on { $property }.
-monopoly-auction-won = { $player } won the auction for { $property } at { $amount }.
-monopoly-property-mortgaged = { $player } mortgaged { $property } for { $amount }.
-monopoly-property-unmortgaged = { $player } unmortgaged { $property } for { $amount }.
-monopoly-house-built-house = { $player } built a house on { $property } for { $amount }. It now has { $level }.
-monopoly-house-built-hotel = { $player } built a hotel on { $property } for { $amount }.
-monopoly-house-sold = { $player } sold a building on { $property } for { $amount } (level: { $level }).
-monopoly-trade-offered = { $proposer } offered { $target } a trade: { $offer }.
-monopoly-trade-completed = Trade completed between { $proposer } and { $target }: { $offer }.
-monopoly-trade-declined = { $target } declined trade from { $proposer }: { $offer }.
-monopoly-trade-cancelled = Trade cancelled: { $offer }.
-monopoly-free-parking-jackpot = { $player } collected the Free Parking jackpot of { $amount }.
-monopoly-mortgaged-no-rent = { $player } landed on mortgaged { $property }; no rent is due.
-monopoly-builder-blocks-awarded = { $player } gained { $amount } builder blocks ({ $blocks } total).
-monopoly-builder-block-spent = { $player } spent a builder block ({ $blocks } remaining).
-monopoly-banking-transfer-success = { $from_player } transferred { $amount } to { $to_player }.
-monopoly-banking-transfer-failed = { $player } bank transfer failed ({ $reason }).
-monopoly-banking-balance-report = { $player } bank balance: { $cash }.
-monopoly-banking-ledger-report = Recent banking activity: { $entries }.
-monopoly-banking-ledger-empty = No banking transactions yet.
-monopoly-voice-command-error = Voice command error: { $reason }.
-monopoly-voice-command-accepted = Voice command accepted: { $intent }.
-monopoly-voice-command-repeat = Repeating last banking response code: { $response }.
-monopoly-voice-transfer-staged = Voice transfer staged: { $amount } to { $target }. Say voice: confirm transfer.
-monopoly-mortgage-transfer-interest-paid = { $player } paid { $amount } in mortgage transfer interest.
+monopoly-auction-no-bids = لا توجد عروض لـ { $property }. يبقى غير مباع.
+monopoly-auction-started = بدأ المزاد على { $property } (عرض الافتتاح: { $amount }).
+monopoly-auction-turn = دور المزاد: { $player } للعمل على { $property } (العرض الحالي: { $amount }).
+monopoly-auction-bid-placed = { $player } عرض { $amount } لـ { $property }.
+monopoly-auction-pass-event = تم تمرير { $player } على { $property }.
+monopoly-auction-won = فاز { $player } بالمزاد العلني لـ { $property } في { $amount }.
+monopoly-property-mortgaged = رهن { $player } { $property } مقابل { $amount }.
+monopoly-property-unmortgaged = { $player } غير مرهونة { $property } لـ { $amount }.
+monopoly-house-built-house = قام { $player } ببناء منزل على { $property } لـ { $amount }. لديها الآن { $level }.
+monopoly-house-built-hotel = قامت { $player } ببناء فندق على { $property } لـ { $amount }.
+monopoly-house-sold = باعت { $player } مبنى على { $property } مقابل { $amount } (المستوى: { $level }).
+monopoly-trade-offered = عرضت { $proposer } على { $target } صفقة تجارية: { $offer }.
+monopoly-trade-completed = اكتملت التجارة بين { $proposer } و{ $target }: { $offer }.
+monopoly-trade-declined = رفض { $target } التجارة من { $proposer }: { $offer }.
+monopoly-trade-cancelled = تم إلغاء التجارة: { $offer }.
+monopoly-free-parking-jackpot = حصلت { $player } على الجائزة الكبرى لمواقف السيارات المجانية { $amount }.
+monopoly-mortgaged-no-rent = هبطت { $player } على { $property } المرهونة ؛ لا يوجد إيجار مستحق.
+monopoly-builder-blocks-awarded = حصل { $player } على كتل بناء { $amount } (إجمالي { $blocks }).
+monopoly-builder-block-spent = قضى { $player } كتلة إنشاء (بقي { $blocks }).
+monopoly-banking-transfer-success = قام { $from_player } بنقل { $amount } إلى { $to_player }.
+monopoly-banking-transfer-failed = فشل التحويل البنكي { $player } ({ $reason }).
+monopoly-banking-balance-report = رصيد البنك { $player }: { $cash }.
+monopoly-banking-ledger-report = الأنشطة المصرفية الأخيرة: { $entries }.
+monopoly-banking-ledger-empty = لا توجد معاملات مصرفية حتى الآن.
+monopoly-voice-command-error = خطأ في الأمر الصوتي: { $reason }.
+monopoly-voice-command-accepted = قبول الأمر الصوتي: { $intent }.
+monopoly-voice-command-repeat = تكرار رمز الاستجابة المصرفية الأخير: { $response }.
+monopoly-voice-transfer-staged = نقل الصوت على مراحل: { $amount } إلى { $target }. قل voice: confirm transfer.
+monopoly-mortgage-transfer-interest-paid = دفعت { $player } { $amount } في فوائد تحويل الرهن العقاري.
 
 # Card engine
-monopoly-card-drawn = { $player } drew a { $deck } card: { $card }.
-monopoly-card-collect = { $player } collected { $amount }.
-monopoly-card-pay = { $player } paid { $amount }.
-monopoly-card-move = { $player } moved to { $space }.
-monopoly-card-jail-free = { $player } received a get-out-of-jail card.
-monopoly-card-utility-roll = { $player } rolled { $die1 } + { $die2 } = { $total } for utility rent.
-monopoly-deck-chance = Chance
-monopoly-deck-community-chest = Community Chest
+monopoly-card-drawn = قام { $player } برسم بطاقة { $deck }: { $card }.
+monopoly-card-collect = تم جمع { $player } { $amount }.
+monopoly-card-pay = { $player } دفعت { $amount }.
+monopoly-card-move = انتقل { $player } إلى { $space }.
+monopoly-card-jail-free = تلقى { $player } بطاقة الخروج من السجن.
+monopoly-card-utility-roll = { $player } توالت { $die1 } + { $die2 } = { $total } للإيجار المرافق.
+monopoly-deck-chance = فرصة
+monopoly-deck-community-chest = صدر المجتمع
 
 # Card descriptions
-monopoly-card-advance-to-go = Advance to GO and collect { $amount }
-monopoly-card-advance-to-illinois-avenue = Advance to Illinois Avenue
-monopoly-card-advance-to-st-charles-place = Advance to St. Charles Place
-monopoly-card-advance-to-nearest-utility = Advance to the nearest Utility
-monopoly-card-advance-to-nearest-railroad = Advance to the nearest Railroad and pay double rent if owned
-monopoly-card-bank-dividend-50 = Bank pays you dividend of { $amount }
-monopoly-card-go-back-three = Go back 3 spaces
-monopoly-card-go-to-jail = Go directly to jail
-monopoly-card-general-repairs = Make general repairs on all your property: { $per_house } per house, { $per_hotel } per hotel
-monopoly-card-poor-tax-15 = Pay poor tax of { $amount }
-monopoly-card-reading-railroad = Take a trip to Reading Railroad
-monopoly-card-boardwalk = Take a walk on Boardwalk
-monopoly-card-chairman-of-the-board = Chairman of the Board, pay { $amount } to every player
-monopoly-card-building-loan-matures = Your building loan matures, collect { $amount }
-monopoly-card-crossword-competition = You won a crossword competition, collect { $amount }
-monopoly-card-bank-error-200 = Bank error in your favor, collect { $amount }
-monopoly-card-doctor-fee-50 = Doctor's fee, pay { $amount }
-monopoly-card-sale-of-stock-50 = From sale of stock you get { $amount }
-monopoly-card-holiday-fund = Holiday fund matures, receive { $amount }
-monopoly-card-tax-refund-20 = Income tax refund, collect { $amount }
-monopoly-card-birthday = It is your birthday, collect { $amount } from every player
-monopoly-card-life-insurance = Life insurance matures, collect { $amount }
-monopoly-card-hospital-fees-100 = Pay hospital fees of { $amount }
-monopoly-card-school-fees-50 = Pay school fees of { $amount }
-monopoly-card-consultancy-fee-25 = Receive { $amount } consultancy fee
-monopoly-card-street-repairs = You are assessed for street repairs: { $per_house } per house, { $per_hotel } per hotel
-monopoly-card-beauty-contest-10 = You have won second prize in a beauty contest, collect { $amount }
-monopoly-card-inherit-100 = You inherit { $amount }
-monopoly-card-get-out-of-jail = Get out of jail free
+monopoly-card-advance-to-go = تقدم إلى GO واجمع { $amount }
+monopoly-card-advance-to-illinois-avenue = تقدم إلى شارع إلينوي
+monopoly-card-advance-to-st-charles-place = تقدم إلى مكان سانت تشارلز
+monopoly-card-advance-to-nearest-utility = تقدم إلى أقرب المرافق
+monopoly-card-advance-to-nearest-railroad = تقدم إلى أقرب خط سكة حديد وادفع إيجارًا مضاعفًا إذا كنت تملكه
+monopoly-card-bank-dividend-50 = يدفع لك البنك أرباحًا بقيمة { $amount }
+monopoly-card-go-back-three = العودة 3 مسافات
+monopoly-card-go-to-jail = الذهاب مباشرة إلى السجن
+monopoly-card-general-repairs = قم بإجراء إصلاحات عامة على جميع الممتلكات الخاصة بك: { $per_house } لكل منزل، { $per_hotel } لكل فندق
+monopoly-card-poor-tax-15 = ادفع ضريبة { $amount } الضعيفة
+monopoly-card-reading-railroad = قم برحلة إلى ريدينغ للسكك الحديدية
+monopoly-card-boardwalk = قم بالمشي على الممشى الخشبي
+monopoly-card-chairman-of-the-board = رئيس مجلس الإدارة، ادفع { $amount } لكل لاعب
+monopoly-card-building-loan-matures = ينضج قرض البناء الخاص بك، اجمع { $amount }
+monopoly-card-crossword-competition = لقد فزت في مسابقة الكلمات المتقاطعة، اجمع { $amount }
+monopoly-card-bank-error-200 = خطأ البنك لصالحك، جمع { $amount }
+monopoly-card-doctor-fee-50 = رسوم الطبيب، ادفع { $amount }
+monopoly-card-sale-of-stock-50 = من بيع المخزون تحصل على { $amount }
+monopoly-card-holiday-fund = ينضج صندوق العطلات، واحصل على { $amount }
+monopoly-card-tax-refund-20 = استرداد ضريبة الدخل، وجمع { $amount }
+monopoly-card-birthday = إنه عيد ميلادك، اجمع { $amount } من كل لاعب
+monopoly-card-life-insurance = ينضج التأمين على الحياة، وجمع { $amount }
+monopoly-card-hospital-fees-100 = دفع رسوم المستشفى { $amount }
+monopoly-card-school-fees-50 = دفع الرسوم المدرسية { $amount }
+monopoly-card-consultancy-fee-25 = احصل على رسوم الاستشارة { $amount }
+monopoly-card-street-repairs = يتم تقييمك لإصلاحات الشوارع: { $per_house } لكل منزل، و{ $per_hotel } لكل فندق
+monopoly-card-beauty-contest-10 = لقد فزت بالجائزة الثانية في مسابقة الجمال، اجمع { $amount }
+monopoly-card-inherit-100 = أنت ترث { $amount }
+monopoly-card-get-out-of-jail = الخروج من السجن مجانا
 
 # Board profile options
-monopoly-set-board = Board: { $board }
-monopoly-select-board = Select a Monopoly board
-monopoly-option-changed-board = Board set to { $board }.
-monopoly-set-board-rules-mode = Board rules mode: { $mode }
-monopoly-select-board-rules-mode = Select board rules mode
-monopoly-option-changed-board-rules-mode = Board rules mode set to { $mode }.
+monopoly-set-board = اللوحة: { $board }
+monopoly-select-board = حدد لوحة الاحتكار
+monopoly-option-changed-board = تم ضبط اللوحة على { $board }.
+monopoly-set-board-rules-mode = وضع قواعد اللوحة: { $mode }
+monopoly-select-board-rules-mode = حدد وضع قواعد اللوحة
+monopoly-option-changed-board-rules-mode = تم ضبط وضع قواعد اللوحة على { $mode }.
 
 # Board labels
 monopoly-board-classic-default = Classic Default
@@ -291,74 +291,74 @@ monopoly-board-rules-simplified = Board rules for { $board } are partially imple
 monopoly-board-active = Active board: { $board } (mode: { $mode }).
 
 # Deed and ownership browsing
-monopoly-view-active-deed = View active deed
-monopoly-view-active-deed-space = View { $property }
-monopoly-browse-all-deeds = Browse all deeds
-monopoly-view-my-properties = View my properties
-monopoly-view-player-properties = View player info
-monopoly-view-selected-deed = View selected deed
-monopoly-view-selected-owner-property-deed = View selected player deed
-monopoly-select-property-deed = Select a property deed
-monopoly-select-player-properties = Select a player
-monopoly-select-player-property-deed = Select a player property deed
-monopoly-no-active-deed = There is no active deed to view right now.
-monopoly-no-deeds-available = No deed-capable properties are available on this board.
-monopoly-no-owned-properties = No owned properties are available for this view.
-monopoly-no-players-with-properties = No players are available.
-monopoly-buy-for = Buy for { $amount }
-monopoly-you-have-no-owned-properties = You do not own any properties.
-monopoly-player-has-no-owned-properties = { $player } does not own any properties.
-monopoly-owner-bank = Bank
-monopoly-owner-unknown = Unknown
-monopoly-building-status-hotel = with hotel
-monopoly-building-status-one-house = with 1 house
-monopoly-building-status-houses = with { $count } houses
-monopoly-mortgaged-short = mortgaged
+monopoly-view-active-deed = عرض الفعل النشط
+monopoly-view-active-deed-space = عرض { $property }
+monopoly-browse-all-deeds = تصفح جميع الأفعال
+monopoly-view-my-properties = عرض عقاراتي
+monopoly-view-player-properties = عرض معلومات اللاعب
+monopoly-view-selected-deed = عرض الفعل المحدد
+monopoly-view-selected-owner-property-deed = عرض صك اللاعب المحدد
+monopoly-select-property-deed = اختر سند ملكية
+monopoly-select-player-properties = اختر لاعبا
+monopoly-select-player-property-deed = اختر سند ملكية اللاعب
+monopoly-no-active-deed = لا يوجد صك نشط لعرضه الآن.
+monopoly-no-deeds-available = لا تتوفر أي خصائص قادرة على التصرف في هذا المنتدى.
+monopoly-no-owned-properties = لا توجد عقارات مملوكة متاحة لهذا العرض.
+monopoly-no-players-with-properties = لا يوجد لاعبين متاحين.
+monopoly-buy-for = شراء { $amount }
+monopoly-you-have-no-owned-properties = أنت لا تملك أي عقارات.
+monopoly-player-has-no-owned-properties = { $player } لا يملك أي عقارات.
+monopoly-owner-bank = بنك
+monopoly-owner-unknown = مجهول
+monopoly-building-status-hotel = مع الفندق
+monopoly-building-status-one-house = مع 1 منزل
+monopoly-building-status-houses = مع منازل { $count }
+monopoly-mortgaged-short = مرهونة
 monopoly-deed-menu-label = { $property } ({ $owner })
 monopoly-deed-menu-label-extra = { $property } ({ $owner }; { $extras })
-monopoly-color-brown = Brown
-monopoly-color-light_blue = Light Blue
-monopoly-color-pink = Pink
-monopoly-color-orange = Orange
-monopoly-color-red = Red
-monopoly-color-yellow = Yellow
-monopoly-color-green = Green
-monopoly-color-dark_blue = Dark Blue
-monopoly-deed-type-color-group = Type: { $color } color group
-monopoly-deed-type-railroad = Type: Railroad
-monopoly-deed-type-utility = Type: Utility
-monopoly-deed-type-generic = Type: { $kind }
-monopoly-deed-purchase-price = Purchase price: { $amount }
-monopoly-deed-rent = Rent: { $amount }
-monopoly-deed-full-set-rent = If owner has full color set: { $amount }
-monopoly-deed-rent-one-house = With 1 house: { $amount }
-monopoly-deed-rent-houses = With { $count } houses: { $amount }
-monopoly-deed-rent-hotel = With hotel: { $amount }
-monopoly-deed-house-cost = House cost: { $amount }
-monopoly-deed-railroad-rent = Rent with { $count } railroads: { $amount }
-monopoly-deed-utility-one-owned = If one utility is owned: 4x dice roll
-monopoly-deed-utility-both-owned = If both utilities are owned: 10x dice roll
-monopoly-deed-utility-base-rent = Utility base rent (legacy fallback): { $amount }
-monopoly-deed-mortgage-value = Mortgage value: { $amount }
-monopoly-deed-unmortgage-cost = Unmortgage cost: { $amount }
-monopoly-deed-owner = Owner: { $owner }
-monopoly-deed-current-buildings = Current buildings: { $buildings }
-monopoly-deed-status-mortgaged = Status: Mortgaged
-monopoly-player-properties-label = { $player }, on { $space }, square { $position }
-monopoly-player-properties-label-no-space = { $player }, square { $position }
+monopoly-color-brown = بني
+monopoly-color-light_blue = أزرق فاتح
+monopoly-color-pink = لون القرنفل
+monopoly-color-orange = البرتقالي
+monopoly-color-red = أحمر
+monopoly-color-yellow = أصفر
+monopoly-color-green = أخضر
+monopoly-color-dark_blue = أزرق غامق
+monopoly-deed-type-color-group = النوع: مجموعة الألوان { $color }
+monopoly-deed-type-railroad = النوع: السكك الحديدية
+monopoly-deed-type-utility = النوع: فائدة
+monopoly-deed-type-generic = النوع: { $kind }
+monopoly-deed-purchase-price = سعر الشراء: { $amount }
+monopoly-deed-rent = الإيجار: { $amount }
+monopoly-deed-full-set-rent = إذا كان لدى المالك مجموعة ألوان كاملة: { $amount }
+monopoly-deed-rent-one-house = مع منزل واحد: { $amount }
+monopoly-deed-rent-houses = مع منازل { $count }: { $amount }
+monopoly-deed-rent-hotel = مع الفندق: { $amount }
+monopoly-deed-house-cost = تكلفة المنزل: { $amount }
+monopoly-deed-railroad-rent = الإيجار مع خطوط السكك الحديدية { $count }: { $amount }
+monopoly-deed-utility-one-owned = إذا كان لديك مرفق واحد مملوك: 4x رمي النرد
+monopoly-deed-utility-both-owned = إذا كانت كلا المرافقين مملوكتين: 10x لفة النرد
+monopoly-deed-utility-base-rent = الإيجار الأساسي للمرافق (الاحتياطي القديم): { $amount }
+monopoly-deed-mortgage-value = قيمة الرهن العقاري: { $amount }
+monopoly-deed-unmortgage-cost = تكلفة عدم الرهن العقاري: { $amount }
+monopoly-deed-owner = المالك: { $owner }
+monopoly-deed-current-buildings = المباني الحالية: { $buildings }
+monopoly-deed-status-mortgaged = الحالة : مرهونة
+monopoly-player-properties-label = { $player }، على { $space }، مربع { $position }
+monopoly-player-properties-label-no-space = { $player }، مربع { $position }
 monopoly-banking-ledger-entry-success = { $tx_id } { $kind } { $from_id }->{ $to_id } { $amount } ({ $reason })
-monopoly-banking-ledger-entry-failed = { $tx_id } { $kind } failed ({ $reason })
+monopoly-banking-ledger-entry-failed = فشل { $tx_id } { $kind } ({ $reason })
 
 # Trade menu summaries
-monopoly-trade-buy-property-summary = Buy { $property } from { $target } for { $amount }
-monopoly-trade-offer-cash-for-property-summary = Offer { $amount } to { $target } for { $property }
-monopoly-trade-sell-property-summary = Sell { $property } to { $target } for { $amount }
-monopoly-trade-offer-property-for-cash-summary = Offer { $property } to { $target } for { $amount }
-monopoly-trade-swap-summary = Swap { $give_property } with { $target } for { $receive_property }
-monopoly-trade-swap-plus-cash-summary = Swap { $give_property } + { $amount } with { $target } for { $receive_property }
-monopoly-trade-swap-receive-cash-summary = Swap { $give_property } for { $receive_property } + { $amount } from { $target }
-monopoly-trade-buy-jail-card-summary = Buy jail card from { $target } for { $amount }
-monopoly-trade-sell-jail-card-summary = Sell jail card to { $target } for { $amount }
+monopoly-trade-buy-property-summary = قم بشراء { $property } من { $target } مقابل { $amount }
+monopoly-trade-offer-cash-for-property-summary = عرض { $amount } إلى { $target } لـ { $property }
+monopoly-trade-sell-property-summary = قم ببيع { $property } إلى { $target } مقابل { $amount }
+monopoly-trade-offer-property-for-cash-summary = عرض { $property } إلى { $target } لـ { $amount }
+monopoly-trade-swap-summary = استبدل { $give_property } بـ { $target } بـ { $receive_property }
+monopoly-trade-swap-plus-cash-summary = استبدل { $give_property } + { $amount } بـ { $target } لـ { $receive_property }
+monopoly-trade-swap-receive-cash-summary = استبدل { $give_property } بـ { $receive_property } + { $amount } من { $target }
+monopoly-trade-buy-jail-card-summary = قم بشراء بطاقة السجن من { $target } لـ { $amount }
+monopoly-trade-sell-jail-card-summary = بيع بطاقة السجن إلى { $target } لـ { $amount }
 
 # Board space names
 monopoly-space-go = GO

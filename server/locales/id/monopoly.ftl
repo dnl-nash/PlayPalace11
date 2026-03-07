@@ -4,224 +4,224 @@
 game-name-monopoly = Monopoly
 
 # Lobby options
-monopoly-set-preset = Preset: { $preset }
-monopoly-select-preset = Select a Monopoly preset
-monopoly-option-changed-preset = Preset set to { $preset }.
+monopoly-set-preset = Prasetel: { $preset }
+monopoly-select-preset = Pilih preset Monopoli
+monopoly-option-changed-preset = Prasetel disetel ke { $preset }.
 
 # Preset labels
-monopoly-preset-classic-standard = Classic and Themed Standard
-monopoly-preset-junior = Monopoly Junior
-monopoly-preset-junior-modern = Monopoly Junior (Modern)
-monopoly-preset-junior-legacy = Monopoly Junior (Legacy)
-monopoly-preset-cheaters = Monopoly Cheaters Edition
-monopoly-preset-electronic-banking = Electronic Banking
-monopoly-preset-voice-banking = Voice Banking
-monopoly-preset-sore-losers = Monopoly for Sore Losers
-monopoly-preset-speed = Monopoly Speed
-monopoly-preset-builder = Monopoly Builder
-monopoly-preset-city = Monopoly City
-monopoly-preset-bid-card-game = Monopoly Bid
-monopoly-preset-deal-card-game = Monopoly Deal
-monopoly-preset-knockout = Monopoly Knockout
-monopoly-preset-free-parking-jackpot = Free Parking Jackpot
+monopoly-preset-classic-standard = Standar Klasik dan Bertema
+monopoly-preset-junior = Monopoli Junior
+monopoly-preset-junior-modern = Monopoli Junior (Modern)
+monopoly-preset-junior-legacy = Monopoli Junior (Warisan)
+monopoly-preset-cheaters = Edisi Penipu Monopoli
+monopoly-preset-electronic-banking = Perbankan Elektronik
+monopoly-preset-voice-banking = Perbankan Suara
+monopoly-preset-sore-losers = Monopoli untuk Pecundang yang Sakit
+monopoly-preset-speed = Kecepatan Monopoli
+monopoly-preset-builder = Pembangun Monopoli
+monopoly-preset-city = Kota Monopoli
+monopoly-preset-bid-card-game = Tawaran Monopoli
+monopoly-preset-deal-card-game = Kesepakatan Monopoli
+monopoly-preset-knockout = KO Monopoli
+monopoly-preset-free-parking-jackpot = Jackpot Parkir Gratis
 
 # Scaffold status
-monopoly-announce-preset = Announce current preset
-monopoly-current-preset = Current preset: { $preset } ({ $count } editions).
-monopoly-scaffold-started = Monopoly scaffold started with { $preset } ({ $count } editions).
+monopoly-announce-preset = Umumkan preset saat ini
+monopoly-current-preset = Prasetel saat ini: { $preset } (edisi { $count }).
+monopoly-scaffold-started = Perancah monopoli dimulai dengan { $preset } (edisi { $count }).
 
 # Turn actions
-monopoly-roll-dice = Roll dice
-monopoly-buy-property = Buy property
-monopoly-banking-balance = Check bank balance
-monopoly-banking-transfer = Transfer funds
-monopoly-banking-ledger = Review bank ledger
-monopoly-voice-command = Voice command
-monopoly-cheaters-claim-reward = Claim cheat reward
-monopoly-end-turn = End turn
+monopoly-roll-dice = Melempar dadu
+monopoly-buy-property = Beli properti
+monopoly-banking-balance = Periksa saldo bank
+monopoly-banking-transfer = Transfer dana
+monopoly-banking-ledger = Tinjau buku besar bank
+monopoly-voice-command = Perintah suara
+monopoly-cheaters-claim-reward = Klaim hadiah cheat
+monopoly-end-turn = Giliran akhir
 
 # Turn validation
-monopoly-roll-first = You need to roll first.
-monopoly-already-rolled = You already rolled this turn.
-monopoly-no-property-to-buy = There is no property to buy right now.
-monopoly-property-owned = That property is already owned.
-monopoly-not-enough-cash = You don't have enough cash.
-monopoly-action-disabled-for-preset = This action is disabled for the selected preset.
-monopoly-buy-disabled = Buying property directly is disabled for this preset.
+monopoly-roll-first = Anda harus berguling terlebih dahulu.
+monopoly-already-rolled = Anda sudah menyelesaikan giliran ini.
+monopoly-no-property-to-buy = Tidak ada properti untuk dibeli saat ini.
+monopoly-property-owned = Properti itu sudah dimiliki.
+monopoly-not-enough-cash = Anda tidak punya cukup uang tunai.
+monopoly-action-disabled-for-preset = Tindakan ini dinonaktifkan untuk preset yang dipilih.
+monopoly-buy-disabled = Membeli properti secara langsung dinonaktifkan untuk preset ini.
 
 # Turn events
-monopoly-pass-go = { $player } passed GO and collected { $amount }.
-monopoly-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-result = You rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-player-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-you-roll-only = You rolled { $die1 } + { $die2 } = { $total }.
-monopoly-player-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-only-doubles = You rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-player-roll-only-doubles = { $player } rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-property-available = { $property } is available for { $price }.
-monopoly-property-bought = { $player } bought { $property } for { $price }.
-monopoly-rent-paid = { $player } paid { $amount } in rent to { $owner } for { $property }.
-monopoly-player-paid-player = { $player } paid { $amount } to { $target }.
-monopoly-you-completed-color-set = You now own all of the { $group } properties.
-monopoly-player-completed-color-set = { $player } now owns all of the { $group } properties.
-monopoly-you-completed-railroads = You now own all of the railroads.
-monopoly-player-completed-railroads = { $player } now owns all of the railroads.
-monopoly-you-completed-utilities = You now own all of the utilities.
-monopoly-player-completed-utilities = { $player } now owns all of the utilities.
-monopoly-landed-owned = { $player } landed on their own property: { $property }.
-monopoly-tax-paid = { $player } paid { $amount } for { $tax }.
-monopoly-go-to-jail = { $player } goes to jail (moved to { $space }).
-monopoly-bankrupt-player = You are bankrupt and out of the game.
-monopoly-player-bankrupt = { $player } is bankrupt. Creditor: { $creditor }.
-monopoly-winner-by-bankruptcy = { $player } wins by bankruptcy with { $cash } cash remaining.
-monopoly-winner-by-cash = { $player } wins with the highest cash total: { $cash }.
-monopoly-city-winner-by-value = { $player } wins Monopoly City with final value { $total }.
+monopoly-pass-go = { $player } melewati GO dan mengumpulkan { $amount }.
+monopoly-roll-result = { $player } menggulung { $die1 } + { $die2 } = { $total } dan mendarat di { $space }.
+monopoly-roll-only = { $player } digulung { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-result = Anda memutar { $die1 } + { $die2 } = { $total } dan mendarat di { $space }.
+monopoly-player-roll-result = { $player } menggulung { $die1 } + { $die2 } = { $total } dan mendarat di { $space }.
+monopoly-you-roll-only = Anda menggulung { $die1 } + { $die2 } = { $total }.
+monopoly-player-roll-only = { $player } digulung { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-only-doubles = Anda menggulung { $die1 } + { $die2 } = { $total }. Ganda!
+monopoly-player-roll-only-doubles = { $player } digulung { $die1 } + { $die2 } = { $total }. Ganda!
+monopoly-property-available = { $property } tersedia untuk { $price }.
+monopoly-property-bought = { $player } membeli { $property } untuk { $price }.
+monopoly-rent-paid = { $player } membayar sewa { $amount } kepada { $owner } untuk { $property }.
+monopoly-player-paid-player = { $player } membayar { $amount } ke { $target }.
+monopoly-you-completed-color-set = Anda sekarang memiliki semua properti { $group }.
+monopoly-player-completed-color-set = { $player } sekarang memiliki semua properti { $group }.
+monopoly-you-completed-railroads = Anda sekarang memiliki semua jalur kereta api.
+monopoly-player-completed-railroads = { $player } sekarang memiliki semua jalur kereta api.
+monopoly-you-completed-utilities = Anda sekarang memiliki semua utilitas.
+monopoly-player-completed-utilities = { $player } sekarang memiliki semua utilitas.
+monopoly-landed-owned = { $player } mendarat di properti mereka sendiri: { $property }.
+monopoly-tax-paid = { $player } membayar { $amount } untuk { $tax }.
+monopoly-go-to-jail = { $player } masuk penjara (dipindahkan ke { $space }).
+monopoly-bankrupt-player = Anda bangkrut dan keluar dari permainan.
+monopoly-player-bankrupt = { $player } bangkrut. Kreditor: { $creditor }.
+monopoly-winner-by-bankruptcy = { $player } menang dengan kebangkrutan dengan sisa uang tunai { $cash }.
+monopoly-winner-by-cash = { $player } menang dengan total uang tunai tertinggi: { $cash }.
+monopoly-city-winner-by-value = { $player } memenangkan Kota Monopoli dengan nilai akhir { $total }.
 
 # Additional actions
-monopoly-auction-property = Auction property
-monopoly-auction-bid = Place auction bid
-monopoly-auction-pass = Pass in auction
-monopoly-mortgage-property = Mortgage property
-monopoly-unmortgage-property = Unmortgage property
-monopoly-build-house = Build house or hotel
-monopoly-sell-house = Sell house or hotel
-monopoly-offer-trade = Offer trade
-monopoly-accept-trade = Accept trade
-monopoly-decline-trade = Decline trade
-monopoly-read-cash = Read cash
-monopoly-pay-bail = Pay bail
-monopoly-use-jail-card = Use get-out-of-jail card
-monopoly-cash-report = { $cash } in cash.
-monopoly-property-amount-option = { $property } for { $amount }
-monopoly-banking-transfer-option = Transfer { $amount } to { $target }
+monopoly-auction-property = Properti lelang
+monopoly-auction-bid = Tempatkan tawaran lelang
+monopoly-auction-pass = Lulus dalam lelang
+monopoly-mortgage-property = Properti hipotek
+monopoly-unmortgage-property = Properti yang tidak digadaikan
+monopoly-build-house = Membangun rumah atau hotel
+monopoly-sell-house = Jual rumah atau hotel
+monopoly-offer-trade = Tawarkan perdagangan
+monopoly-accept-trade = Terima perdagangan
+monopoly-decline-trade = Tolak perdagangan
+monopoly-read-cash = Baca uang tunai
+monopoly-pay-bail = Bayar jaminan
+monopoly-use-jail-card = Gunakan kartu keluar penjara
+monopoly-cash-report = { $cash } tunai.
+monopoly-property-amount-option = { $property } untuk { $amount }
+monopoly-banking-transfer-option = Transfer { $amount } ke { $target }
 
 # Additional prompts
-monopoly-select-property-mortgage = Select a property to mortgage
-monopoly-select-property-unmortgage = Select a property to unmortgage
-monopoly-select-property-build = Select a property to build on
-monopoly-select-property-sell = Select a property to sell from
-monopoly-select-trade-offer = Select a trade offer
-monopoly-select-auction-bid = Select your auction bid
-monopoly-select-banking-transfer = Select a transfer
-monopoly-select-voice-command = Enter a voice command beginning with voice:
+monopoly-select-property-mortgage = Pilih properti yang akan digadaikan
+monopoly-select-property-unmortgage = Pilih properti yang akan dibatalkan hipoteknya
+monopoly-select-property-build = Pilih properti untuk dibangun
+monopoly-select-property-sell = Pilih properti untuk dijual
+monopoly-select-trade-offer = Pilih penawaran dagang
+monopoly-select-auction-bid = Pilih tawaran lelang Anda
+monopoly-select-banking-transfer = Pilih transfer
+monopoly-select-voice-command = Masukkan perintah suara yang diawali dengan voice:
 
 # Additional validation
-monopoly-no-property-to-auction = There is no property to auction right now.
-monopoly-auction-active = Resolve the active auction first.
-monopoly-no-auction-active = There is no auction in progress.
-monopoly-not-your-auction-turn = It is not your turn in the auction.
-monopoly-no-mortgage-options = You do not have properties available to mortgage.
-monopoly-no-unmortgage-options = You do not have mortgaged properties to unmortgage.
-monopoly-no-build-options = You do not have properties available to build on.
-monopoly-no-sell-options = You do not have properties with buildings available to sell.
-monopoly-no-trade-options = You do not have any valid trades to offer right now.
-monopoly-no-trade-pending = There is no pending trade for you.
-monopoly-trade-pending = A trade is already pending.
-monopoly-trade-no-longer-valid = That trade is no longer valid.
-monopoly-not-in-jail = You are not in jail.
-monopoly-no-jail-card = You do not have a get-out-of-jail card.
-monopoly-roll-again-required = You rolled doubles and must roll again.
-monopoly-resolve-property-first = Resolve the pending property decision first.
+monopoly-no-property-to-auction = Tidak ada properti untuk dilelang saat ini.
+monopoly-auction-active = Selesaikan lelang aktif terlebih dahulu.
+monopoly-no-auction-active = Tidak ada lelang yang sedang berlangsung.
+monopoly-not-your-auction-turn = Ini bukan giliran Anda dalam pelelangan.
+monopoly-no-mortgage-options = Anda tidak memiliki properti yang tersedia untuk digadaikan.
+monopoly-no-unmortgage-options = Anda tidak memiliki properti yang digadaikan untuk dibatalkan hipoteknya.
+monopoly-no-build-options = Anda tidak memiliki properti yang tersedia untuk dibangun.
+monopoly-no-sell-options = Anda tidak memiliki properti dengan bangunan yang tersedia untuk dijual.
+monopoly-no-trade-options = Anda tidak memiliki perdagangan valid untuk ditawarkan saat ini.
+monopoly-no-trade-pending = Tidak ada perdagangan yang tertunda untuk Anda.
+monopoly-trade-pending = Perdagangan sudah tertunda.
+monopoly-trade-no-longer-valid = Perdagangan itu tidak berlaku lagi.
+monopoly-not-in-jail = Anda tidak berada di penjara.
+monopoly-no-jail-card = Anda tidak memiliki kartu keluar penjara.
+monopoly-roll-again-required = Anda melakukan roll ganda dan harus melakukan roll lagi.
+monopoly-resolve-property-first = Selesaikan terlebih dahulu keputusan properti yang tertunda.
 
 # Additional turn events
-monopoly-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-you-roll-again = You rolled doubles and get another roll.
-monopoly-player-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-you-jail-roll-doubles = You rolled doubles ({ $die1 } and { $die2 }) and leave jail.
-monopoly-player-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-jail-roll-failed = { $player } rolled { $die1 } and { $die2 } in jail (attempt { $attempts }).
-monopoly-bail-paid = { $player } paid { $amount } bail.
-monopoly-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-you-three-doubles-jail = You rolled three doubles in one turn and are sent to jail.
-monopoly-player-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-jail-card-used = { $player } used a get-out-of-jail card.
-monopoly-sore-loser-rebate = { $player } received a sore loser rebate of { $amount }.
-monopoly-cheaters-early-end-turn-blocked = { $player } tried to end the turn early and paid a cheating penalty of { $amount }.
-monopoly-cheaters-payment-avoidance-blocked = { $player } triggered a cheaters payment penalty of { $amount }.
-monopoly-cheaters-reward-granted = { $player } claimed a cheaters reward of { $amount }.
-monopoly-cheaters-reward-unavailable = { $player } already claimed the cheaters reward this turn.
+monopoly-roll-again = { $player } digulung ganda dan mendapat gulungan lagi.
+monopoly-you-roll-again = Anda mendapatkan lemparan ganda dan mendapatkan lemparan lainnya.
+monopoly-player-roll-again = { $player } digulung ganda dan mendapat gulungan lagi.
+monopoly-jail-roll-doubles = { $player } digulung ganda ({ $die1 } dan { $die2 }) dan keluar dari penjara.
+monopoly-you-jail-roll-doubles = Anda mendapatkan nomor ganda ({ $die1 } dan { $die2 }) dan keluar dari penjara.
+monopoly-player-jail-roll-doubles = { $player } digulung ganda ({ $die1 } dan { $die2 }) dan keluar dari penjara.
+monopoly-jail-roll-failed = { $player } memasukkan { $die1 } dan { $die2 } ke penjara (coba { $attempts }).
+monopoly-bail-paid = { $player } membayar jaminan { $amount }.
+monopoly-three-doubles-jail = { $player } mendapatkan tiga angka ganda dalam satu putaran dan dikirim ke penjara.
+monopoly-you-three-doubles-jail = Anda mendapatkan tiga angka ganda dalam satu putaran dan dikirim ke penjara.
+monopoly-player-three-doubles-jail = { $player } mendapatkan tiga angka ganda dalam satu putaran dan dikirim ke penjara.
+monopoly-jail-card-used = { $player } menggunakan kartu keluar penjara.
+monopoly-sore-loser-rebate = { $player } menerima rabat pecundang dari { $amount }.
+monopoly-cheaters-early-end-turn-blocked = { $player } mencoba mengakhiri giliran lebih awal dan membayar penalti kecurangan { $amount }.
+monopoly-cheaters-payment-avoidance-blocked = { $player } memicu penalti pembayaran penipu { $amount }.
+monopoly-cheaters-reward-granted = { $player } mengklaim hadiah cheater dari { $amount }.
+monopoly-cheaters-reward-unavailable = { $player } sudah mengklaim hadiah cheater pada giliran ini.
 
 # Auctions and mortgages
-monopoly-auction-no-bids = No bids for { $property }. It remains unsold.
-monopoly-auction-started = Auction started for { $property } (opening bid: { $amount }).
-monopoly-auction-turn = Auction turn: { $player } to act on { $property } (current bid: { $amount }).
-monopoly-auction-bid-placed = { $player } bid { $amount } for { $property }.
-monopoly-auction-pass-event = { $player } passed on { $property }.
-monopoly-auction-won = { $player } won the auction for { $property } at { $amount }.
-monopoly-property-mortgaged = { $player } mortgaged { $property } for { $amount }.
-monopoly-property-unmortgaged = { $player } unmortgaged { $property } for { $amount }.
-monopoly-house-built-house = { $player } built a house on { $property } for { $amount }. It now has { $level }.
-monopoly-house-built-hotel = { $player } built a hotel on { $property } for { $amount }.
-monopoly-house-sold = { $player } sold a building on { $property } for { $amount } (level: { $level }).
-monopoly-trade-offered = { $proposer } offered { $target } a trade: { $offer }.
-monopoly-trade-completed = Trade completed between { $proposer } and { $target }: { $offer }.
-monopoly-trade-declined = { $target } declined trade from { $proposer }: { $offer }.
-monopoly-trade-cancelled = Trade cancelled: { $offer }.
-monopoly-free-parking-jackpot = { $player } collected the Free Parking jackpot of { $amount }.
-monopoly-mortgaged-no-rent = { $player } landed on mortgaged { $property }; no rent is due.
-monopoly-builder-blocks-awarded = { $player } gained { $amount } builder blocks ({ $blocks } total).
-monopoly-builder-block-spent = { $player } spent a builder block ({ $blocks } remaining).
-monopoly-banking-transfer-success = { $from_player } transferred { $amount } to { $to_player }.
-monopoly-banking-transfer-failed = { $player } bank transfer failed ({ $reason }).
-monopoly-banking-balance-report = { $player } bank balance: { $cash }.
-monopoly-banking-ledger-report = Recent banking activity: { $entries }.
-monopoly-banking-ledger-empty = No banking transactions yet.
-monopoly-voice-command-error = Voice command error: { $reason }.
-monopoly-voice-command-accepted = Voice command accepted: { $intent }.
-monopoly-voice-command-repeat = Repeating last banking response code: { $response }.
-monopoly-voice-transfer-staged = Voice transfer staged: { $amount } to { $target }. Say voice: confirm transfer.
-monopoly-mortgage-transfer-interest-paid = { $player } paid { $amount } in mortgage transfer interest.
+monopoly-auction-no-bids = Tidak ada tawaran untuk { $property }. Itu tetap tidak terjual.
+monopoly-auction-started = Lelang dimulai untuk { $property } (penawaran pembukaan: { $amount }).
+monopoly-auction-turn = Giliran lelang: { $player } untuk bertindak atas { $property } (tawaran saat ini: { $amount }).
+monopoly-auction-bid-placed = { $player } menawar { $amount } untuk { $property }.
+monopoly-auction-pass-event = { $player } meneruskan { $property }.
+monopoly-auction-won = { $player } memenangkan lelang { $property } di { $amount }.
+monopoly-property-mortgaged = { $player } menggadaikan { $property } untuk { $amount }.
+monopoly-property-unmortgaged = { $player } { $property } yang tidak digadaikan untuk { $amount }.
+monopoly-house-built-house = { $player } membangun rumah di { $property } untuk { $amount }. Sekarang memiliki { $level }.
+monopoly-house-built-hotel = { $player } membangun hotel di { $property } untuk { $amount }.
+monopoly-house-sold = { $player } menjual bangunan di { $property } untuk { $amount } (level: { $level }).
+monopoly-trade-offered = { $proposer } menawarkan { $target } perdagangan: { $offer }.
+monopoly-trade-completed = Perdagangan selesai antara { $proposer } dan { $target }: { $offer }.
+monopoly-trade-declined = { $target } menolak perdagangan dari { $proposer }: { $offer }.
+monopoly-trade-cancelled = Perdagangan dibatalkan: { $offer }.
+monopoly-free-parking-jackpot = { $player } mengumpulkan jackpot Parkir Gratis { $amount }.
+monopoly-mortgaged-no-rent = { $player } mendarat pada { $property } yang digadaikan; tidak ada uang sewa yang harus dibayar.
+monopoly-builder-blocks-awarded = { $player } memperoleh blok pembangun { $amount } (total { $blocks }).
+monopoly-builder-block-spent = { $player } menghabiskan satu blok pembangun (sisa { $blocks }).
+monopoly-banking-transfer-success = { $from_player } mentransfer { $amount } ke { $to_player }.
+monopoly-banking-transfer-failed = Transfer bank { $player } gagal ({ $reason }).
+monopoly-banking-balance-report = Saldo bank { $player }: { $cash }.
+monopoly-banking-ledger-report = Aktivitas perbankan terkini: { $entries }.
+monopoly-banking-ledger-empty = Belum ada transaksi perbankan.
+monopoly-voice-command-error = Kesalahan perintah suara: { $reason }.
+monopoly-voice-command-accepted = Perintah suara diterima: { $intent }.
+monopoly-voice-command-repeat = Mengulangi kode respons perbankan terakhir: { $response }.
+monopoly-voice-transfer-staged = Transfer suara dilakukan: { $amount } ke { $target }. Ucapkan voice: confirm transfer.
+monopoly-mortgage-transfer-interest-paid = { $player } membayar { $amount } bunga transfer hipotek.
 
 # Card engine
-monopoly-card-drawn = { $player } drew a { $deck } card: { $card }.
-monopoly-card-collect = { $player } collected { $amount }.
-monopoly-card-pay = { $player } paid { $amount }.
-monopoly-card-move = { $player } moved to { $space }.
-monopoly-card-jail-free = { $player } received a get-out-of-jail card.
-monopoly-card-utility-roll = { $player } rolled { $die1 } + { $die2 } = { $total } for utility rent.
-monopoly-deck-chance = Chance
-monopoly-deck-community-chest = Community Chest
+monopoly-card-drawn = { $player } menarik kartu { $deck }: { $card }.
+monopoly-card-collect = { $player } mengumpulkan { $amount }.
+monopoly-card-pay = { $player } membayar { $amount }.
+monopoly-card-move = { $player } dipindahkan ke { $space }.
+monopoly-card-jail-free = { $player } menerima kartu keluar penjara.
+monopoly-card-utility-roll = { $player } digulung { $die1 } + { $die2 } = { $total } untuk sewa utilitas.
+monopoly-deck-chance = Peluang
+monopoly-deck-community-chest = Peti Komunitas
 
 # Card descriptions
-monopoly-card-advance-to-go = Advance to GO and collect { $amount }
-monopoly-card-advance-to-illinois-avenue = Advance to Illinois Avenue
-monopoly-card-advance-to-st-charles-place = Advance to St. Charles Place
-monopoly-card-advance-to-nearest-utility = Advance to the nearest Utility
-monopoly-card-advance-to-nearest-railroad = Advance to the nearest Railroad and pay double rent if owned
-monopoly-card-bank-dividend-50 = Bank pays you dividend of { $amount }
-monopoly-card-go-back-three = Go back 3 spaces
-monopoly-card-go-to-jail = Go directly to jail
-monopoly-card-general-repairs = Make general repairs on all your property: { $per_house } per house, { $per_hotel } per hotel
-monopoly-card-poor-tax-15 = Pay poor tax of { $amount }
-monopoly-card-reading-railroad = Take a trip to Reading Railroad
-monopoly-card-boardwalk = Take a walk on Boardwalk
-monopoly-card-chairman-of-the-board = Chairman of the Board, pay { $amount } to every player
-monopoly-card-building-loan-matures = Your building loan matures, collect { $amount }
-monopoly-card-crossword-competition = You won a crossword competition, collect { $amount }
-monopoly-card-bank-error-200 = Bank error in your favor, collect { $amount }
-monopoly-card-doctor-fee-50 = Doctor's fee, pay { $amount }
-monopoly-card-sale-of-stock-50 = From sale of stock you get { $amount }
-monopoly-card-holiday-fund = Holiday fund matures, receive { $amount }
-monopoly-card-tax-refund-20 = Income tax refund, collect { $amount }
-monopoly-card-birthday = It is your birthday, collect { $amount } from every player
-monopoly-card-life-insurance = Life insurance matures, collect { $amount }
-monopoly-card-hospital-fees-100 = Pay hospital fees of { $amount }
-monopoly-card-school-fees-50 = Pay school fees of { $amount }
-monopoly-card-consultancy-fee-25 = Receive { $amount } consultancy fee
-monopoly-card-street-repairs = You are assessed for street repairs: { $per_house } per house, { $per_hotel } per hotel
-monopoly-card-beauty-contest-10 = You have won second prize in a beauty contest, collect { $amount }
-monopoly-card-inherit-100 = You inherit { $amount }
-monopoly-card-get-out-of-jail = Get out of jail free
+monopoly-card-advance-to-go = Maju ke GO dan kumpulkan { $amount }
+monopoly-card-advance-to-illinois-avenue = Maju ke Illinois Avenue
+monopoly-card-advance-to-st-charles-place = Maju ke St. Charles Place
+monopoly-card-advance-to-nearest-utility = Maju ke Utilitas terdekat
+monopoly-card-advance-to-nearest-railroad = Maju ke Kereta Api terdekat dan bayar sewa dua kali lipat jika dimiliki
+monopoly-card-bank-dividend-50 = Bank membayar Anda dividen { $amount }
+monopoly-card-go-back-three = Mundur 3 spasi
+monopoly-card-go-to-jail = Langsung masuk penjara
+monopoly-card-general-repairs = Lakukan perbaikan umum pada seluruh properti Anda: { $per_house } per rumah, { $per_hotel } per hotel
+monopoly-card-poor-tax-15 = Bayar pajak yang buruk dari { $amount }
+monopoly-card-reading-railroad = Lakukan perjalanan ke Reading Railroad
+monopoly-card-boardwalk = Berjalan-jalan di Boardwalk
+monopoly-card-chairman-of-the-board = Ketua Dewan, bayarkan { $amount } kepada setiap pemain
+monopoly-card-building-loan-matures = Pinjaman Gedung Anda Jatuh Tempo, Kumpulkan { $amount }
+monopoly-card-crossword-competition = Anda memenangkan kompetisi teka-teki silang, kumpulkan { $amount }
+monopoly-card-bank-error-200 = Kesalahan bank menguntungkan Anda, kumpulkan { $amount }
+monopoly-card-doctor-fee-50 = Biaya dokter, bayar { $amount }
+monopoly-card-sale-of-stock-50 = Dari penjualan stok Anda mendapatkan { $amount }
+monopoly-card-holiday-fund = Dana liburan jatuh tempo, terima { $amount }
+monopoly-card-tax-refund-20 = Restitusi pajak penghasilan, kumpulkan { $amount }
+monopoly-card-birthday = Ini hari ulang tahunmu, kumpulkan { $amount } dari setiap pemain
+monopoly-card-life-insurance = Asuransi jiwa jatuh tempo, kumpulkan { $amount }
+monopoly-card-hospital-fees-100 = Bayar biaya rumah sakit { $amount }
+monopoly-card-school-fees-50 = Bayar biaya sekolah { $amount }
+monopoly-card-consultancy-fee-25 = Menerima biaya konsultasi { $amount }
+monopoly-card-street-repairs = Anda dinilai untuk perbaikan jalan: { $per_house } per rumah, { $per_hotel } per hotel
+monopoly-card-beauty-contest-10 = Anda telah memenangkan hadiah kedua dalam kontes kecantikan, kumpulkan { $amount }
+monopoly-card-inherit-100 = Anda mewarisi { $amount }
+monopoly-card-get-out-of-jail = Keluar dari penjara bebas
 
 # Board profile options
-monopoly-set-board = Board: { $board }
-monopoly-select-board = Select a Monopoly board
-monopoly-option-changed-board = Board set to { $board }.
-monopoly-set-board-rules-mode = Board rules mode: { $mode }
-monopoly-select-board-rules-mode = Select board rules mode
-monopoly-option-changed-board-rules-mode = Board rules mode set to { $mode }.
+monopoly-set-board = Papan: { $board }
+monopoly-select-board = Pilih papan Monopoli
+monopoly-option-changed-board = Papan disetel ke { $board }.
+monopoly-set-board-rules-mode = Mode aturan papan: { $mode }
+monopoly-select-board-rules-mode = Pilih mode aturan papan
+monopoly-option-changed-board-rules-mode = Mode aturan papan disetel ke { $mode }.
 
 # Board labels
 monopoly-board-classic-default = Classic Default
@@ -291,74 +291,74 @@ monopoly-board-rules-simplified = Board rules for { $board } are partially imple
 monopoly-board-active = Active board: { $board } (mode: { $mode }).
 
 # Deed and ownership browsing
-monopoly-view-active-deed = View active deed
-monopoly-view-active-deed-space = View { $property }
-monopoly-browse-all-deeds = Browse all deeds
-monopoly-view-my-properties = View my properties
-monopoly-view-player-properties = View player info
-monopoly-view-selected-deed = View selected deed
-monopoly-view-selected-owner-property-deed = View selected player deed
-monopoly-select-property-deed = Select a property deed
-monopoly-select-player-properties = Select a player
-monopoly-select-player-property-deed = Select a player property deed
-monopoly-no-active-deed = There is no active deed to view right now.
-monopoly-no-deeds-available = No deed-capable properties are available on this board.
-monopoly-no-owned-properties = No owned properties are available for this view.
-monopoly-no-players-with-properties = No players are available.
-monopoly-buy-for = Buy for { $amount }
-monopoly-you-have-no-owned-properties = You do not own any properties.
-monopoly-player-has-no-owned-properties = { $player } does not own any properties.
+monopoly-view-active-deed = Lihat akta aktif
+monopoly-view-active-deed-space = Lihat { $property }
+monopoly-browse-all-deeds = Telusuri semua perbuatan
+monopoly-view-my-properties = Lihat properti saya
+monopoly-view-player-properties = Lihat info pemain
+monopoly-view-selected-deed = Lihat akta yang dipilih
+monopoly-view-selected-owner-property-deed = Lihat akta pemain yang dipilih
+monopoly-select-property-deed = Pilih akta properti
+monopoly-select-player-properties = Pilih pemain
+monopoly-select-player-property-deed = Pilih akta properti pemain
+monopoly-no-active-deed = Tidak ada akta aktif untuk dilihat saat ini.
+monopoly-no-deeds-available = Tidak ada properti berkemampuan akta yang tersedia di forum ini.
+monopoly-no-owned-properties = Tidak ada properti milik yang tersedia untuk tampilan ini.
+monopoly-no-players-with-properties = Tidak ada pemain yang tersedia.
+monopoly-buy-for = Beli untuk { $amount }
+monopoly-you-have-no-owned-properties = Anda tidak memiliki properti apa pun.
+monopoly-player-has-no-owned-properties = { $player } tidak memiliki properti apa pun.
 monopoly-owner-bank = Bank
-monopoly-owner-unknown = Unknown
-monopoly-building-status-hotel = with hotel
-monopoly-building-status-one-house = with 1 house
-monopoly-building-status-houses = with { $count } houses
-monopoly-mortgaged-short = mortgaged
+monopoly-owner-unknown = Tidak dikenal
+monopoly-building-status-hotel = dengan hotel
+monopoly-building-status-one-house = dengan 1 rumah
+monopoly-building-status-houses = dengan rumah { $count }
+monopoly-mortgaged-short = digadaikan
 monopoly-deed-menu-label = { $property } ({ $owner })
 monopoly-deed-menu-label-extra = { $property } ({ $owner }; { $extras })
-monopoly-color-brown = Brown
-monopoly-color-light_blue = Light Blue
-monopoly-color-pink = Pink
-monopoly-color-orange = Orange
-monopoly-color-red = Red
-monopoly-color-yellow = Yellow
-monopoly-color-green = Green
-monopoly-color-dark_blue = Dark Blue
-monopoly-deed-type-color-group = Type: { $color } color group
-monopoly-deed-type-railroad = Type: Railroad
-monopoly-deed-type-utility = Type: Utility
-monopoly-deed-type-generic = Type: { $kind }
-monopoly-deed-purchase-price = Purchase price: { $amount }
-monopoly-deed-rent = Rent: { $amount }
-monopoly-deed-full-set-rent = If owner has full color set: { $amount }
-monopoly-deed-rent-one-house = With 1 house: { $amount }
-monopoly-deed-rent-houses = With { $count } houses: { $amount }
-monopoly-deed-rent-hotel = With hotel: { $amount }
-monopoly-deed-house-cost = House cost: { $amount }
-monopoly-deed-railroad-rent = Rent with { $count } railroads: { $amount }
-monopoly-deed-utility-one-owned = If one utility is owned: 4x dice roll
-monopoly-deed-utility-both-owned = If both utilities are owned: 10x dice roll
-monopoly-deed-utility-base-rent = Utility base rent (legacy fallback): { $amount }
-monopoly-deed-mortgage-value = Mortgage value: { $amount }
-monopoly-deed-unmortgage-cost = Unmortgage cost: { $amount }
-monopoly-deed-owner = Owner: { $owner }
-monopoly-deed-current-buildings = Current buildings: { $buildings }
-monopoly-deed-status-mortgaged = Status: Mortgaged
-monopoly-player-properties-label = { $player }, on { $space }, square { $position }
-monopoly-player-properties-label-no-space = { $player }, square { $position }
+monopoly-color-brown = Cokelat
+monopoly-color-light_blue = Biru muda
+monopoly-color-pink = Berwarna merah muda
+monopoly-color-orange = Oranye
+monopoly-color-red = Merah
+monopoly-color-yellow = Kuning
+monopoly-color-green = Hijau
+monopoly-color-dark_blue = Biru tua
+monopoly-deed-type-color-group = Jenis: kelompok warna { $color }
+monopoly-deed-type-railroad = Jenis: Kereta Api
+monopoly-deed-type-utility = Jenis: Utilitas
+monopoly-deed-type-generic = Jenis: { $kind }
+monopoly-deed-purchase-price = Harga pembelian: { $amount }
+monopoly-deed-rent = Sewa: { $amount }
+monopoly-deed-full-set-rent = Jika pemilik memiliki set warna lengkap: { $amount }
+monopoly-deed-rent-one-house = Dengan 1 rumah: { $amount }
+monopoly-deed-rent-houses = Dengan rumah { $count }: { $amount }
+monopoly-deed-rent-hotel = Dengan hotel: { $amount }
+monopoly-deed-house-cost = Biaya rumah: { $amount }
+monopoly-deed-railroad-rent = Sewa dengan kereta api { $count }: { $amount }
+monopoly-deed-utility-one-owned = Jika salah satu kegunaan yang dimiliki : 4x pelemparan dadu
+monopoly-deed-utility-both-owned = Jika kedua utilitas dimiliki: 10x pelemparan dadu
+monopoly-deed-utility-base-rent = Sewa dasar utilitas (penggantian lama): { $amount }
+monopoly-deed-mortgage-value = Nilai hipotek: { $amount }
+monopoly-deed-unmortgage-cost = Biaya pembatalan hipotek: { $amount }
+monopoly-deed-owner = Pemilik: { $owner }
+monopoly-deed-current-buildings = Bangunan saat ini: { $buildings }
+monopoly-deed-status-mortgaged = Status: Digadaikan
+monopoly-player-properties-label = { $player }, di { $space }, kotak { $position }
+monopoly-player-properties-label-no-space = { $player }, { $position } persegi
 monopoly-banking-ledger-entry-success = { $tx_id } { $kind } { $from_id }->{ $to_id } { $amount } ({ $reason })
-monopoly-banking-ledger-entry-failed = { $tx_id } { $kind } failed ({ $reason })
+monopoly-banking-ledger-entry-failed = { $tx_id } { $kind } gagal ({ $reason })
 
 # Trade menu summaries
-monopoly-trade-buy-property-summary = Buy { $property } from { $target } for { $amount }
-monopoly-trade-offer-cash-for-property-summary = Offer { $amount } to { $target } for { $property }
-monopoly-trade-sell-property-summary = Sell { $property } to { $target } for { $amount }
-monopoly-trade-offer-property-for-cash-summary = Offer { $property } to { $target } for { $amount }
-monopoly-trade-swap-summary = Swap { $give_property } with { $target } for { $receive_property }
-monopoly-trade-swap-plus-cash-summary = Swap { $give_property } + { $amount } with { $target } for { $receive_property }
-monopoly-trade-swap-receive-cash-summary = Swap { $give_property } for { $receive_property } + { $amount } from { $target }
-monopoly-trade-buy-jail-card-summary = Buy jail card from { $target } for { $amount }
-monopoly-trade-sell-jail-card-summary = Sell jail card to { $target } for { $amount }
+monopoly-trade-buy-property-summary = Beli { $property } dari { $target } untuk { $amount }
+monopoly-trade-offer-cash-for-property-summary = Tawarkan { $amount } ke { $target } untuk { $property }
+monopoly-trade-sell-property-summary = Jual { $property } ke { $target } untuk { $amount }
+monopoly-trade-offer-property-for-cash-summary = Tawarkan { $property } ke { $target } untuk { $amount }
+monopoly-trade-swap-summary = Tukar { $give_property } dengan { $target } dengan { $receive_property }
+monopoly-trade-swap-plus-cash-summary = Tukar { $give_property } + { $amount } dengan { $target } dengan { $receive_property }
+monopoly-trade-swap-receive-cash-summary = Tukar { $give_property } dengan { $receive_property } + { $amount } dari { $target }
+monopoly-trade-buy-jail-card-summary = Beli kartu penjara dari { $target } untuk { $amount }
+monopoly-trade-sell-jail-card-summary = Jual kartu penjara ke { $target } untuk { $amount }
 
 # Board space names
 monopoly-space-go = GO

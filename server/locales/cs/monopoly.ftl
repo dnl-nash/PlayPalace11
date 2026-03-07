@@ -4,224 +4,224 @@
 game-name-monopoly = Monopoly
 
 # Lobby options
-monopoly-set-preset = Preset: { $preset }
-monopoly-select-preset = Select a Monopoly preset
-monopoly-option-changed-preset = Preset set to { $preset }.
+monopoly-set-preset = Přednastaveno: { $preset }
+monopoly-select-preset = Vyberte předvolbu Monopoly
+monopoly-option-changed-preset = Přednastaveno na { $preset }.
 
 # Preset labels
-monopoly-preset-classic-standard = Classic and Themed Standard
+monopoly-preset-classic-standard = Klasický a tematický standard
 monopoly-preset-junior = Monopoly Junior
-monopoly-preset-junior-modern = Monopoly Junior (Modern)
-monopoly-preset-junior-legacy = Monopoly Junior (Legacy)
-monopoly-preset-cheaters = Monopoly Cheaters Edition
-monopoly-preset-electronic-banking = Electronic Banking
-monopoly-preset-voice-banking = Voice Banking
-monopoly-preset-sore-losers = Monopoly for Sore Losers
-monopoly-preset-speed = Monopoly Speed
+monopoly-preset-junior-modern = Monopoly Junior (moderní)
+monopoly-preset-junior-legacy = Monopoly Junior (starší)
+monopoly-preset-cheaters = Edice Monopoly Cheaters
+monopoly-preset-electronic-banking = Elektronické bankovnictví
+monopoly-preset-voice-banking = Hlasové bankovnictví
+monopoly-preset-sore-losers = Monopol pro poražené
+monopoly-preset-speed = Monopolní rychlost
 monopoly-preset-builder = Monopoly Builder
 monopoly-preset-city = Monopoly City
-monopoly-preset-bid-card-game = Monopoly Bid
-monopoly-preset-deal-card-game = Monopoly Deal
-monopoly-preset-knockout = Monopoly Knockout
-monopoly-preset-free-parking-jackpot = Free Parking Jackpot
+monopoly-preset-bid-card-game = Monopolní nabídka
+monopoly-preset-deal-card-game = Monopolní dohoda
+monopoly-preset-knockout = Monopoly knockout
+monopoly-preset-free-parking-jackpot = Jackpot parkování zdarma
 
 # Scaffold status
-monopoly-announce-preset = Announce current preset
-monopoly-current-preset = Current preset: { $preset } ({ $count } editions).
-monopoly-scaffold-started = Monopoly scaffold started with { $preset } ({ $count } editions).
+monopoly-announce-preset = Oznámit aktuální předvolbu
+monopoly-current-preset = Aktuální předvolba: { $preset } (edice { $count }).
+monopoly-scaffold-started = Monopolní lešení začalo se { $preset } (edice { $count }).
 
 # Turn actions
-monopoly-roll-dice = Roll dice
-monopoly-buy-property = Buy property
-monopoly-banking-balance = Check bank balance
-monopoly-banking-transfer = Transfer funds
-monopoly-banking-ledger = Review bank ledger
-monopoly-voice-command = Voice command
-monopoly-cheaters-claim-reward = Claim cheat reward
-monopoly-end-turn = End turn
+monopoly-roll-dice = Hoďte kostkami
+monopoly-buy-property = Koupit nemovitost
+monopoly-banking-balance = Zkontrolujte bankovní zůstatek
+monopoly-banking-transfer = Převod finančních prostředků
+monopoly-banking-ledger = Prohlédněte si bankovní knihu
+monopoly-voice-command = Hlasový příkaz
+monopoly-cheaters-claim-reward = Získejte podvodnou odměnu
+monopoly-end-turn = Konec zatáčky
 
 # Turn validation
-monopoly-roll-first = You need to roll first.
-monopoly-already-rolled = You already rolled this turn.
-monopoly-no-property-to-buy = There is no property to buy right now.
-monopoly-property-owned = That property is already owned.
-monopoly-not-enough-cash = You don't have enough cash.
-monopoly-action-disabled-for-preset = This action is disabled for the selected preset.
-monopoly-buy-disabled = Buying property directly is disabled for this preset.
+monopoly-roll-first = Nejprve se musíte koulet.
+monopoly-already-rolled = Tuto zatáčku jste již protočili.
+monopoly-no-property-to-buy = Momentálně není žádná nemovitost ke koupi.
+monopoly-property-owned = Tato nemovitost je již ve vlastnictví.
+monopoly-not-enough-cash = Nemáte dostatek hotovosti.
+monopoly-action-disabled-for-preset = Tato akce je pro vybranou předvolbu zakázána.
+monopoly-buy-disabled = Přímý nákup nemovitosti je pro tuto předvolbu zakázán.
 
 # Turn events
-monopoly-pass-go = { $player } passed GO and collected { $amount }.
-monopoly-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-result = You rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-player-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-you-roll-only = You rolled { $die1 } + { $die2 } = { $total }.
-monopoly-player-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-only-doubles = You rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-player-roll-only-doubles = { $player } rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-property-available = { $property } is available for { $price }.
-monopoly-property-bought = { $player } bought { $property } for { $price }.
-monopoly-rent-paid = { $player } paid { $amount } in rent to { $owner } for { $property }.
-monopoly-player-paid-player = { $player } paid { $amount } to { $target }.
-monopoly-you-completed-color-set = You now own all of the { $group } properties.
-monopoly-player-completed-color-set = { $player } now owns all of the { $group } properties.
-monopoly-you-completed-railroads = You now own all of the railroads.
-monopoly-player-completed-railroads = { $player } now owns all of the railroads.
-monopoly-you-completed-utilities = You now own all of the utilities.
-monopoly-player-completed-utilities = { $player } now owns all of the utilities.
-monopoly-landed-owned = { $player } landed on their own property: { $property }.
-monopoly-tax-paid = { $player } paid { $amount } for { $tax }.
-monopoly-go-to-jail = { $player } goes to jail (moved to { $space }).
-monopoly-bankrupt-player = You are bankrupt and out of the game.
-monopoly-player-bankrupt = { $player } is bankrupt. Creditor: { $creditor }.
-monopoly-winner-by-bankruptcy = { $player } wins by bankruptcy with { $cash } cash remaining.
-monopoly-winner-by-cash = { $player } wins with the highest cash total: { $cash }.
-monopoly-city-winner-by-value = { $player } wins Monopoly City with final value { $total }.
+monopoly-pass-go = { $player } prošel GO a získal { $amount }.
+monopoly-roll-result = { $player } stočil { $die1 } + { $die2 } = { $total } a přistál na { $space }.
+monopoly-roll-only = { $player } válcované { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-result = Hodili jste { $die1 } + { $die2 } = { $total } a přistáli jste na { $space }.
+monopoly-player-roll-result = { $player } stočil { $die1 } + { $die2 } = { $total } a přistál na { $space }.
+monopoly-you-roll-only = Hodili jste { $die1 } + { $die2 } = { $total }.
+monopoly-player-roll-only = { $player } válcované { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-only-doubles = Hodili jste { $die1 } + { $die2 } = { $total }. Čtyřhra!
+monopoly-player-roll-only-doubles = { $player } válcované { $die1 } + { $die2 } = { $total }. Čtyřhra!
+monopoly-property-available = { $property } je k dispozici pro { $price }.
+monopoly-property-bought = { $player } koupil { $property } za { $price }.
+monopoly-rent-paid = Společnost { $player } zaplatila { $amount } nájemné společnosti { $owner } za { $property }.
+monopoly-player-paid-player = { $player } zaplatil { $amount } až { $target }.
+monopoly-you-completed-color-set = Nyní vlastníte všechny vlastnosti { $group }.
+monopoly-player-completed-color-set = { $player } nyní vlastní všechny vlastnosti { $group }.
+monopoly-you-completed-railroads = Nyní vlastníte všechny železnice.
+monopoly-player-completed-railroads = { $player } nyní vlastní všechny železnice.
+monopoly-you-completed-utilities = Nyní vlastníte všechny nástroje.
+monopoly-player-completed-utilities = { $player } nyní vlastní všechny nástroje.
+monopoly-landed-owned = { $player } přistál na vlastním pozemku: { $property }.
+monopoly-tax-paid = { $player } zaplatil { $amount } za { $tax }.
+monopoly-go-to-jail = { $player } jde do vězení (přesunuto do { $space }).
+monopoly-bankrupt-player = Jste na mizině a jste mimo hru.
+monopoly-player-bankrupt = { $player } je v úpadku. Věřitel: { $creditor }.
+monopoly-winner-by-bankruptcy = { $player } vyhraje bankrotem se zbývající hotovostí { $cash }.
+monopoly-winner-by-cash = { $player } vyhrává s nejvyšší hotovostí: { $cash }.
+monopoly-city-winner-by-value = { $player } vyhrává Monopoly City s konečnou hodnotou { $total }.
 
 # Additional actions
-monopoly-auction-property = Auction property
-monopoly-auction-bid = Place auction bid
-monopoly-auction-pass = Pass in auction
-monopoly-mortgage-property = Mortgage property
-monopoly-unmortgage-property = Unmortgage property
-monopoly-build-house = Build house or hotel
-monopoly-sell-house = Sell house or hotel
-monopoly-offer-trade = Offer trade
-monopoly-accept-trade = Accept trade
-monopoly-decline-trade = Decline trade
-monopoly-read-cash = Read cash
-monopoly-pay-bail = Pay bail
-monopoly-use-jail-card = Use get-out-of-jail card
-monopoly-cash-report = { $cash } in cash.
-monopoly-property-amount-option = { $property } for { $amount }
-monopoly-banking-transfer-option = Transfer { $amount } to { $target }
+monopoly-auction-property = Aukční nemovitost
+monopoly-auction-bid = Umístěte aukční nabídku
+monopoly-auction-pass = Předat v aukci
+monopoly-mortgage-property = Hypoteční nemovitost
+monopoly-unmortgage-property = Nezastavte nemovitost
+monopoly-build-house = Postavit dům nebo hotel
+monopoly-sell-house = Prodej domu nebo hotelu
+monopoly-offer-trade = Nabídka obchodu
+monopoly-accept-trade = Přijmout obchod
+monopoly-decline-trade = Pokles obchodu
+monopoly-read-cash = Čtěte hotovost
+monopoly-pay-bail = Zaplatit kauci
+monopoly-use-jail-card = Použijte kartu pro únik z vězení
+monopoly-cash-report = { $cash } v hotovosti.
+monopoly-property-amount-option = { $property } pro { $amount }
+monopoly-banking-transfer-option = Převeďte { $amount } na { $target }
 
 # Additional prompts
-monopoly-select-property-mortgage = Select a property to mortgage
-monopoly-select-property-unmortgage = Select a property to unmortgage
-monopoly-select-property-build = Select a property to build on
-monopoly-select-property-sell = Select a property to sell from
-monopoly-select-trade-offer = Select a trade offer
-monopoly-select-auction-bid = Select your auction bid
-monopoly-select-banking-transfer = Select a transfer
-monopoly-select-voice-command = Enter a voice command beginning with voice:
+monopoly-select-property-mortgage = Vyberte nemovitost na hypotéku
+monopoly-select-property-unmortgage = Vyberte nemovitost, kterou chcete uvolnit
+monopoly-select-property-build = Vyberte nemovitost, na které chcete stavět
+monopoly-select-property-sell = Vyberte nemovitost k prodeji
+monopoly-select-trade-offer = Vyberte obchodní nabídku
+monopoly-select-auction-bid = Vyberte aukční nabídku
+monopoly-select-banking-transfer = Vyberte převod
+monopoly-select-voice-command = Zadejte hlasový příkaz začínající na voice:
 
 # Additional validation
-monopoly-no-property-to-auction = There is no property to auction right now.
-monopoly-auction-active = Resolve the active auction first.
-monopoly-no-auction-active = There is no auction in progress.
-monopoly-not-your-auction-turn = It is not your turn in the auction.
-monopoly-no-mortgage-options = You do not have properties available to mortgage.
-monopoly-no-unmortgage-options = You do not have mortgaged properties to unmortgage.
-monopoly-no-build-options = You do not have properties available to build on.
-monopoly-no-sell-options = You do not have properties with buildings available to sell.
-monopoly-no-trade-options = You do not have any valid trades to offer right now.
-monopoly-no-trade-pending = There is no pending trade for you.
-monopoly-trade-pending = A trade is already pending.
-monopoly-trade-no-longer-valid = That trade is no longer valid.
-monopoly-not-in-jail = You are not in jail.
-monopoly-no-jail-card = You do not have a get-out-of-jail card.
-monopoly-roll-again-required = You rolled doubles and must roll again.
-monopoly-resolve-property-first = Resolve the pending property decision first.
+monopoly-no-property-to-auction = Momentálně není žádná nemovitost k dražbě.
+monopoly-auction-active = Nejprve vyřešte aktivní aukci.
+monopoly-no-auction-active = Neprobíhá žádná aukce.
+monopoly-not-your-auction-turn = V aukci nejste na řadě.
+monopoly-no-mortgage-options = Nemovitosti k zástavě nemáte.
+monopoly-no-unmortgage-options = Nemáte zastavené nemovitosti k odstavení.
+monopoly-no-build-options = Nemáte k dispozici nemovitosti, na kterých byste mohli stavět.
+monopoly-no-sell-options = Nemáte nemovitosti s budovami k prodeji.
+monopoly-no-trade-options = Momentálně nemáte žádné platné obchody, které byste mohli nabídnout.
+monopoly-no-trade-pending = Neexistuje pro vás žádný čekající obchod.
+monopoly-trade-pending = Obchod již probíhá.
+monopoly-trade-no-longer-valid = Tento obchod již není platný.
+monopoly-not-in-jail = Nejste ve vězení.
+monopoly-no-jail-card = Nemáte kartu pro únik z vězení.
+monopoly-roll-again-required = Hodili jste dvojky a musíte hodit znovu.
+monopoly-resolve-property-first = Nejprve vyřešte nevyřízené rozhodnutí o vlastnictví.
 
 # Additional turn events
-monopoly-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-you-roll-again = You rolled doubles and get another roll.
-monopoly-player-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-you-jail-roll-doubles = You rolled doubles ({ $die1 } and { $die2 }) and leave jail.
-monopoly-player-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-jail-roll-failed = { $player } rolled { $die1 } and { $die2 } in jail (attempt { $attempts }).
-monopoly-bail-paid = { $player } paid { $amount } bail.
-monopoly-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-you-three-doubles-jail = You rolled three doubles in one turn and are sent to jail.
-monopoly-player-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-jail-card-used = { $player } used a get-out-of-jail card.
-monopoly-sore-loser-rebate = { $player } received a sore loser rebate of { $amount }.
-monopoly-cheaters-early-end-turn-blocked = { $player } tried to end the turn early and paid a cheating penalty of { $amount }.
-monopoly-cheaters-payment-avoidance-blocked = { $player } triggered a cheaters payment penalty of { $amount }.
-monopoly-cheaters-reward-granted = { $player } claimed a cheaters reward of { $amount }.
-monopoly-cheaters-reward-unavailable = { $player } already claimed the cheaters reward this turn.
+monopoly-roll-again = { $player } se hodí zdvojnásobí a dostane další hod.
+monopoly-you-roll-again = Hodili jste dvojky a získáte další hod.
+monopoly-player-roll-again = { $player } se hodí zdvojnásobí a dostane další hod.
+monopoly-jail-roll-doubles = { $player } se zdvojnásobí ({ $die1 } a { $die2 }) a opustí vězení.
+monopoly-you-jail-roll-doubles = Hodili jste dvojky ({ $die1 } a { $die2 }) a opustili vězení.
+monopoly-player-jail-roll-doubles = { $player } se zdvojnásobí ({ $die1 } a { $die2 }) a opustí vězení.
+monopoly-jail-roll-failed = { $player } hodila { $die1 } a { $die2 } do vězení (pokus { $attempts }).
+monopoly-bail-paid = { $player } zaplatil kauci { $amount }.
+monopoly-three-doubles-jail = { $player } hodil tři double v jednom kole a je poslán do vězení.
+monopoly-you-three-doubles-jail = Hodili jste tři dvojky v jednom kole a jste posláni do vězení.
+monopoly-player-three-doubles-jail = { $player } hodil tři double v jednom kole a je poslán do vězení.
+monopoly-jail-card-used = { $player } použil kartu pro únik z vězení.
+monopoly-sore-loser-rebate = { $player } obdržel bolestnou slevu pro poražené ve výši { $amount }.
+monopoly-cheaters-early-end-turn-blocked = { $player } se pokusil předčasně ukončit tah a zaplatil penalizaci za podvádění ve výši { $amount }.
+monopoly-cheaters-payment-avoidance-blocked = { $player } vyvolalo pokutu za podvody ve výši { $amount }.
+monopoly-cheaters-reward-granted = { $player } získal odměnu pro podvodníky ve výši { $amount }.
+monopoly-cheaters-reward-unavailable = { $player } si již toto kolo vyžádal odměnu pro podvodníky.
 
 # Auctions and mortgages
-monopoly-auction-no-bids = No bids for { $property }. It remains unsold.
-monopoly-auction-started = Auction started for { $property } (opening bid: { $amount }).
-monopoly-auction-turn = Auction turn: { $player } to act on { $property } (current bid: { $amount }).
-monopoly-auction-bid-placed = { $player } bid { $amount } for { $property }.
-monopoly-auction-pass-event = { $player } passed on { $property }.
-monopoly-auction-won = { $player } won the auction for { $property } at { $amount }.
-monopoly-property-mortgaged = { $player } mortgaged { $property } for { $amount }.
-monopoly-property-unmortgaged = { $player } unmortgaged { $property } for { $amount }.
-monopoly-house-built-house = { $player } built a house on { $property } for { $amount }. It now has { $level }.
-monopoly-house-built-hotel = { $player } built a hotel on { $property } for { $amount }.
-monopoly-house-sold = { $player } sold a building on { $property } for { $amount } (level: { $level }).
-monopoly-trade-offered = { $proposer } offered { $target } a trade: { $offer }.
-monopoly-trade-completed = Trade completed between { $proposer } and { $target }: { $offer }.
-monopoly-trade-declined = { $target } declined trade from { $proposer }: { $offer }.
-monopoly-trade-cancelled = Trade cancelled: { $offer }.
-monopoly-free-parking-jackpot = { $player } collected the Free Parking jackpot of { $amount }.
-monopoly-mortgaged-no-rent = { $player } landed on mortgaged { $property }; no rent is due.
-monopoly-builder-blocks-awarded = { $player } gained { $amount } builder blocks ({ $blocks } total).
-monopoly-builder-block-spent = { $player } spent a builder block ({ $blocks } remaining).
-monopoly-banking-transfer-success = { $from_player } transferred { $amount } to { $to_player }.
-monopoly-banking-transfer-failed = { $player } bank transfer failed ({ $reason }).
-monopoly-banking-balance-report = { $player } bank balance: { $cash }.
-monopoly-banking-ledger-report = Recent banking activity: { $entries }.
-monopoly-banking-ledger-empty = No banking transactions yet.
-monopoly-voice-command-error = Voice command error: { $reason }.
-monopoly-voice-command-accepted = Voice command accepted: { $intent }.
-monopoly-voice-command-repeat = Repeating last banking response code: { $response }.
-monopoly-voice-transfer-staged = Voice transfer staged: { $amount } to { $target }. Say voice: confirm transfer.
-monopoly-mortgage-transfer-interest-paid = { $player } paid { $amount } in mortgage transfer interest.
+monopoly-auction-no-bids = Žádné nabídky pro { $property }. Zůstává neprodáno.
+monopoly-auction-started = Byla zahájena aukce na { $property } (vyvolávací nabídka: { $amount }).
+monopoly-auction-turn = Aukční tah: { $player }, aby se jednalo o { $property } (aktuální nabídka: { $amount }).
+monopoly-auction-bid-placed = { $player } nabídka { $amount } za { $property }.
+monopoly-auction-pass-event = { $player } předán { $property }.
+monopoly-auction-won = { $player } vyhrál aukci na { $property } na { $amount }.
+monopoly-property-mortgaged = { $player } zastaveno { $property } za { $amount }.
+monopoly-property-unmortgaged = { $player } nezastavený { $property } pro { $amount }.
+monopoly-house-built-house = { $player } postavil dům na { $property } pro { $amount }. Nyní má { $level }.
+monopoly-house-built-hotel = { $player } postavil hotel na { $property } pro { $amount }.
+monopoly-house-sold = { $player } prodal budovu na { $property } za { $amount } (úroveň: { $level }).
+monopoly-trade-offered = { $proposer } nabídl { $target } obchod: { $offer }.
+monopoly-trade-completed = Obchod dokončen mezi { $proposer } a { $target }: { $offer }.
+monopoly-trade-declined = { $target } odmítl obchod z { $proposer }: { $offer }.
+monopoly-trade-cancelled = Zrušený obchod: { $offer }.
+monopoly-free-parking-jackpot = { $player } získal jackpot bezplatného parkování { $amount }.
+monopoly-mortgaged-no-rent = { $player } přistál na zastaveném { $property }; neplatí se nájem.
+monopoly-builder-blocks-awarded = { $player } získal stavební bloky { $amount } (celkem { $blocks }).
+monopoly-builder-block-spent = { $player } strávil stavební blok (zbývá { $blocks }).
+monopoly-banking-transfer-success = { $from_player } převedl { $amount } na { $to_player }.
+monopoly-banking-transfer-failed = Bankovní převod { $player } se nezdařil ({ $reason }).
+monopoly-banking-balance-report = { $player } bankovní zůstatek: { $cash }.
+monopoly-banking-ledger-report = Nedávná bankovní aktivita: { $entries }.
+monopoly-banking-ledger-empty = Zatím žádné bankovní transakce.
+monopoly-voice-command-error = Chyba hlasového příkazu: { $reason }.
+monopoly-voice-command-accepted = Přijatý hlasový příkaz: { $intent }.
+monopoly-voice-command-repeat = Opakující se kód poslední bankovní odpovědi: { $response }.
+monopoly-voice-transfer-staged = Přenos hlasu zinscenovaný: { $amount } na { $target }. Řekněte voice: confirm transfer.
+monopoly-mortgage-transfer-interest-paid = { $player } zaplatil { $amount } na úrocích z převodu hypotéky.
 
 # Card engine
-monopoly-card-drawn = { $player } drew a { $deck } card: { $card }.
-monopoly-card-collect = { $player } collected { $amount }.
-monopoly-card-pay = { $player } paid { $amount }.
-monopoly-card-move = { $player } moved to { $space }.
-monopoly-card-jail-free = { $player } received a get-out-of-jail card.
-monopoly-card-utility-roll = { $player } rolled { $die1 } + { $die2 } = { $total } for utility rent.
-monopoly-deck-chance = Chance
-monopoly-deck-community-chest = Community Chest
+monopoly-card-drawn = { $player } vytáhl kartu { $deck }: { $card }.
+monopoly-card-collect = { $player } shromážděno { $amount }.
+monopoly-card-pay = { $player } zaplatil { $amount }.
+monopoly-card-move = { $player } přesunut na { $space }.
+monopoly-card-jail-free = { $player } obdržel kartu k úniku z vězení.
+monopoly-card-utility-roll = { $player } válcované { $die1 } + { $die2 } = { $total } k pronájmu.
+monopoly-deck-chance = Šance
+monopoly-deck-community-chest = Společenská truhla
 
 # Card descriptions
-monopoly-card-advance-to-go = Advance to GO and collect { $amount }
-monopoly-card-advance-to-illinois-avenue = Advance to Illinois Avenue
-monopoly-card-advance-to-st-charles-place = Advance to St. Charles Place
-monopoly-card-advance-to-nearest-utility = Advance to the nearest Utility
-monopoly-card-advance-to-nearest-railroad = Advance to the nearest Railroad and pay double rent if owned
-monopoly-card-bank-dividend-50 = Bank pays you dividend of { $amount }
-monopoly-card-go-back-three = Go back 3 spaces
-monopoly-card-go-to-jail = Go directly to jail
-monopoly-card-general-repairs = Make general repairs on all your property: { $per_house } per house, { $per_hotel } per hotel
-monopoly-card-poor-tax-15 = Pay poor tax of { $amount }
-monopoly-card-reading-railroad = Take a trip to Reading Railroad
-monopoly-card-boardwalk = Take a walk on Boardwalk
-monopoly-card-chairman-of-the-board = Chairman of the Board, pay { $amount } to every player
-monopoly-card-building-loan-matures = Your building loan matures, collect { $amount }
-monopoly-card-crossword-competition = You won a crossword competition, collect { $amount }
-monopoly-card-bank-error-200 = Bank error in your favor, collect { $amount }
-monopoly-card-doctor-fee-50 = Doctor's fee, pay { $amount }
-monopoly-card-sale-of-stock-50 = From sale of stock you get { $amount }
-monopoly-card-holiday-fund = Holiday fund matures, receive { $amount }
-monopoly-card-tax-refund-20 = Income tax refund, collect { $amount }
-monopoly-card-birthday = It is your birthday, collect { $amount } from every player
-monopoly-card-life-insurance = Life insurance matures, collect { $amount }
-monopoly-card-hospital-fees-100 = Pay hospital fees of { $amount }
-monopoly-card-school-fees-50 = Pay school fees of { $amount }
-monopoly-card-consultancy-fee-25 = Receive { $amount } consultancy fee
-monopoly-card-street-repairs = You are assessed for street repairs: { $per_house } per house, { $per_hotel } per hotel
-monopoly-card-beauty-contest-10 = You have won second prize in a beauty contest, collect { $amount }
-monopoly-card-inherit-100 = You inherit { $amount }
-monopoly-card-get-out-of-jail = Get out of jail free
+monopoly-card-advance-to-go = Přejděte na GO a sbírejte { $amount }
+monopoly-card-advance-to-illinois-avenue = Postup na Illinois Avenue
+monopoly-card-advance-to-st-charles-place = Postup na St. Charles Place
+monopoly-card-advance-to-nearest-utility = Přejděte do nejbližší utility
+monopoly-card-advance-to-nearest-railroad = Přejděte na nejbližší železnici a zaplaťte dvojnásobný nájem, pokud ji vlastníte
+monopoly-card-bank-dividend-50 = Banka vám vyplatí dividendu ve výši { $amount }
+monopoly-card-go-back-three = Vraťte se o 3 místa zpět
+monopoly-card-go-to-jail = Jděte přímo do vězení
+monopoly-card-general-repairs = Proveďte generální opravy na celém svém majetku: { $per_house } za dům, { $per_hotel } za hotel
+monopoly-card-poor-tax-15 = Zaplaťte špatnou daň ve výši { $amount }
+monopoly-card-reading-railroad = Udělejte si výlet do Reading Railroad
+monopoly-card-boardwalk = Projděte se po promenádě
+monopoly-card-chairman-of-the-board = Předsedo představenstva, zaplaťte { $amount } každému hráči
+monopoly-card-building-loan-matures = Váš stavební úvěr je splatný, inkasujte { $amount }
+monopoly-card-crossword-competition = Vyhráli jste křížovkářskou soutěž, sbírejte { $amount }
+monopoly-card-bank-error-200 = Bankovní chyba ve váš prospěch, vyzvedněte { $amount }
+monopoly-card-doctor-fee-50 = Poplatek za lékaře, zaplaťte { $amount }
+monopoly-card-sale-of-stock-50 = Z výprodeje zásob získáte { $amount }
+monopoly-card-holiday-fund = Prázdninový fond dozrává, získejte { $amount }
+monopoly-card-tax-refund-20 = Vrácení daně z příjmu, inkasujte { $amount }
+monopoly-card-birthday = Máte narozeniny, sbírejte { $amount } od každého hráče
+monopoly-card-life-insurance = Životní pojištění dozrává, inkasujte { $amount }
+monopoly-card-hospital-fees-100 = Zaplaťte nemocniční poplatky ve výši { $amount }
+monopoly-card-school-fees-50 = Zaplaťte školné ve výši { $amount }
+monopoly-card-consultancy-fee-25 = Získejte poplatek za poradenství { $amount }
+monopoly-card-street-repairs = Za opravy ulic jste hodnoceni: { $per_house } za dům, { $per_hotel } za hotel
+monopoly-card-beauty-contest-10 = Vyhráli jste druhou cenu v soutěži krásy, sbírejte { $amount }
+monopoly-card-inherit-100 = Zdědíte { $amount }
+monopoly-card-get-out-of-jail = Vypadni z vězení na svobodu
 
 # Board profile options
-monopoly-set-board = Board: { $board }
-monopoly-select-board = Select a Monopoly board
-monopoly-option-changed-board = Board set to { $board }.
-monopoly-set-board-rules-mode = Board rules mode: { $mode }
-monopoly-select-board-rules-mode = Select board rules mode
-monopoly-option-changed-board-rules-mode = Board rules mode set to { $mode }.
+monopoly-set-board = Deska: { $board }
+monopoly-select-board = Vyberte desku Monopoly
+monopoly-option-changed-board = Deska nastavena na { $board }.
+monopoly-set-board-rules-mode = Režim pravidel desky: { $mode }
+monopoly-select-board-rules-mode = Vyberte režim pravidel nástěnky
+monopoly-option-changed-board-rules-mode = Režim pravidel desky nastaven na { $mode }.
 
 # Board labels
 monopoly-board-classic-default = Classic Default
@@ -291,74 +291,74 @@ monopoly-board-rules-simplified = Board rules for { $board } are partially imple
 monopoly-board-active = Active board: { $board } (mode: { $mode }).
 
 # Deed and ownership browsing
-monopoly-view-active-deed = View active deed
-monopoly-view-active-deed-space = View { $property }
-monopoly-browse-all-deeds = Browse all deeds
-monopoly-view-my-properties = View my properties
-monopoly-view-player-properties = View player info
-monopoly-view-selected-deed = View selected deed
-monopoly-view-selected-owner-property-deed = View selected player deed
-monopoly-select-property-deed = Select a property deed
-monopoly-select-player-properties = Select a player
-monopoly-select-player-property-deed = Select a player property deed
-monopoly-no-active-deed = There is no active deed to view right now.
-monopoly-no-deeds-available = No deed-capable properties are available on this board.
-monopoly-no-owned-properties = No owned properties are available for this view.
-monopoly-no-players-with-properties = No players are available.
-monopoly-buy-for = Buy for { $amount }
-monopoly-you-have-no-owned-properties = You do not own any properties.
-monopoly-player-has-no-owned-properties = { $player } does not own any properties.
-monopoly-owner-bank = Bank
-monopoly-owner-unknown = Unknown
-monopoly-building-status-hotel = with hotel
-monopoly-building-status-one-house = with 1 house
-monopoly-building-status-houses = with { $count } houses
-monopoly-mortgaged-short = mortgaged
+monopoly-view-active-deed = Zobrazit aktivní listinu
+monopoly-view-active-deed-space = Zobrazit { $property }
+monopoly-browse-all-deeds = Prohlédněte si všechny listiny
+monopoly-view-my-properties = Zobrazit moje vlastnosti
+monopoly-view-player-properties = Zobrazit informace o hráči
+monopoly-view-selected-deed = Zobrazit vybranou listinu
+monopoly-view-selected-owner-property-deed = Zobrazit vybranou hráčskou listinu
+monopoly-select-property-deed = Vyberte list vlastnictví
+monopoly-select-player-properties = Vyberte hráče
+monopoly-select-player-property-deed = Vyberte list vlastnictví hráče
+monopoly-no-active-deed = Momentálně není k zobrazení žádná aktivní listina.
+monopoly-no-deeds-available = Na této desce nejsou k dispozici žádné vlastnosti schopné listiny.
+monopoly-no-owned-properties = Pro toto zobrazení nejsou k dispozici žádné vlastněné nemovitosti.
+monopoly-no-players-with-properties = Nejsou k dispozici žádní hráči.
+monopoly-buy-for = Koupit za { $amount }
+monopoly-you-have-no-owned-properties = Nevlastníte žádné nemovitosti.
+monopoly-player-has-no-owned-properties = { $player } nevlastní žádné vlastnosti.
+monopoly-owner-bank = Banka
+monopoly-owner-unknown = Neznámý
+monopoly-building-status-hotel = s hotelem
+monopoly-building-status-one-house = s 1 domem
+monopoly-building-status-houses = s domy { $count }
+monopoly-mortgaged-short = zastavena
 monopoly-deed-menu-label = { $property } ({ $owner })
 monopoly-deed-menu-label-extra = { $property } ({ $owner }; { $extras })
-monopoly-color-brown = Brown
-monopoly-color-light_blue = Light Blue
-monopoly-color-pink = Pink
-monopoly-color-orange = Orange
-monopoly-color-red = Red
-monopoly-color-yellow = Yellow
-monopoly-color-green = Green
-monopoly-color-dark_blue = Dark Blue
-monopoly-deed-type-color-group = Type: { $color } color group
-monopoly-deed-type-railroad = Type: Railroad
-monopoly-deed-type-utility = Type: Utility
-monopoly-deed-type-generic = Type: { $kind }
-monopoly-deed-purchase-price = Purchase price: { $amount }
-monopoly-deed-rent = Rent: { $amount }
-monopoly-deed-full-set-rent = If owner has full color set: { $amount }
-monopoly-deed-rent-one-house = With 1 house: { $amount }
-monopoly-deed-rent-houses = With { $count } houses: { $amount }
-monopoly-deed-rent-hotel = With hotel: { $amount }
-monopoly-deed-house-cost = House cost: { $amount }
-monopoly-deed-railroad-rent = Rent with { $count } railroads: { $amount }
-monopoly-deed-utility-one-owned = If one utility is owned: 4x dice roll
-monopoly-deed-utility-both-owned = If both utilities are owned: 10x dice roll
-monopoly-deed-utility-base-rent = Utility base rent (legacy fallback): { $amount }
-monopoly-deed-mortgage-value = Mortgage value: { $amount }
-monopoly-deed-unmortgage-cost = Unmortgage cost: { $amount }
-monopoly-deed-owner = Owner: { $owner }
-monopoly-deed-current-buildings = Current buildings: { $buildings }
-monopoly-deed-status-mortgaged = Status: Mortgaged
-monopoly-player-properties-label = { $player }, on { $space }, square { $position }
-monopoly-player-properties-label-no-space = { $player }, square { $position }
+monopoly-color-brown = Hnědý
+monopoly-color-light_blue = Světle modrá
+monopoly-color-pink = Růžový
+monopoly-color-orange = Pomerančový
+monopoly-color-red = Červený
+monopoly-color-yellow = Žluť
+monopoly-color-green = Zelený
+monopoly-color-dark_blue = Tmavě modrá
+monopoly-deed-type-color-group = Typ: Skupina barev { $color }
+monopoly-deed-type-railroad = Typ: Železnice
+monopoly-deed-type-utility = Typ: Utility
+monopoly-deed-type-generic = Typ: { $kind }
+monopoly-deed-purchase-price = Pořizovací cena: { $amount }
+monopoly-deed-rent = Půjčovné: { $amount }
+monopoly-deed-full-set-rent = Pokud má majitel celou sadu barev: { $amount }
+monopoly-deed-rent-one-house = S 1 domem: { $amount }
+monopoly-deed-rent-houses = S domy { $count }: { $amount }
+monopoly-deed-rent-hotel = S hotelem: { $amount }
+monopoly-deed-house-cost = Cena domu: { $amount }
+monopoly-deed-railroad-rent = Pronájem s železnicemi { $count }: { $amount }
+monopoly-deed-utility-one-owned = Pokud vlastníte jeden nástroj: 4x hod kostkou
+monopoly-deed-utility-both-owned = Pokud jsou ve vlastnictví oba nástroje: 10x hod kostkou
+monopoly-deed-utility-base-rent = Základní nájemné (starší záloha): { $amount }
+monopoly-deed-mortgage-value = Hodnota hypotéky: { $amount }
+monopoly-deed-unmortgage-cost = Cena bez hypotéky: { $amount }
+monopoly-deed-owner = Majitel: { $owner }
+monopoly-deed-current-buildings = Současné budovy: { $buildings }
+monopoly-deed-status-mortgaged = Stav: Zastaveno
+monopoly-player-properties-label = { $player }, na { $space }, čtverec { $position }
+monopoly-player-properties-label-no-space = { $player }, čtverec { $position }
 monopoly-banking-ledger-entry-success = { $tx_id } { $kind } { $from_id }->{ $to_id } { $amount } ({ $reason })
-monopoly-banking-ledger-entry-failed = { $tx_id } { $kind } failed ({ $reason })
+monopoly-banking-ledger-entry-failed = { $tx_id } { $kind } se nezdařilo ({ $reason })
 
 # Trade menu summaries
-monopoly-trade-buy-property-summary = Buy { $property } from { $target } for { $amount }
-monopoly-trade-offer-cash-for-property-summary = Offer { $amount } to { $target } for { $property }
-monopoly-trade-sell-property-summary = Sell { $property } to { $target } for { $amount }
-monopoly-trade-offer-property-for-cash-summary = Offer { $property } to { $target } for { $amount }
-monopoly-trade-swap-summary = Swap { $give_property } with { $target } for { $receive_property }
-monopoly-trade-swap-plus-cash-summary = Swap { $give_property } + { $amount } with { $target } for { $receive_property }
-monopoly-trade-swap-receive-cash-summary = Swap { $give_property } for { $receive_property } + { $amount } from { $target }
-monopoly-trade-buy-jail-card-summary = Buy jail card from { $target } for { $amount }
-monopoly-trade-sell-jail-card-summary = Sell jail card to { $target } for { $amount }
+monopoly-trade-buy-property-summary = Kupte si { $property } od { $target } za { $amount }
+monopoly-trade-offer-cash-for-property-summary = Nabídněte { $amount } až { $target } za { $property }
+monopoly-trade-sell-property-summary = Prodám { $property } až { $target } za { $amount }
+monopoly-trade-offer-property-for-cash-summary = Nabídněte { $property } až { $target } za { $amount }
+monopoly-trade-swap-summary = Vyměňte { $give_property } za { $target } za { $receive_property }
+monopoly-trade-swap-plus-cash-summary = Vyměnit { $give_property } + { $amount } za { $target } za { $receive_property }
+monopoly-trade-swap-receive-cash-summary = Vyměnit { $give_property } za { $receive_property } + { $amount } za { $target }
+monopoly-trade-buy-jail-card-summary = Kupte si vězeňskou kartu od { $target } za { $amount }
+monopoly-trade-sell-jail-card-summary = Prodám vězeňskou kartu { $target } za { $amount }
 
 # Board space names
 monopoly-space-go = GO

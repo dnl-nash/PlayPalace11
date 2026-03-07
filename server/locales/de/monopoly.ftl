@@ -4,224 +4,224 @@
 game-name-monopoly = Monopoly
 
 # Lobby options
-monopoly-set-preset = Preset: { $preset }
-monopoly-select-preset = Select a Monopoly preset
-monopoly-option-changed-preset = Preset set to { $preset }.
+monopoly-set-preset = Voreinstellung: { $preset }
+monopoly-select-preset = Wählen Sie eine Monopoly-Voreinstellung aus
+monopoly-option-changed-preset = Voreingestellt ist { $preset }.
 
 # Preset labels
-monopoly-preset-classic-standard = Classic and Themed Standard
+monopoly-preset-classic-standard = Klassischer und thematischer Standard
 monopoly-preset-junior = Monopoly Junior
 monopoly-preset-junior-modern = Monopoly Junior (Modern)
 monopoly-preset-junior-legacy = Monopoly Junior (Legacy)
-monopoly-preset-cheaters = Monopoly Cheaters Edition
-monopoly-preset-electronic-banking = Electronic Banking
-monopoly-preset-voice-banking = Voice Banking
-monopoly-preset-sore-losers = Monopoly for Sore Losers
-monopoly-preset-speed = Monopoly Speed
-monopoly-preset-builder = Monopoly Builder
-monopoly-preset-city = Monopoly City
-monopoly-preset-bid-card-game = Monopoly Bid
-monopoly-preset-deal-card-game = Monopoly Deal
-monopoly-preset-knockout = Monopoly Knockout
-monopoly-preset-free-parking-jackpot = Free Parking Jackpot
+monopoly-preset-cheaters = Monopoly Cheater Edition
+monopoly-preset-electronic-banking = Elektronisches Banking
+monopoly-preset-voice-banking = Voice-Banking
+monopoly-preset-sore-losers = Monopol für schlechte Verlierer
+monopoly-preset-speed = Monopolgeschwindigkeit
+monopoly-preset-builder = Monopolbauer
+monopoly-preset-city = Monopolstadt
+monopoly-preset-bid-card-game = Monopolangebot
+monopoly-preset-deal-card-game = Monopol-Deal
+monopoly-preset-knockout = Monopol-Knockout
+monopoly-preset-free-parking-jackpot = Kostenloser Parkplatz-Jackpot
 
 # Scaffold status
-monopoly-announce-preset = Announce current preset
-monopoly-current-preset = Current preset: { $preset } ({ $count } editions).
-monopoly-scaffold-started = Monopoly scaffold started with { $preset } ({ $count } editions).
+monopoly-announce-preset = Aktuelle Voreinstellung ansagen
+monopoly-current-preset = Aktuelle Voreinstellung: { $preset } ({ $count }-Editionen).
+monopoly-scaffold-started = Das Monopoly-Gerüst begann mit { $preset } ({ $count }-Editionen).
 
 # Turn actions
-monopoly-roll-dice = Roll dice
-monopoly-buy-property = Buy property
-monopoly-banking-balance = Check bank balance
-monopoly-banking-transfer = Transfer funds
-monopoly-banking-ledger = Review bank ledger
-monopoly-voice-command = Voice command
-monopoly-cheaters-claim-reward = Claim cheat reward
-monopoly-end-turn = End turn
+monopoly-roll-dice = Würfeln
+monopoly-buy-property = Immobilien kaufen
+monopoly-banking-balance = Überprüfen Sie den Kontostand
+monopoly-banking-transfer = Geld überweisen
+monopoly-banking-ledger = Überprüfen Sie das Bankbuch
+monopoly-voice-command = Sprachbefehl
+monopoly-cheaters-claim-reward = Fordern Sie eine Cheat-Belohnung an
+monopoly-end-turn = Runde beenden
 
 # Turn validation
-monopoly-roll-first = You need to roll first.
-monopoly-already-rolled = You already rolled this turn.
-monopoly-no-property-to-buy = There is no property to buy right now.
-monopoly-property-owned = That property is already owned.
-monopoly-not-enough-cash = You don't have enough cash.
-monopoly-action-disabled-for-preset = This action is disabled for the selected preset.
-monopoly-buy-disabled = Buying property directly is disabled for this preset.
+monopoly-roll-first = Sie müssen zuerst rollen.
+monopoly-already-rolled = Du hast diesen Zug bereits gewürfelt.
+monopoly-no-property-to-buy = Im Moment gibt es keine Immobilie zum Kauf.
+monopoly-property-owned = Diese Immobilie ist bereits Eigentum.
+monopoly-not-enough-cash = Sie haben nicht genug Bargeld.
+monopoly-action-disabled-for-preset = Diese Aktion ist für die ausgewählte Voreinstellung deaktiviert.
+monopoly-buy-disabled = Der direkte Immobilienkauf ist für diese Voreinstellung deaktiviert.
 
 # Turn events
-monopoly-pass-go = { $player } passed GO and collected { $amount }.
-monopoly-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-result = You rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-player-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-you-roll-only = You rolled { $die1 } + { $die2 } = { $total }.
-monopoly-player-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-only-doubles = You rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-player-roll-only-doubles = { $player } rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-property-available = { $property } is available for { $price }.
-monopoly-property-bought = { $player } bought { $property } for { $price }.
-monopoly-rent-paid = { $player } paid { $amount } in rent to { $owner } for { $property }.
-monopoly-player-paid-player = { $player } paid { $amount } to { $target }.
-monopoly-you-completed-color-set = You now own all of the { $group } properties.
-monopoly-player-completed-color-set = { $player } now owns all of the { $group } properties.
-monopoly-you-completed-railroads = You now own all of the railroads.
-monopoly-player-completed-railroads = { $player } now owns all of the railroads.
-monopoly-you-completed-utilities = You now own all of the utilities.
-monopoly-player-completed-utilities = { $player } now owns all of the utilities.
-monopoly-landed-owned = { $player } landed on their own property: { $property }.
-monopoly-tax-paid = { $player } paid { $amount } for { $tax }.
-monopoly-go-to-jail = { $player } goes to jail (moved to { $space }).
-monopoly-bankrupt-player = You are bankrupt and out of the game.
-monopoly-player-bankrupt = { $player } is bankrupt. Creditor: { $creditor }.
-monopoly-winner-by-bankruptcy = { $player } wins by bankruptcy with { $cash } cash remaining.
-monopoly-winner-by-cash = { $player } wins with the highest cash total: { $cash }.
-monopoly-city-winner-by-value = { $player } wins Monopoly City with final value { $total }.
+monopoly-pass-go = { $player } hat GO bestanden und { $amount } gesammelt.
+monopoly-roll-result = { $player } würfelte { $die1 } + { $die2 } = { $total } und landete auf { $space }.
+monopoly-roll-only = { $player } gewürfelt { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-result = Sie haben { $die1 } + { $die2 } = { $total } gewürfelt und sind auf { $space } gelandet.
+monopoly-player-roll-result = { $player } würfelte { $die1 } + { $die2 } = { $total } und landete auf { $space }.
+monopoly-you-roll-only = Du hast { $die1 } + { $die2 } = { $total } gewürfelt.
+monopoly-player-roll-only = { $player } gewürfelt { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-only-doubles = Du hast { $die1 } + { $die2 } = { $total } gewürfelt. Doppel!
+monopoly-player-roll-only-doubles = { $player } gewürfelt { $die1 } + { $die2 } = { $total }. Doppel!
+monopoly-property-available = { $property } ist für { $price } verfügbar.
+monopoly-property-bought = { $player } kaufte { $property } für { $price }.
+monopoly-rent-paid = { $player } zahlte { $amount } Miete an { $owner } für { $property }.
+monopoly-player-paid-player = { $player } hat { $amount } an { $target } gezahlt.
+monopoly-you-completed-color-set = Sie besitzen jetzt alle { $group }-Eigenschaften.
+monopoly-player-completed-color-set = { $player } besitzt jetzt alle { $group }-Eigenschaften.
+monopoly-you-completed-railroads = Sie besitzen jetzt alle Eisenbahnen.
+monopoly-player-completed-railroads = { $player } besitzt jetzt alle Eisenbahnen.
+monopoly-you-completed-utilities = Sie besitzen jetzt alle Versorgungseinrichtungen.
+monopoly-player-completed-utilities = { $player } besitzt jetzt alle Dienstprogramme.
+monopoly-landed-owned = { $player } landete auf seinem eigenen Grundstück: { $property }.
+monopoly-tax-paid = { $player } hat { $amount } für { $tax } bezahlt.
+monopoly-go-to-jail = { $player } geht ins Gefängnis (verschoben nach { $space }).
+monopoly-bankrupt-player = Sie sind bankrott und aus dem Spiel.
+monopoly-player-bankrupt = { $player } ist bankrott. Gläubiger: { $creditor }.
+monopoly-winner-by-bankruptcy = { $player } gewinnt durch Insolvenz mit verbleibendem { $cash }-Bargeld.
+monopoly-winner-by-cash = { $player } gewinnt mit der höchsten Bargeldsumme: { $cash }.
+monopoly-city-winner-by-value = { $player } gewinnt Monopoly City mit dem Endwert { $total }.
 
 # Additional actions
-monopoly-auction-property = Auction property
-monopoly-auction-bid = Place auction bid
-monopoly-auction-pass = Pass in auction
-monopoly-mortgage-property = Mortgage property
-monopoly-unmortgage-property = Unmortgage property
-monopoly-build-house = Build house or hotel
-monopoly-sell-house = Sell house or hotel
-monopoly-offer-trade = Offer trade
-monopoly-accept-trade = Accept trade
-monopoly-decline-trade = Decline trade
-monopoly-read-cash = Read cash
-monopoly-pay-bail = Pay bail
-monopoly-use-jail-card = Use get-out-of-jail card
-monopoly-cash-report = { $cash } in cash.
-monopoly-property-amount-option = { $property } for { $amount }
-monopoly-banking-transfer-option = Transfer { $amount } to { $target }
+monopoly-auction-property = Auktionsobjekt
+monopoly-auction-bid = Auktionsgebot abgeben
+monopoly-auction-pass = Pass in der Auktion
+monopoly-mortgage-property = Hypothekeneigentum
+monopoly-unmortgage-property = Eigentum entleihen
+monopoly-build-house = Haus oder Hotel bauen
+monopoly-sell-house = Haus oder Hotel verkaufen
+monopoly-offer-trade = Biete Handel an
+monopoly-accept-trade = Akzeptieren Sie den Handel
+monopoly-decline-trade = Handel ablehnen
+monopoly-read-cash = Lesen Sie Bargeld
+monopoly-pay-bail = Kaution zahlen
+monopoly-use-jail-card = Verwenden Sie eine Entlassungskarte
+monopoly-cash-report = { $cash } in bar.
+monopoly-property-amount-option = { $property } für { $amount }
+monopoly-banking-transfer-option = Übertragen Sie { $amount } auf { $target }
 
 # Additional prompts
-monopoly-select-property-mortgage = Select a property to mortgage
-monopoly-select-property-unmortgage = Select a property to unmortgage
-monopoly-select-property-build = Select a property to build on
-monopoly-select-property-sell = Select a property to sell from
-monopoly-select-trade-offer = Select a trade offer
-monopoly-select-auction-bid = Select your auction bid
-monopoly-select-banking-transfer = Select a transfer
-monopoly-select-voice-command = Enter a voice command beginning with voice:
+monopoly-select-property-mortgage = Wählen Sie eine Immobilie zur Hypothek aus
+monopoly-select-property-unmortgage = Wählen Sie eine Immobilie zur Entschuldung aus
+monopoly-select-property-build = Wählen Sie eine Immobilie aus, auf der Sie bauen möchten
+monopoly-select-property-sell = Wählen Sie eine Immobilie zum Verkauf aus
+monopoly-select-trade-offer = Wählen Sie ein Handelsangebot aus
+monopoly-select-auction-bid = Wählen Sie Ihr Auktionsgebot
+monopoly-select-banking-transfer = Wählen Sie eine Übertragung aus
+monopoly-select-voice-command = Geben Sie einen Sprachbefehl ein, der mit voice: beginnt
 
 # Additional validation
-monopoly-no-property-to-auction = There is no property to auction right now.
-monopoly-auction-active = Resolve the active auction first.
-monopoly-no-auction-active = There is no auction in progress.
-monopoly-not-your-auction-turn = It is not your turn in the auction.
-monopoly-no-mortgage-options = You do not have properties available to mortgage.
-monopoly-no-unmortgage-options = You do not have mortgaged properties to unmortgage.
-monopoly-no-build-options = You do not have properties available to build on.
-monopoly-no-sell-options = You do not have properties with buildings available to sell.
-monopoly-no-trade-options = You do not have any valid trades to offer right now.
-monopoly-no-trade-pending = There is no pending trade for you.
-monopoly-trade-pending = A trade is already pending.
-monopoly-trade-no-longer-valid = That trade is no longer valid.
-monopoly-not-in-jail = You are not in jail.
-monopoly-no-jail-card = You do not have a get-out-of-jail card.
-monopoly-roll-again-required = You rolled doubles and must roll again.
-monopoly-resolve-property-first = Resolve the pending property decision first.
+monopoly-no-property-to-auction = Im Moment gibt es keine Immobilie zum Versteigern.
+monopoly-auction-active = Lösen Sie zuerst die aktive Auktion ab.
+monopoly-no-auction-active = Es findet keine Auktion statt.
+monopoly-not-your-auction-turn = Sie sind bei der Auktion nicht an der Reihe.
+monopoly-no-mortgage-options = Sie verfügen nicht über Immobilien, die Sie mit einer Hypothek beleihen können.
+monopoly-no-unmortgage-options = Sie haben keine mit Hypotheken belasteten Immobilien, die Sie entschulden könnten.
+monopoly-no-build-options = Ihnen stehen keine Grundstücke zum Bauen zur Verfügung.
+monopoly-no-sell-options = Sie haben keine zum Verkauf stehenden Immobilien mit Gebäuden.
+monopoly-no-trade-options = Sie haben derzeit keine gültigen Trades zum Angebot.
+monopoly-no-trade-pending = Es gibt für Sie keinen ausstehenden Handel.
+monopoly-trade-pending = Ein Handel steht bereits an.
+monopoly-trade-no-longer-valid = Dieser Handel ist nicht mehr gültig.
+monopoly-not-in-jail = Du bist nicht im Gefängnis.
+monopoly-no-jail-card = Sie haben keine Entlassungskarte.
+monopoly-roll-again-required = Sie haben einen Pasch gewürfelt und müssen noch einmal würfeln.
+monopoly-resolve-property-first = Klären Sie zunächst die ausstehende Eigentumsentscheidung.
 
 # Additional turn events
-monopoly-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-you-roll-again = You rolled doubles and get another roll.
-monopoly-player-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-you-jail-roll-doubles = You rolled doubles ({ $die1 } and { $die2 }) and leave jail.
-monopoly-player-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-jail-roll-failed = { $player } rolled { $die1 } and { $die2 } in jail (attempt { $attempts }).
-monopoly-bail-paid = { $player } paid { $amount } bail.
-monopoly-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-you-three-doubles-jail = You rolled three doubles in one turn and are sent to jail.
-monopoly-player-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-jail-card-used = { $player } used a get-out-of-jail card.
-monopoly-sore-loser-rebate = { $player } received a sore loser rebate of { $amount }.
-monopoly-cheaters-early-end-turn-blocked = { $player } tried to end the turn early and paid a cheating penalty of { $amount }.
-monopoly-cheaters-payment-avoidance-blocked = { $player } triggered a cheaters payment penalty of { $amount }.
-monopoly-cheaters-reward-granted = { $player } claimed a cheaters reward of { $amount }.
-monopoly-cheaters-reward-unavailable = { $player } already claimed the cheaters reward this turn.
+monopoly-roll-again = Der { $player }-Wurf verdoppelt sich und erhält einen weiteren Wurf.
+monopoly-you-roll-again = Sie haben einen Pasch gewürfelt und erhalten einen weiteren Wurf.
+monopoly-player-roll-again = Der { $player }-Wurf verdoppelt sich und erhält einen weiteren Wurf.
+monopoly-jail-roll-doubles = { $player } hat doppelt gewürfelt ({ $die1 } und { $die2 }) und verlässt das Gefängnis.
+monopoly-you-jail-roll-doubles = Sie haben Doppel gewürfelt ({ $die1 } und { $die2 }) und das Gefängnis verlassen.
+monopoly-player-jail-roll-doubles = { $player } hat doppelt gewürfelt ({ $die1 } und { $die2 }) und verlässt das Gefängnis.
+monopoly-jail-roll-failed = { $player } rollte { $die1 } und { $die2 } ins Gefängnis (Versuch { $attempts }).
+monopoly-bail-paid = { $player } hat die Kaution für { $amount } bezahlt.
+monopoly-three-doubles-jail = { $player } hat in einer Runde drei Pasch gewürfelt und wird ins Gefängnis geschickt.
+monopoly-you-three-doubles-jail = Du hast in einer Runde drei Pasch gewürfelt und wirst ins Gefängnis geschickt.
+monopoly-player-three-doubles-jail = { $player } hat in einer Runde drei Pasch gewürfelt und wird ins Gefängnis geschickt.
+monopoly-jail-card-used = { $player } verwendete eine Entlassungskarte.
+monopoly-sore-loser-rebate = { $player } erhielt einen herben Verliererrabatt von { $amount }.
+monopoly-cheaters-early-end-turn-blocked = { $player } versuchte, den Zug vorzeitig zu beenden und zahlte eine Betrugsstrafe von { $amount }.
+monopoly-cheaters-payment-avoidance-blocked = { $player } löste eine Zahlungsstrafe für Betrüger in Höhe von { $amount } aus.
+monopoly-cheaters-reward-granted = { $player } forderte eine Cheater-Belohnung von { $amount }.
+monopoly-cheaters-reward-unavailable = { $player } hat sich in dieser Runde bereits die Cheater-Belohnung gesichert.
 
 # Auctions and mortgages
-monopoly-auction-no-bids = No bids for { $property }. It remains unsold.
-monopoly-auction-started = Auction started for { $property } (opening bid: { $amount }).
-monopoly-auction-turn = Auction turn: { $player } to act on { $property } (current bid: { $amount }).
-monopoly-auction-bid-placed = { $player } bid { $amount } for { $property }.
-monopoly-auction-pass-event = { $player } passed on { $property }.
-monopoly-auction-won = { $player } won the auction for { $property } at { $amount }.
-monopoly-property-mortgaged = { $player } mortgaged { $property } for { $amount }.
-monopoly-property-unmortgaged = { $player } unmortgaged { $property } for { $amount }.
-monopoly-house-built-house = { $player } built a house on { $property } for { $amount }. It now has { $level }.
-monopoly-house-built-hotel = { $player } built a hotel on { $property } for { $amount }.
-monopoly-house-sold = { $player } sold a building on { $property } for { $amount } (level: { $level }).
-monopoly-trade-offered = { $proposer } offered { $target } a trade: { $offer }.
-monopoly-trade-completed = Trade completed between { $proposer } and { $target }: { $offer }.
-monopoly-trade-declined = { $target } declined trade from { $proposer }: { $offer }.
-monopoly-trade-cancelled = Trade cancelled: { $offer }.
-monopoly-free-parking-jackpot = { $player } collected the Free Parking jackpot of { $amount }.
-monopoly-mortgaged-no-rent = { $player } landed on mortgaged { $property }; no rent is due.
-monopoly-builder-blocks-awarded = { $player } gained { $amount } builder blocks ({ $blocks } total).
-monopoly-builder-block-spent = { $player } spent a builder block ({ $blocks } remaining).
-monopoly-banking-transfer-success = { $from_player } transferred { $amount } to { $to_player }.
-monopoly-banking-transfer-failed = { $player } bank transfer failed ({ $reason }).
-monopoly-banking-balance-report = { $player } bank balance: { $cash }.
-monopoly-banking-ledger-report = Recent banking activity: { $entries }.
-monopoly-banking-ledger-empty = No banking transactions yet.
-monopoly-voice-command-error = Voice command error: { $reason }.
-monopoly-voice-command-accepted = Voice command accepted: { $intent }.
-monopoly-voice-command-repeat = Repeating last banking response code: { $response }.
-monopoly-voice-transfer-staged = Voice transfer staged: { $amount } to { $target }. Say voice: confirm transfer.
-monopoly-mortgage-transfer-interest-paid = { $player } paid { $amount } in mortgage transfer interest.
+monopoly-auction-no-bids = Keine Gebote für { $property }. Es bleibt unverkauft.
+monopoly-auction-started = Auktion für { $property } gestartet (Eröffnungsgebot: { $amount }).
+monopoly-auction-turn = Auktionsrunde: { $player } soll auf { $property } reagieren (aktuelles Gebot: { $amount }).
+monopoly-auction-bid-placed = { $player } bietet { $amount } für { $property }.
+monopoly-auction-pass-event = { $player } wurde an { $property } weitergegeben.
+monopoly-auction-won = { $player } gewann die Auktion für { $property } bei { $amount }.
+monopoly-property-mortgaged = { $player } hat { $property } für { $amount } verpfändet.
+monopoly-property-unmortgaged = { $player } ohne Hypothek { $property } für { $amount }.
+monopoly-house-built-house = { $player } hat für { $amount } ein Haus auf { $property } gebaut. Es hat jetzt { $level }.
+monopoly-house-built-hotel = { $player } hat für { $amount } ein Hotel auf { $property } gebaut.
+monopoly-house-sold = { $player } hat ein Gebäude auf { $property } für { $amount } verkauft (Ebene: { $level }).
+monopoly-trade-offered = { $proposer } bot { $target } einen Handel an: { $offer }.
+monopoly-trade-completed = Handel zwischen { $proposer } und { $target } abgeschlossen: { $offer }.
+monopoly-trade-declined = { $target } lehnte den Handel von { $proposer }: { $offer } ab.
+monopoly-trade-cancelled = Handel abgebrochen: { $offer }.
+monopoly-free-parking-jackpot = { $player } hat den Free Parking-Jackpot von { $amount } gesammelt.
+monopoly-mortgaged-no-rent = { $player } landete auf dem verpfändeten { $property }; es ist keine Miete fällig.
+monopoly-builder-blocks-awarded = { $player } hat { $amount }-Builder-Blöcke erhalten ({ $blocks } insgesamt).
+monopoly-builder-block-spent = { $player } hat einen Builder-Block ausgegeben ({ $blocks } bleibt übrig).
+monopoly-banking-transfer-success = { $from_player } hat { $amount } an { $to_player } übertragen.
+monopoly-banking-transfer-failed = { $player }-Banküberweisung fehlgeschlagen ({ $reason }).
+monopoly-banking-balance-report = { $player }-Bankguthaben: { $cash }.
+monopoly-banking-ledger-report = Aktuelle Bankaktivität: { $entries }.
+monopoly-banking-ledger-empty = Noch keine Bankgeschäfte.
+monopoly-voice-command-error = Sprachbefehlsfehler: { $reason }.
+monopoly-voice-command-accepted = Sprachbefehl akzeptiert: { $intent }.
+monopoly-voice-command-repeat = Wiederholter letzter Bank-Antwortcode: { $response }.
+monopoly-voice-transfer-staged = Sprachübertragung inszeniert: { $amount } zu { $target }. Sagen Sie SPRACHÜBERTRAGUNG BESTÄTIGEN.
+monopoly-mortgage-transfer-interest-paid = { $player } zahlte { $amount } Hypothekenübertragungszinsen.
 
 # Card engine
-monopoly-card-drawn = { $player } drew a { $deck } card: { $card }.
-monopoly-card-collect = { $player } collected { $amount }.
-monopoly-card-pay = { $player } paid { $amount }.
-monopoly-card-move = { $player } moved to { $space }.
-monopoly-card-jail-free = { $player } received a get-out-of-jail card.
-monopoly-card-utility-roll = { $player } rolled { $die1 } + { $die2 } = { $total } for utility rent.
+monopoly-card-drawn = { $player } hat eine { $deck }-Karte gezogen: { $card }.
+monopoly-card-collect = { $player } hat { $amount } gesammelt.
+monopoly-card-pay = { $player } hat { $amount } bezahlt.
+monopoly-card-move = { $player } wurde nach { $space } verschoben.
+monopoly-card-jail-free = { $player } hat eine Entlassungskarte erhalten.
+monopoly-card-utility-roll = { $player } würfelte { $die1 } + { $die2 } = { $total } für die Miete der Versorgungsunternehmen.
 monopoly-deck-chance = Chance
-monopoly-deck-community-chest = Community Chest
+monopoly-deck-community-chest = Community-Truhe
 
 # Card descriptions
-monopoly-card-advance-to-go = Advance to GO and collect { $amount }
-monopoly-card-advance-to-illinois-avenue = Advance to Illinois Avenue
-monopoly-card-advance-to-st-charles-place = Advance to St. Charles Place
-monopoly-card-advance-to-nearest-utility = Advance to the nearest Utility
-monopoly-card-advance-to-nearest-railroad = Advance to the nearest Railroad and pay double rent if owned
-monopoly-card-bank-dividend-50 = Bank pays you dividend of { $amount }
-monopoly-card-go-back-three = Go back 3 spaces
-monopoly-card-go-to-jail = Go directly to jail
-monopoly-card-general-repairs = Make general repairs on all your property: { $per_house } per house, { $per_hotel } per hotel
-monopoly-card-poor-tax-15 = Pay poor tax of { $amount }
-monopoly-card-reading-railroad = Take a trip to Reading Railroad
-monopoly-card-boardwalk = Take a walk on Boardwalk
-monopoly-card-chairman-of-the-board = Chairman of the Board, pay { $amount } to every player
-monopoly-card-building-loan-matures = Your building loan matures, collect { $amount }
-monopoly-card-crossword-competition = You won a crossword competition, collect { $amount }
-monopoly-card-bank-error-200 = Bank error in your favor, collect { $amount }
-monopoly-card-doctor-fee-50 = Doctor's fee, pay { $amount }
-monopoly-card-sale-of-stock-50 = From sale of stock you get { $amount }
-monopoly-card-holiday-fund = Holiday fund matures, receive { $amount }
-monopoly-card-tax-refund-20 = Income tax refund, collect { $amount }
-monopoly-card-birthday = It is your birthday, collect { $amount } from every player
-monopoly-card-life-insurance = Life insurance matures, collect { $amount }
-monopoly-card-hospital-fees-100 = Pay hospital fees of { $amount }
-monopoly-card-school-fees-50 = Pay school fees of { $amount }
-monopoly-card-consultancy-fee-25 = Receive { $amount } consultancy fee
-monopoly-card-street-repairs = You are assessed for street repairs: { $per_house } per house, { $per_hotel } per hotel
-monopoly-card-beauty-contest-10 = You have won second prize in a beauty contest, collect { $amount }
-monopoly-card-inherit-100 = You inherit { $amount }
-monopoly-card-get-out-of-jail = Get out of jail free
+monopoly-card-advance-to-go = Gehen Sie weiter zu GO und sammeln Sie { $amount }
+monopoly-card-advance-to-illinois-avenue = Fahren Sie weiter zur Illinois Avenue
+monopoly-card-advance-to-st-charles-place = Vorstoß zum St. Charles Place
+monopoly-card-advance-to-nearest-utility = Gehen Sie zum nächstgelegenen Versorgungsunternehmen
+monopoly-card-advance-to-nearest-railroad = Fahren Sie zur nächstgelegenen Eisenbahngesellschaft und zahlen Sie die doppelte Miete, falls Sie Eigentümer sind
+monopoly-card-bank-dividend-50 = Die Bank zahlt Ihnen eine Dividende von { $amount }
+monopoly-card-go-back-three = Gehe 3 Felder zurück
+monopoly-card-go-to-jail = Gehen Sie direkt ins Gefängnis
+monopoly-card-general-repairs = Führen Sie allgemeine Reparaturen an Ihrem gesamten Eigentum durch: { $per_house } pro Haus, { $per_hotel } pro Hotel
+monopoly-card-poor-tax-15 = Zahlen Sie eine schlechte Steuer von { $amount }
+monopoly-card-reading-railroad = Machen Sie einen Ausflug zur Reading Railroad
+monopoly-card-boardwalk = Machen Sie einen Spaziergang auf dem Boardwalk
+monopoly-card-chairman-of-the-board = Vorstandsvorsitzender, zahlen Sie { $amount } an jeden Spieler
+monopoly-card-building-loan-matures = Ihr Baukredit läuft aus, sammeln Sie { $amount } ein
+monopoly-card-crossword-competition = Sie haben einen Kreuzworträtselwettbewerb gewonnen und { $amount } gesammelt
+monopoly-card-bank-error-200 = Bankfehler zu Ihren Gunsten, sammeln Sie { $amount }
+monopoly-card-doctor-fee-50 = Arzthonorar, { $amount } bezahlen
+monopoly-card-sale-of-stock-50 = Durch den Verkauf von Lagerbeständen erhalten Sie { $amount }
+monopoly-card-holiday-fund = Urlaubsfonds läuft ab, { $amount } erhalten
+monopoly-card-tax-refund-20 = Einkommensteuerrückerstattung, { $amount } einsammeln
+monopoly-card-birthday = Es ist dein Geburtstag, sammle { $amount } von jedem Spieler
+monopoly-card-life-insurance = Lebensversicherung läuft aus, { $amount } einsammeln
+monopoly-card-hospital-fees-100 = Bezahlen Sie Krankenhausgebühren in Höhe von { $amount }
+monopoly-card-school-fees-50 = Bezahlen Sie die Schulgebühren von { $amount }
+monopoly-card-consultancy-fee-25 = Erhalten Sie eine { $amount }-Beratungsgebühr
+monopoly-card-street-repairs = Für Straßenreparaturen werden Ihnen folgende Kosten berechnet: { $per_house } pro Haus, { $per_hotel } pro Hotel
+monopoly-card-beauty-contest-10 = Sie haben den zweiten Preis bei einem Schönheitswettbewerb gewonnen. Sammeln Sie { $amount }
+monopoly-card-inherit-100 = Sie erben { $amount }
+monopoly-card-get-out-of-jail = Kommen Sie frei aus dem Gefängnis
 
 # Board profile options
-monopoly-set-board = Board: { $board }
-monopoly-select-board = Select a Monopoly board
-monopoly-option-changed-board = Board set to { $board }.
-monopoly-set-board-rules-mode = Board rules mode: { $mode }
-monopoly-select-board-rules-mode = Select board rules mode
-monopoly-option-changed-board-rules-mode = Board rules mode set to { $mode }.
+monopoly-set-board = Vorstand: { $board }
+monopoly-select-board = Wählen Sie ein Monopoly-Spielbrett aus
+monopoly-option-changed-board = Board auf { $board } eingestellt.
+monopoly-set-board-rules-mode = Board-Regelmodus: { $mode }
+monopoly-select-board-rules-mode = Wählen Sie den Board-Regelmodus
+monopoly-option-changed-board-rules-mode = Der Board-Regelmodus ist auf { $mode } eingestellt.
 
 # Board labels
 monopoly-board-classic-default = Classic Default
@@ -291,74 +291,74 @@ monopoly-board-rules-simplified = Board rules for { $board } are partially imple
 monopoly-board-active = Active board: { $board } (mode: { $mode }).
 
 # Deed and ownership browsing
-monopoly-view-active-deed = View active deed
-monopoly-view-active-deed-space = View { $property }
-monopoly-browse-all-deeds = Browse all deeds
-monopoly-view-my-properties = View my properties
-monopoly-view-player-properties = View player info
-monopoly-view-selected-deed = View selected deed
-monopoly-view-selected-owner-property-deed = View selected player deed
-monopoly-select-property-deed = Select a property deed
-monopoly-select-player-properties = Select a player
-monopoly-select-player-property-deed = Select a player property deed
-monopoly-no-active-deed = There is no active deed to view right now.
-monopoly-no-deeds-available = No deed-capable properties are available on this board.
-monopoly-no-owned-properties = No owned properties are available for this view.
-monopoly-no-players-with-properties = No players are available.
-monopoly-buy-for = Buy for { $amount }
-monopoly-you-have-no-owned-properties = You do not own any properties.
-monopoly-player-has-no-owned-properties = { $player } does not own any properties.
+monopoly-view-active-deed = Aktive Urkunde anzeigen
+monopoly-view-active-deed-space = { $property } anzeigen
+monopoly-browse-all-deeds = Durchsuchen Sie alle Urkunden
+monopoly-view-my-properties = Sehen Sie sich meine Eigenschaften an
+monopoly-view-player-properties = Spielerinformationen anzeigen
+monopoly-view-selected-deed = Ausgewählte Urkunde anzeigen
+monopoly-view-selected-owner-property-deed = Ausgewählte Spielerurkunde anzeigen
+monopoly-select-property-deed = Wählen Sie eine Eigentumsurkunde aus
+monopoly-select-player-properties = Wählen Sie einen Spieler aus
+monopoly-select-player-property-deed = Wählen Sie eine Spielereigentumsurkunde aus
+monopoly-no-active-deed = Im Moment ist keine aktive Urkunde zur Ansicht vorhanden.
+monopoly-no-deeds-available = Auf dieser Seite sind keine urkundefähigen Grundstücke verfügbar.
+monopoly-no-owned-properties = Für diese Ansicht sind keine eigenen Eigenschaften verfügbar.
+monopoly-no-players-with-properties = Es sind keine Spieler verfügbar.
+monopoly-buy-for = Kaufen Sie für { $amount }
+monopoly-you-have-no-owned-properties = Sie besitzen keine Immobilien.
+monopoly-player-has-no-owned-properties = { $player } besitzt keine Eigenschaften.
 monopoly-owner-bank = Bank
-monopoly-owner-unknown = Unknown
-monopoly-building-status-hotel = with hotel
-monopoly-building-status-one-house = with 1 house
-monopoly-building-status-houses = with { $count } houses
-monopoly-mortgaged-short = mortgaged
+monopoly-owner-unknown = Unbekannt
+monopoly-building-status-hotel = mit Hotel
+monopoly-building-status-one-house = mit 1 Haus
+monopoly-building-status-houses = mit { $count }-Häusern
+monopoly-mortgaged-short = verpfändet
 monopoly-deed-menu-label = { $property } ({ $owner })
 monopoly-deed-menu-label-extra = { $property } ({ $owner }; { $extras })
-monopoly-color-brown = Brown
-monopoly-color-light_blue = Light Blue
-monopoly-color-pink = Pink
+monopoly-color-brown = Braun
+monopoly-color-light_blue = Hellblau
+monopoly-color-pink = Rosa
 monopoly-color-orange = Orange
-monopoly-color-red = Red
-monopoly-color-yellow = Yellow
-monopoly-color-green = Green
-monopoly-color-dark_blue = Dark Blue
-monopoly-deed-type-color-group = Type: { $color } color group
-monopoly-deed-type-railroad = Type: Railroad
-monopoly-deed-type-utility = Type: Utility
-monopoly-deed-type-generic = Type: { $kind }
-monopoly-deed-purchase-price = Purchase price: { $amount }
-monopoly-deed-rent = Rent: { $amount }
-monopoly-deed-full-set-rent = If owner has full color set: { $amount }
-monopoly-deed-rent-one-house = With 1 house: { $amount }
-monopoly-deed-rent-houses = With { $count } houses: { $amount }
-monopoly-deed-rent-hotel = With hotel: { $amount }
-monopoly-deed-house-cost = House cost: { $amount }
-monopoly-deed-railroad-rent = Rent with { $count } railroads: { $amount }
-monopoly-deed-utility-one-owned = If one utility is owned: 4x dice roll
-monopoly-deed-utility-both-owned = If both utilities are owned: 10x dice roll
-monopoly-deed-utility-base-rent = Utility base rent (legacy fallback): { $amount }
-monopoly-deed-mortgage-value = Mortgage value: { $amount }
-monopoly-deed-unmortgage-cost = Unmortgage cost: { $amount }
-monopoly-deed-owner = Owner: { $owner }
-monopoly-deed-current-buildings = Current buildings: { $buildings }
-monopoly-deed-status-mortgaged = Status: Mortgaged
-monopoly-player-properties-label = { $player }, on { $space }, square { $position }
-monopoly-player-properties-label-no-space = { $player }, square { $position }
+monopoly-color-red = Rot
+monopoly-color-yellow = Gelb
+monopoly-color-green = Grün
+monopoly-color-dark_blue = Dunkelblau
+monopoly-deed-type-color-group = Typ: { $color }-Farbgruppe
+monopoly-deed-type-railroad = Typ: Eisenbahn
+monopoly-deed-type-utility = Typ: Dienstprogramm
+monopoly-deed-type-generic = Typ: { $kind }
+monopoly-deed-purchase-price = Kaufpreis: { $amount }
+monopoly-deed-rent = Miete: { $amount }
+monopoly-deed-full-set-rent = Wenn der Besitzer über einen vollständigen Farbsatz verfügt: { $amount }
+monopoly-deed-rent-one-house = Mit 1 Haus: { $amount }
+monopoly-deed-rent-houses = Mit { $count }-Häusern: { $amount }
+monopoly-deed-rent-hotel = Mit Hotel: { $amount }
+monopoly-deed-house-cost = Hauskosten: { $amount }
+monopoly-deed-railroad-rent = Miete bei { $count }-Eisenbahnen: { $amount }
+monopoly-deed-utility-one-owned = Wenn ein Versorgungsunternehmen im Besitz ist: 4x Würfelwurf
+monopoly-deed-utility-both-owned = Wenn beide Versorgungseinrichtungen im Besitz sind: 10x Würfelwurf
+monopoly-deed-utility-base-rent = Grundmiete für Versorgungsunternehmen (alte Ersatzmiete): { $amount }
+monopoly-deed-mortgage-value = Hypothekenwert: { $amount }
+monopoly-deed-unmortgage-cost = Kosten für die Aufhebung der Hypothek: { $amount }
+monopoly-deed-owner = Besitzer: { $owner }
+monopoly-deed-current-buildings = Aktuelle Gebäude: { $buildings }
+monopoly-deed-status-mortgaged = Status: Hypothekenpflichtig
+monopoly-player-properties-label = { $player }, auf { $space }, quadratisches { $position }
+monopoly-player-properties-label-no-space = { $player }, quadratisches { $position }
 monopoly-banking-ledger-entry-success = { $tx_id } { $kind } { $from_id }->{ $to_id } { $amount } ({ $reason })
-monopoly-banking-ledger-entry-failed = { $tx_id } { $kind } failed ({ $reason })
+monopoly-banking-ledger-entry-failed = { $tx_id } { $kind } fehlgeschlagen ({ $reason })
 
 # Trade menu summaries
-monopoly-trade-buy-property-summary = Buy { $property } from { $target } for { $amount }
-monopoly-trade-offer-cash-for-property-summary = Offer { $amount } to { $target } for { $property }
-monopoly-trade-sell-property-summary = Sell { $property } to { $target } for { $amount }
-monopoly-trade-offer-property-for-cash-summary = Offer { $property } to { $target } for { $amount }
-monopoly-trade-swap-summary = Swap { $give_property } with { $target } for { $receive_property }
-monopoly-trade-swap-plus-cash-summary = Swap { $give_property } + { $amount } with { $target } for { $receive_property }
-monopoly-trade-swap-receive-cash-summary = Swap { $give_property } for { $receive_property } + { $amount } from { $target }
-monopoly-trade-buy-jail-card-summary = Buy jail card from { $target } for { $amount }
-monopoly-trade-sell-jail-card-summary = Sell jail card to { $target } for { $amount }
+monopoly-trade-buy-property-summary = Kaufen Sie { $property } von { $target } für { $amount }
+monopoly-trade-offer-cash-for-property-summary = Bieten Sie { $amount } an { $target } für { $property } an
+monopoly-trade-sell-property-summary = Verkaufen Sie { $property } an { $target } für { $amount }
+monopoly-trade-offer-property-for-cash-summary = Bieten Sie { $property } an { $target } für { $amount } an
+monopoly-trade-swap-summary = Tauschen Sie { $give_property } mit { $target } gegen { $receive_property }
+monopoly-trade-swap-plus-cash-summary = Tauschen Sie { $give_property } + { $amount } mit { $target } gegen { $receive_property }
+monopoly-trade-swap-receive-cash-summary = Tauschen Sie { $give_property } gegen { $receive_property } + { $amount } von { $target }
+monopoly-trade-buy-jail-card-summary = Kaufen Sie eine Gefängniskarte von { $target } für { $amount }
+monopoly-trade-sell-jail-card-summary = Verkaufen Sie die Gefängniskarte an { $target } für { $amount }
 
 # Board space names
 monopoly-space-go = GO

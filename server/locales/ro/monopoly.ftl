@@ -4,184 +4,184 @@
 game-name-monopoly = Monopoly
 
 # Lobby options
-monopoly-set-preset = Preset: { $preset }
-monopoly-select-preset = Select a Monopoly preset
-monopoly-option-changed-preset = Preset set to { $preset }.
+monopoly-set-preset = Presetat: { $preset }
+monopoly-select-preset = Selectați o presetare Monopoly
+monopoly-option-changed-preset = Presetat setat la { $preset }.
 
 # Preset labels
-monopoly-preset-classic-standard = Classic and Themed Standard
+monopoly-preset-classic-standard = Standard clasic și tematic
 monopoly-preset-junior = Monopoly Junior
 monopoly-preset-junior-modern = Monopoly Junior (Modern)
-monopoly-preset-junior-legacy = Monopoly Junior (Legacy)
-monopoly-preset-cheaters = Monopoly Cheaters Edition
-monopoly-preset-electronic-banking = Electronic Banking
+monopoly-preset-junior-legacy = Monopoly Junior (Moștenire)
+monopoly-preset-cheaters = Ediția Monopoly Cheaters
+monopoly-preset-electronic-banking = Banca electronică
 monopoly-preset-voice-banking = Voice Banking
-monopoly-preset-sore-losers = Monopoly for Sore Losers
-monopoly-preset-speed = Monopoly Speed
-monopoly-preset-builder = Monopoly Builder
-monopoly-preset-city = Monopoly City
-monopoly-preset-bid-card-game = Monopoly Bid
-monopoly-preset-deal-card-game = Monopoly Deal
-monopoly-preset-knockout = Monopoly Knockout
-monopoly-preset-free-parking-jackpot = Free Parking Jackpot
+monopoly-preset-sore-losers = Monopol pentru Sore Losers
+monopoly-preset-speed = Viteza monopolului
+monopoly-preset-builder = Constructor de monopol
+monopoly-preset-city = Orașul monopolului
+monopoly-preset-bid-card-game = Oferta de monopol
+monopoly-preset-deal-card-game = Acord de monopol
+monopoly-preset-knockout = Knockout la monopol
+monopoly-preset-free-parking-jackpot = Jackpot de parcare gratuită
 
 # Scaffold status
-monopoly-announce-preset = Announce current preset
-monopoly-current-preset = Current preset: { $preset } ({ $count } editions).
-monopoly-scaffold-started = Monopoly scaffold started with { $preset } ({ $count } editions).
+monopoly-announce-preset = Anunțați presetarea curentă
+monopoly-current-preset = Presetare curentă: { $preset } (ediții { $count }).
+monopoly-scaffold-started = Schela Monopoly a început cu { $preset } (edițiile { $count }).
 
 # Turn actions
-monopoly-roll-dice = Roll dice
-monopoly-buy-property = Buy property
-monopoly-banking-balance = Check bank balance
-monopoly-banking-transfer = Transfer funds
-monopoly-banking-ledger = Review bank ledger
-monopoly-voice-command = Voice command
-monopoly-cheaters-claim-reward = Claim cheat reward
-monopoly-end-turn = End turn
+monopoly-roll-dice = Rotiți zarurile
+monopoly-buy-property = Cumpărați proprietate
+monopoly-banking-balance = Verificați soldul bancar
+monopoly-banking-transfer = Transferați fonduri
+monopoly-banking-ledger = Consultați registrul bancar
+monopoly-voice-command = Comandă vocală
+monopoly-cheaters-claim-reward = Solicitați recompensă pentru trișuri
+monopoly-end-turn = Sfârșitul turei
 
 # Turn validation
-monopoly-roll-first = You need to roll first.
-monopoly-already-rolled = You already rolled this turn.
-monopoly-no-property-to-buy = There is no property to buy right now.
-monopoly-property-owned = That property is already owned.
-monopoly-not-enough-cash = You don't have enough cash.
-monopoly-action-disabled-for-preset = This action is disabled for the selected preset.
-monopoly-buy-disabled = Buying property directly is disabled for this preset.
+monopoly-roll-first = Trebuie să te rostogolești mai întâi.
+monopoly-already-rolled = Ai trecut deja în acest turn.
+monopoly-no-property-to-buy = Nu există nicio proprietate de cumpărat în acest moment.
+monopoly-property-owned = Proprietatea este deja deținută.
+monopoly-not-enough-cash = Nu ai suficienți numerar.
+monopoly-action-disabled-for-preset = Această acțiune este dezactivată pentru presetarea selectată.
+monopoly-buy-disabled = Cumpărarea directă a proprietății este dezactivată pentru această presetare.
 
 # Turn events
-monopoly-pass-go = { $player } passed GO and collected { $amount }.
-monopoly-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-result = You rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-player-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-you-roll-only = You rolled { $die1 } + { $die2 } = { $total }.
-monopoly-player-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-only-doubles = You rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-player-roll-only-doubles = { $player } rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-property-available = { $property } is available for { $price }.
-monopoly-property-bought = { $player } bought { $property } for { $price }.
-monopoly-rent-paid = { $player } paid { $amount } in rent to { $owner } for { $property }.
-monopoly-player-paid-player = { $player } paid { $amount } to { $target }.
-monopoly-you-completed-color-set = You now own all of the { $group } properties.
-monopoly-player-completed-color-set = { $player } now owns all of the { $group } properties.
-monopoly-you-completed-railroads = You now own all of the railroads.
-monopoly-player-completed-railroads = { $player } now owns all of the railroads.
-monopoly-you-completed-utilities = You now own all of the utilities.
-monopoly-player-completed-utilities = { $player } now owns all of the utilities.
-monopoly-landed-owned = { $player } landed on their own property: { $property }.
-monopoly-tax-paid = { $player } paid { $amount } for { $tax }.
-monopoly-go-to-jail = { $player } goes to jail (moved to { $space }).
-monopoly-bankrupt-player = You are bankrupt and out of the game.
-monopoly-player-bankrupt = { $player } is bankrupt. Creditor: { $creditor }.
-monopoly-winner-by-bankruptcy = { $player } wins by bankruptcy with { $cash } cash remaining.
-monopoly-winner-by-cash = { $player } wins with the highest cash total: { $cash }.
-monopoly-city-winner-by-value = { $player } wins Monopoly City with final value { $total }.
+monopoly-pass-go = { $player } a trecut GO și a colectat { $amount }.
+monopoly-roll-result = { $player } a rulat { $die1 } + { $die2 } = { $total } și a aterizat pe { $space }.
+monopoly-roll-only = { $player } rulat { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-result = Ați aruncat { $die1 } + { $die2 } = { $total } și ați aterizat pe { $space }.
+monopoly-player-roll-result = { $player } a rulat { $die1 } + { $die2 } = { $total } și a aterizat pe { $space }.
+monopoly-you-roll-only = Ai aruncat { $die1 } + { $die2 } = { $total }.
+monopoly-player-roll-only = { $player } rulat { $die1 } + { $die2 } = { $total }.
+monopoly-you-roll-only-doubles = Ai aruncat { $die1 } + { $die2 } = { $total }. Duble!
+monopoly-player-roll-only-doubles = { $player } rulat { $die1 } + { $die2 } = { $total }. Duble!
+monopoly-property-available = { $property } este disponibil pentru { $price }.
+monopoly-property-bought = { $player } a cumpărat { $property } pentru { $price }.
+monopoly-rent-paid = { $player } a plătit { $amount } în chirie către { $owner } pentru { $property }.
+monopoly-player-paid-player = { $player } a plătit { $amount } către { $target }.
+monopoly-you-completed-color-set = Acum dețineți toate proprietățile { $group }.
+monopoly-player-completed-color-set = { $player } deține acum toate proprietățile { $group }.
+monopoly-you-completed-railroads = Acum dețineți toate căile ferate.
+monopoly-player-completed-railroads = { $player } deține acum toate căile ferate.
+monopoly-you-completed-utilities = Acum dețineți toate utilitățile.
+monopoly-player-completed-utilities = { $player } deține acum toate utilitățile.
+monopoly-landed-owned = { $player } a aterizat pe proprietatea proprie: { $property }.
+monopoly-tax-paid = { $player } a plătit { $amount } pentru { $tax }.
+monopoly-go-to-jail = { $player } ajunge la închisoare (mutat în { $space }).
+monopoly-bankrupt-player = Ești în faliment și în afara jocului.
+monopoly-player-bankrupt = { $player } este în faliment. Creditor: { $creditor }.
+monopoly-winner-by-bankruptcy = { $player } câștigă prin faliment, rămânând numerar { $cash }.
+monopoly-winner-by-cash = { $player } câștigă cu cel mai mare total în numerar: { $cash }.
+monopoly-city-winner-by-value = { $player } câștigă Monopoly City cu valoarea finală { $total }.
 
 # Additional actions
-monopoly-auction-property = Auction property
-monopoly-auction-bid = Place auction bid
-monopoly-auction-pass = Pass in auction
-monopoly-mortgage-property = Mortgage property
-monopoly-unmortgage-property = Unmortgage property
-monopoly-build-house = Build house or hotel
-monopoly-sell-house = Sell house or hotel
-monopoly-offer-trade = Offer trade
-monopoly-accept-trade = Accept trade
-monopoly-decline-trade = Decline trade
-monopoly-read-cash = Read cash
-monopoly-pay-bail = Pay bail
-monopoly-use-jail-card = Use get-out-of-jail card
-monopoly-cash-report = { $cash } in cash.
-monopoly-property-amount-option = { $property } for { $amount }
-monopoly-banking-transfer-option = Transfer { $amount } to { $target }
+monopoly-auction-property = Proprietate de licitație
+monopoly-auction-bid = Plasați oferta la licitație
+monopoly-auction-pass = Treceți la licitație
+monopoly-mortgage-property = Proprietate ipotecară
+monopoly-unmortgage-property = Proprietate neipotecară
+monopoly-build-house = Construiește o casă sau un hotel
+monopoly-sell-house = Vindem casa sau hotelul
+monopoly-offer-trade = Oferă comerț
+monopoly-accept-trade = Acceptați comerțul
+monopoly-decline-trade = Declinul comerțului
+monopoly-read-cash = Citiți numerar
+monopoly-pay-bail = Plătiți cauțiune
+monopoly-use-jail-card = Folosește cardul de ieșire din închisoare
+monopoly-cash-report = { $cash } în numerar.
+monopoly-property-amount-option = { $property } pentru { $amount }
+monopoly-banking-transfer-option = Transferați { $amount } în { $target }
 
 # Additional prompts
-monopoly-select-property-mortgage = Select a property to mortgage
-monopoly-select-property-unmortgage = Select a property to unmortgage
-monopoly-select-property-build = Select a property to build on
-monopoly-select-property-sell = Select a property to sell from
-monopoly-select-trade-offer = Select a trade offer
-monopoly-select-auction-bid = Select your auction bid
-monopoly-select-banking-transfer = Select a transfer
-monopoly-select-voice-command = Enter a voice command beginning with voice:
+monopoly-select-property-mortgage = Selectați o proprietate pentru ipotecare
+monopoly-select-property-unmortgage = Selectați o proprietate de anulat ipotecare
+monopoly-select-property-build = Selectați o proprietate pe care să construiți
+monopoly-select-property-sell = Selectați o proprietate din care să vindeți
+monopoly-select-trade-offer = Selectați o ofertă comercială
+monopoly-select-auction-bid = Selectați oferta dvs. de licitație
+monopoly-select-banking-transfer = Selectați un transfer
+monopoly-select-voice-command = Introduceți o comandă vocală care începe cu voice:
 
 # Additional validation
-monopoly-no-property-to-auction = There is no property to auction right now.
-monopoly-auction-active = Resolve the active auction first.
-monopoly-no-auction-active = There is no auction in progress.
-monopoly-not-your-auction-turn = It is not your turn in the auction.
-monopoly-no-mortgage-options = You do not have properties available to mortgage.
-monopoly-no-unmortgage-options = You do not have mortgaged properties to unmortgage.
-monopoly-no-build-options = You do not have properties available to build on.
-monopoly-no-sell-options = You do not have properties with buildings available to sell.
-monopoly-no-trade-options = You do not have any valid trades to offer right now.
-monopoly-no-trade-pending = There is no pending trade for you.
-monopoly-trade-pending = A trade is already pending.
-monopoly-trade-no-longer-valid = That trade is no longer valid.
-monopoly-not-in-jail = You are not in jail.
-monopoly-no-jail-card = You do not have a get-out-of-jail card.
-monopoly-roll-again-required = You rolled doubles and must roll again.
-monopoly-resolve-property-first = Resolve the pending property decision first.
+monopoly-no-property-to-auction = Nu există nicio proprietate de licitat în acest moment.
+monopoly-auction-active = Rezolvați mai întâi licitația activă.
+monopoly-no-auction-active = Nu există nicio licitație în derulare.
+monopoly-not-your-auction-turn = Nu este rândul tău la licitație.
+monopoly-no-mortgage-options = Nu aveți proprietăți disponibile pentru ipotecare.
+monopoly-no-unmortgage-options = Nu aveți proprietăți ipotecate pentru a nu ipoteca.
+monopoly-no-build-options = Nu aveți proprietăți disponibile pentru a construi.
+monopoly-no-sell-options = Nu aveți proprietăți cu clădiri disponibile pentru vânzare.
+monopoly-no-trade-options = Nu aveți tranzacții valide de oferit în acest moment.
+monopoly-no-trade-pending = Nu există tranzacții în așteptare pentru dvs.
+monopoly-trade-pending = O tranzacție este deja în așteptare.
+monopoly-trade-no-longer-valid = Acel comert nu mai este valabil.
+monopoly-not-in-jail = Nu ești în închisoare.
+monopoly-no-jail-card = Nu aveți un card de ieșire din închisoare.
+monopoly-roll-again-required = Ai făcut duble și trebuie să arunci din nou.
+monopoly-resolve-property-first = Rezolvați mai întâi decizia de proprietate în așteptare.
 
 # Additional turn events
-monopoly-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-you-roll-again = You rolled doubles and get another roll.
-monopoly-player-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-you-jail-roll-doubles = You rolled doubles ({ $die1 } and { $die2 }) and leave jail.
-monopoly-player-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-jail-roll-failed = { $player } rolled { $die1 } and { $die2 } in jail (attempt { $attempts }).
-monopoly-bail-paid = { $player } paid { $amount } bail.
-monopoly-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-you-three-doubles-jail = You rolled three doubles in one turn and are sent to jail.
-monopoly-player-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-jail-card-used = { $player } used a get-out-of-jail card.
-monopoly-sore-loser-rebate = { $player } received a sore loser rebate of { $amount }.
-monopoly-cheaters-early-end-turn-blocked = { $player } tried to end the turn early and paid a cheating penalty of { $amount }.
-monopoly-cheaters-payment-avoidance-blocked = { $player } triggered a cheaters payment penalty of { $amount }.
-monopoly-cheaters-reward-granted = { $player } claimed a cheaters reward of { $amount }.
-monopoly-cheaters-reward-unavailable = { $player } already claimed the cheaters reward this turn.
+monopoly-roll-again = { $player } se dublează și primește un alt rol.
+monopoly-you-roll-again = Ai făcut dublu și ai primit un alt rol.
+monopoly-player-roll-again = { $player } se dublează și primește un alt rol.
+monopoly-jail-roll-doubles = { $player } dublează ({ $die1 } și { $die2 }) și iese din închisoare.
+monopoly-you-jail-roll-doubles = Ai făcut duble ({ $die1 } și { $die2 }) și ai părăsit închisoarea.
+monopoly-player-jail-roll-doubles = { $player } dublează ({ $die1 } și { $die2 }) și iese din închisoare.
+monopoly-jail-roll-failed = { $player } a aruncat { $die1 } și { $die2 } în închisoare (încercare { $attempts }).
+monopoly-bail-paid = { $player } a plătit cauțiune pentru { $amount }.
+monopoly-three-doubles-jail = { $player } a făcut trei duble într-o singură tură și este trimis la închisoare.
+monopoly-you-three-doubles-jail = Ai făcut trei duble într-o singură tură și ești trimis la închisoare.
+monopoly-player-three-doubles-jail = { $player } a făcut trei duble într-o singură tură și este trimis la închisoare.
+monopoly-jail-card-used = { $player } a folosit un card de ieșire din închisoare.
+monopoly-sore-loser-rebate = { $player } a primit o reducere neplăcută pentru pierderea { $amount }.
+monopoly-cheaters-early-end-turn-blocked = { $player } a încercat să încheie turnul mai devreme și a plătit o penalizare pentru înșelăciune de { $amount }.
+monopoly-cheaters-payment-avoidance-blocked = { $player } a declanșat o penalizare de plată pentru trișori de { $amount }.
+monopoly-cheaters-reward-granted = { $player } a revendicat o recompensă pentru trișori de { $amount }.
+monopoly-cheaters-reward-unavailable = { $player } a revendicat deja recompensa trișorilor în acest turn.
 
 # Auctions and mortgages
-monopoly-auction-no-bids = No bids for { $property }. It remains unsold.
-monopoly-auction-started = Auction started for { $property } (opening bid: { $amount }).
-monopoly-auction-turn = Auction turn: { $player } to act on { $property } (current bid: { $amount }).
-monopoly-auction-bid-placed = { $player } bid { $amount } for { $property }.
-monopoly-auction-pass-event = { $player } passed on { $property }.
-monopoly-auction-won = { $player } won the auction for { $property } at { $amount }.
-monopoly-property-mortgaged = { $player } mortgaged { $property } for { $amount }.
-monopoly-property-unmortgaged = { $player } unmortgaged { $property } for { $amount }.
-monopoly-house-built-house = { $player } built a house on { $property } for { $amount }. It now has { $level }.
-monopoly-house-built-hotel = { $player } built a hotel on { $property } for { $amount }.
-monopoly-house-sold = { $player } sold a building on { $property } for { $amount } (level: { $level }).
-monopoly-trade-offered = { $proposer } offered { $target } a trade: { $offer }.
-monopoly-trade-completed = Trade completed between { $proposer } and { $target }: { $offer }.
-monopoly-trade-declined = { $target } declined trade from { $proposer }: { $offer }.
-monopoly-trade-cancelled = Trade cancelled: { $offer }.
-monopoly-free-parking-jackpot = { $player } collected the Free Parking jackpot of { $amount }.
-monopoly-mortgaged-no-rent = { $player } landed on mortgaged { $property }; no rent is due.
-monopoly-builder-blocks-awarded = { $player } gained { $amount } builder blocks ({ $blocks } total).
-monopoly-builder-block-spent = { $player } spent a builder block ({ $blocks } remaining).
-monopoly-banking-transfer-success = { $from_player } transferred { $amount } to { $to_player }.
-monopoly-banking-transfer-failed = { $player } bank transfer failed ({ $reason }).
-monopoly-banking-balance-report = { $player } bank balance: { $cash }.
-monopoly-banking-ledger-report = Recent banking activity: { $entries }.
-monopoly-banking-ledger-empty = No banking transactions yet.
-monopoly-voice-command-error = Voice command error: { $reason }.
-monopoly-voice-command-accepted = Voice command accepted: { $intent }.
-monopoly-voice-command-repeat = Repeating last banking response code: { $response }.
-monopoly-voice-transfer-staged = Voice transfer staged: { $amount } to { $target }. Say voice: confirm transfer.
-monopoly-mortgage-transfer-interest-paid = { $player } paid { $amount } in mortgage transfer interest.
+monopoly-auction-no-bids = Nu există oferte pentru { $property }. Rămâne nevândut.
+monopoly-auction-started = Licitația a început pentru { $property } (oferta de deschidere: { $amount }).
+monopoly-auction-turn = Turnul licitației: { $player } pentru a acționa asupra { $property } (oferta curentă: { $amount }).
+monopoly-auction-bid-placed = { $player } licitați { $amount } pentru { $property }.
+monopoly-auction-pass-event = { $player } a transmis { $property }.
+monopoly-auction-won = { $player } a câștigat licitația pentru { $property } la { $amount }.
+monopoly-property-mortgaged = { $player } a ipotecat { $property } pentru { $amount }.
+monopoly-property-unmortgaged = { $player } { $property } neipotecat pentru { $amount }.
+monopoly-house-built-house = { $player } a construit o casă pe { $property } pentru { $amount }. Acum are { $level }.
+monopoly-house-built-hotel = { $player } a construit un hotel pe { $property } pentru { $amount }.
+monopoly-house-sold = { $player } a vândut o clădire pe { $property } pentru { $amount } (nivel: { $level }).
+monopoly-trade-offered = { $proposer } i-a oferit lui { $target } o tranzacție: { $offer }.
+monopoly-trade-completed = Comerț încheiat între { $proposer } și { $target }: { $offer }.
+monopoly-trade-declined = { $target } a refuzat tranzacția de la { $proposer }: { $offer }.
+monopoly-trade-cancelled = Comerț anulat: { $offer }.
+monopoly-free-parking-jackpot = { $player } a colectat jackpot-ul de parcare gratuită de la { $amount }.
+monopoly-mortgaged-no-rent = { $player } a aterizat pe { $property } ipotecat; nu se datorează chirie.
+monopoly-builder-blocks-awarded = { $player } a câștigat blocuri de construcție { $amount } ({ $blocks } total).
+monopoly-builder-block-spent = { $player } a cheltuit un bloc de constructor ({ $blocks } rămas).
+monopoly-banking-transfer-success = { $from_player } a transferat { $amount } la { $to_player }.
+monopoly-banking-transfer-failed = Transferul bancar { $player } nu a reușit ({ $reason }).
+monopoly-banking-balance-report = Soldul bancar { $player }: { $cash }.
+monopoly-banking-ledger-report = Activitate bancară recentă: { $entries }.
+monopoly-banking-ledger-empty = Încă nu există tranzacții bancare.
+monopoly-voice-command-error = Eroare de comandă vocală: { $reason }.
+monopoly-voice-command-accepted = Comandă vocală acceptată: { $intent }.
+monopoly-voice-command-repeat = Se repetă ultimul cod de răspuns bancar: { $response }.
+monopoly-voice-transfer-staged = Transfer vocal în etapă: { $amount } la { $target }. Spune voice: confirm transfer.
+monopoly-mortgage-transfer-interest-paid = { $player } a plătit { $amount } în dobândă de transfer ipotecar.
 
 # Card engine
-monopoly-card-drawn = { $player } drew a { $deck } card: { $card }.
-monopoly-card-collect = { $player } collected { $amount }.
-monopoly-card-pay = { $player } paid { $amount }.
-monopoly-card-move = { $player } moved to { $space }.
-monopoly-card-jail-free = { $player } received a get-out-of-jail card.
-monopoly-card-utility-roll = { $player } rolled { $die1 } + { $die2 } = { $total } for utility rent.
-monopoly-deck-chance = Chance
+monopoly-card-drawn = { $player } a extras un card { $deck }: { $card }.
+monopoly-card-collect = { $player } a colectat { $amount }.
+monopoly-card-pay = { $player } plătit { $amount }.
+monopoly-card-move = { $player } a fost mutat în { $space }.
+monopoly-card-jail-free = { $player } a primit un card de ieșire din închisoare.
+monopoly-card-utility-roll = { $player } rulat { $die1 } + { $die2 } = { $total } pentru închiriere de utilități.
+monopoly-deck-chance = Şansă
 monopoly-deck-community-chest = Community Chest
 
 # Card descriptions

@@ -4,174 +4,174 @@
 game-name-monopoly = Monopoly
 
 # Lobby options
-monopoly-set-preset = Preset: { $preset }
-monopoly-select-preset = Select a Monopoly preset
-monopoly-option-changed-preset = Preset set to { $preset }.
+monopoly-set-preset = プリセット: { $preset }
+monopoly-select-preset = モノポリーのプリセットを選択します
+monopoly-option-changed-preset = プリセットは{ $preset }に設定されています。
 
 # Preset labels
-monopoly-preset-classic-standard = Classic and Themed Standard
-monopoly-preset-junior = Monopoly Junior
-monopoly-preset-junior-modern = Monopoly Junior (Modern)
-monopoly-preset-junior-legacy = Monopoly Junior (Legacy)
-monopoly-preset-cheaters = Monopoly Cheaters Edition
-monopoly-preset-electronic-banking = Electronic Banking
-monopoly-preset-voice-banking = Voice Banking
-monopoly-preset-sore-losers = Monopoly for Sore Losers
-monopoly-preset-speed = Monopoly Speed
-monopoly-preset-builder = Monopoly Builder
-monopoly-preset-city = Monopoly City
-monopoly-preset-bid-card-game = Monopoly Bid
-monopoly-preset-deal-card-game = Monopoly Deal
-monopoly-preset-knockout = Monopoly Knockout
-monopoly-preset-free-parking-jackpot = Free Parking Jackpot
+monopoly-preset-classic-standard = クラシックおよびテーマ別スタンダード
+monopoly-preset-junior = モノポリージュニア
+monopoly-preset-junior-modern = モノポリージュニア (モダン)
+monopoly-preset-junior-legacy = モノポリー ジュニア (レガシー)
+monopoly-preset-cheaters = モノポリー チーターズ エディション
+monopoly-preset-electronic-banking = 電子バンキング
+monopoly-preset-voice-banking = ボイスバンキング
+monopoly-preset-sore-losers = 負けず嫌いのためのモノポリー
+monopoly-preset-speed = モノポリースピード
+monopoly-preset-builder = モノポリービルダー
+monopoly-preset-city = モノポリーシティ
+monopoly-preset-bid-card-game = 独占入札
+monopoly-preset-deal-card-game = 独占取引
+monopoly-preset-knockout = モノポリー ノックアウト
+monopoly-preset-free-parking-jackpot = 無料駐車場のジャックポット
 
 # Scaffold status
-monopoly-announce-preset = Announce current preset
-monopoly-current-preset = Current preset: { $preset } ({ $count } editions).
-monopoly-scaffold-started = Monopoly scaffold started with { $preset } ({ $count } editions).
+monopoly-announce-preset = 現在のプリセットをアナウンスする
+monopoly-current-preset = 現在のプリセット: { $preset } ({ $count } エディション)。
+monopoly-scaffold-started = モノポリー足場は { $preset } ({ $count } エディション) から始まりました。
 
 # Turn actions
-monopoly-roll-dice = Roll dice
-monopoly-buy-property = Buy property
-monopoly-banking-balance = Check bank balance
-monopoly-banking-transfer = Transfer funds
-monopoly-banking-ledger = Review bank ledger
-monopoly-voice-command = Voice command
-monopoly-cheaters-claim-reward = Claim cheat reward
-monopoly-end-turn = End turn
+monopoly-roll-dice = サイコロを振る
+monopoly-buy-property = 不動産を購入する
+monopoly-banking-balance = 銀行残高を確認する
+monopoly-banking-transfer = 資金の移動
+monopoly-banking-ledger = 銀行元帳を確認する
+monopoly-voice-command = 音声コマンド
+monopoly-cheaters-claim-reward = チート報酬を請求する
+monopoly-end-turn = ターン終了
 
 # Turn validation
-monopoly-roll-first = You need to roll first.
-monopoly-already-rolled = You already rolled this turn.
-monopoly-no-property-to-buy = There is no property to buy right now.
-monopoly-property-owned = That property is already owned.
-monopoly-not-enough-cash = You don't have enough cash.
-monopoly-action-disabled-for-preset = This action is disabled for the selected preset.
-monopoly-buy-disabled = Buying property directly is disabled for this preset.
+monopoly-roll-first = まずロールする必要があります。
+monopoly-already-rolled = あなたはすでにこのターンをロールしました。
+monopoly-no-property-to-buy = 現在購入できる物件はありません。
+monopoly-property-owned = その不動産はすでに所有されています。
+monopoly-not-enough-cash = 現金が足りません。
+monopoly-action-disabled-for-preset = このアクションは、選択したプリセットでは無効になっています。
+monopoly-buy-disabled = このプリセットでは、プロパティを直接購入することはできません。
 
 # Turn events
-monopoly-pass-go = { $player } passed GO and collected { $amount }.
-monopoly-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-result = You rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-player-roll-result = { $player } rolled { $die1 } + { $die2 } = { $total } and landed on { $space }.
-monopoly-you-roll-only = You rolled { $die1 } + { $die2 } = { $total }.
-monopoly-player-roll-only = { $player } rolled { $die1 } + { $die2 } = { $total }.
-monopoly-you-roll-only-doubles = You rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-player-roll-only-doubles = { $player } rolled { $die1 } + { $die2 } = { $total }. Doubles!
-monopoly-property-available = { $property } is available for { $price }.
-monopoly-property-bought = { $player } bought { $property } for { $price }.
-monopoly-rent-paid = { $player } paid { $amount } in rent to { $owner } for { $property }.
-monopoly-player-paid-player = { $player } paid { $amount } to { $target }.
-monopoly-you-completed-color-set = You now own all of the { $group } properties.
-monopoly-player-completed-color-set = { $player } now owns all of the { $group } properties.
-monopoly-you-completed-railroads = You now own all of the railroads.
-monopoly-player-completed-railroads = { $player } now owns all of the railroads.
-monopoly-you-completed-utilities = You now own all of the utilities.
-monopoly-player-completed-utilities = { $player } now owns all of the utilities.
-monopoly-landed-owned = { $player } landed on their own property: { $property }.
-monopoly-tax-paid = { $player } paid { $amount } for { $tax }.
-monopoly-go-to-jail = { $player } goes to jail (moved to { $space }).
-monopoly-bankrupt-player = You are bankrupt and out of the game.
-monopoly-player-bankrupt = { $player } is bankrupt. Creditor: { $creditor }.
-monopoly-winner-by-bankruptcy = { $player } wins by bankruptcy with { $cash } cash remaining.
-monopoly-winner-by-cash = { $player } wins with the highest cash total: { $cash }.
-monopoly-city-winner-by-value = { $player } wins Monopoly City with final value { $total }.
+monopoly-pass-go = { $player } が GO を通過し、{ $amount } を収集しました。
+monopoly-roll-result = { $player } は { $die1 } + { $die2 } = { $total } をロールし、{ $space } に着地しました。
+monopoly-roll-only = { $player } は { $die1 } + { $die2 } = { $total } をロールしました。
+monopoly-you-roll-result = { $die1 } + { $die2 } = { $total } をロールし、{ $space } に着地しました。
+monopoly-player-roll-result = { $player } は { $die1 } + { $die2 } = { $total } をロールし、{ $space } に着地しました。
+monopoly-you-roll-only = { $die1 } + { $die2 } = { $total } が出ました。
+monopoly-player-roll-only = { $player } は { $die1 } + { $die2 } = { $total } をロールしました。
+monopoly-you-roll-only-doubles = { $die1 } + { $die2 } = { $total } が出ました。ダブルス！
+monopoly-player-roll-only-doubles = { $player } は { $die1 } + { $die2 } = { $total } をロールしました。ダブルス！
+monopoly-property-available = { $property }は{ $price }で利用可能です。
+monopoly-property-bought = { $player } は { $price } のために { $property } を購入しました。
+monopoly-rent-paid = { $player } は、{ $property } の賃料として { $amount } を { $owner } に支払いました。
+monopoly-player-paid-player = { $player }は{ $amount }を{ $target }に支払いました。
+monopoly-you-completed-color-set = これで、{ $group } プロパティをすべて所有するようになりました。
+monopoly-player-completed-color-set = { $player } は、{ $group } のすべてのプロパティを所有するようになりました。
+monopoly-you-completed-railroads = これですべての鉄道を所有できるようになりました。
+monopoly-player-completed-railroads = { $player } は現在、すべての鉄道を所有しています。
+monopoly-you-completed-utilities = これで、すべてのユーティリティを所有できるようになりました。
+monopoly-player-completed-utilities = { $player } は現在、すべてのユーティリティを所有しています。
+monopoly-landed-owned = { $player } は自身の所有地である { $property } に着陸しました。
+monopoly-tax-paid = { $player } は { $tax } のために { $amount } を支払いました。
+monopoly-go-to-jail = { $player } は刑務所に送られます ({ $space } に移動)。
+monopoly-bankrupt-player = あなたは破産し、ゲームから外れました。
+monopoly-player-bankrupt = { $player }は破産しました。債権者: { $creditor }。
+monopoly-winner-by-bankruptcy = { $player }は{ $cash }の現金が残った状態で破産により勝利します。
+monopoly-winner-by-cash = { $player } は最高の現金総額を獲得し、{ $cash } が勝ちます。
+monopoly-city-winner-by-value = { $player } が最終値 { $total } でモノポリーシティに勝利します。
 
 # Additional actions
-monopoly-auction-property = Auction property
-monopoly-auction-bid = Place auction bid
-monopoly-auction-pass = Pass in auction
-monopoly-mortgage-property = Mortgage property
-monopoly-unmortgage-property = Unmortgage property
-monopoly-build-house = Build house or hotel
-monopoly-sell-house = Sell house or hotel
-monopoly-offer-trade = Offer trade
-monopoly-accept-trade = Accept trade
-monopoly-decline-trade = Decline trade
-monopoly-read-cash = Read cash
-monopoly-pay-bail = Pay bail
-monopoly-use-jail-card = Use get-out-of-jail card
-monopoly-cash-report = { $cash } in cash.
-monopoly-property-amount-option = { $property } for { $amount }
-monopoly-banking-transfer-option = Transfer { $amount } to { $target }
+monopoly-auction-property = 競売物件
+monopoly-auction-bid = オークションに入札する
+monopoly-auction-pass = オークションに出す
+monopoly-mortgage-property = 住宅ローン物件
+monopoly-unmortgage-property = 抵当権のない不動産
+monopoly-build-house = 家やホテルを建てる
+monopoly-sell-house = 家やホテルを売る
+monopoly-offer-trade = オファートレード
+monopoly-accept-trade = 取引を受け入れる
+monopoly-decline-trade = 貿易の衰退
+monopoly-read-cash = 現金を読み取る
+monopoly-pay-bail = 保釈金を支払う
+monopoly-use-jail-card = 出所カードを使う
+monopoly-cash-report = 現金の{ $cash }。
+monopoly-property-amount-option = { $amount }の{ $property }
+monopoly-banking-transfer-option = { $amount }を{ $target }に転送
 
 # Additional prompts
-monopoly-select-property-mortgage = Select a property to mortgage
-monopoly-select-property-unmortgage = Select a property to unmortgage
-monopoly-select-property-build = Select a property to build on
-monopoly-select-property-sell = Select a property to sell from
-monopoly-select-trade-offer = Select a trade offer
-monopoly-select-auction-bid = Select your auction bid
-monopoly-select-banking-transfer = Select a transfer
-monopoly-select-voice-command = Enter a voice command beginning with voice:
+monopoly-select-property-mortgage = 住宅ローンを組む物件を選択する
+monopoly-select-property-unmortgage = 抵当権を解除する物件を選択してください
+monopoly-select-property-build = 建築する物件を選択してください
+monopoly-select-property-sell = 売却する物件を選択してください
+monopoly-select-trade-offer = トレードオファーを選択してください
+monopoly-select-auction-bid = オークション入札額を選択してください
+monopoly-select-banking-transfer = 転送を選択してください
+monopoly-select-voice-command = voice:で始まる音声コマンドを入力してください
 
 # Additional validation
-monopoly-no-property-to-auction = There is no property to auction right now.
-monopoly-auction-active = Resolve the active auction first.
-monopoly-no-auction-active = There is no auction in progress.
-monopoly-not-your-auction-turn = It is not your turn in the auction.
-monopoly-no-mortgage-options = You do not have properties available to mortgage.
-monopoly-no-unmortgage-options = You do not have mortgaged properties to unmortgage.
-monopoly-no-build-options = You do not have properties available to build on.
-monopoly-no-sell-options = You do not have properties with buildings available to sell.
-monopoly-no-trade-options = You do not have any valid trades to offer right now.
-monopoly-no-trade-pending = There is no pending trade for you.
-monopoly-trade-pending = A trade is already pending.
-monopoly-trade-no-longer-valid = That trade is no longer valid.
-monopoly-not-in-jail = You are not in jail.
-monopoly-no-jail-card = You do not have a get-out-of-jail card.
-monopoly-roll-again-required = You rolled doubles and must roll again.
-monopoly-resolve-property-first = Resolve the pending property decision first.
+monopoly-no-property-to-auction = 現在競売にかけられる物件はありません。
+monopoly-auction-active = まずアクティブなオークションを解決してください。
+monopoly-no-auction-active = 進行中のオークションはありません。
+monopoly-not-your-auction-turn = オークションではあなたの番ではありません。
+monopoly-no-mortgage-options = 抵当に入れることができる不動産がありません。
+monopoly-no-unmortgage-options = 抵当権を解除する抵当物件はありません。
+monopoly-no-build-options = 構築できるプロパティがありません。
+monopoly-no-sell-options = 販売可能な建物付きの物件はありません。
+monopoly-no-trade-options = 現在、提案できる有効な取引はありません。
+monopoly-no-trade-pending = 保留中の取引はありません。
+monopoly-trade-pending = 取引はすでに保留中です。
+monopoly-trade-no-longer-valid = その取引はもう無効です。
+monopoly-not-in-jail = あなたは刑務所にはいません。
+monopoly-no-jail-card = あなたは出所カードを持っていません。
+monopoly-roll-again-required = ダブルスが出たので、もう一度出さなければなりません。
+monopoly-resolve-property-first = まず保留中の不動産に関する決定を解決します。
 
 # Additional turn events
-monopoly-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-you-roll-again = You rolled doubles and get another roll.
-monopoly-player-roll-again = { $player } rolled doubles and gets another roll.
-monopoly-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-you-jail-roll-doubles = You rolled doubles ({ $die1 } and { $die2 }) and leave jail.
-monopoly-player-jail-roll-doubles = { $player } rolled doubles ({ $die1 } and { $die2 }) and leaves jail.
-monopoly-jail-roll-failed = { $player } rolled { $die1 } and { $die2 } in jail (attempt { $attempts }).
-monopoly-bail-paid = { $player } paid { $amount } bail.
-monopoly-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-you-three-doubles-jail = You rolled three doubles in one turn and are sent to jail.
-monopoly-player-three-doubles-jail = { $player } rolled three doubles in one turn and is sent to jail.
-monopoly-jail-card-used = { $player } used a get-out-of-jail card.
-monopoly-sore-loser-rebate = { $player } received a sore loser rebate of { $amount }.
-monopoly-cheaters-early-end-turn-blocked = { $player } tried to end the turn early and paid a cheating penalty of { $amount }.
-monopoly-cheaters-payment-avoidance-blocked = { $player } triggered a cheaters payment penalty of { $amount }.
-monopoly-cheaters-reward-granted = { $player } claimed a cheaters reward of { $amount }.
-monopoly-cheaters-reward-unavailable = { $player } already claimed the cheaters reward this turn.
+monopoly-roll-again = { $player } はダブルを出して別のロールを獲得しました。
+monopoly-you-roll-again = ダブルを出して別のロールを獲得しました。
+monopoly-player-roll-again = { $player } はダブルを出して別のロールを獲得しました。
+monopoly-jail-roll-doubles = { $player } はダブル ({ $die1 } と { $die2 }) を出して刑務所を出ました。
+monopoly-you-jail-roll-doubles = ダブル ({ $die1 } と { $die2 }) を出して刑務所を出ました。
+monopoly-player-jail-roll-doubles = { $player } はダブル ({ $die1 } と { $die2 }) を出して刑務所を出ました。
+monopoly-jail-roll-failed = { $player } は刑務所で { $die1 } と { $die2 } をロールしました ({ $attempts } を試みました)。
+monopoly-bail-paid = { $player }は{ $amount }の保釈金を支払った。
+monopoly-three-doubles-jail = { $player } は 1 ターンに 3 つのダブルを出して刑務所に送られました。
+monopoly-you-three-doubles-jail = 1 つのターンで 3 つのダブルが出たため、刑務所に送られます。
+monopoly-player-three-doubles-jail = { $player } は 1 ターンに 3 つのダブルを出して刑務所に送られました。
+monopoly-jail-card-used = { $player }は出所カードを使用しました。
+monopoly-sore-loser-rebate = { $player } は { $amount } の敗者復活リベートを受け取りました。
+monopoly-cheaters-early-end-turn-blocked = { $player } はターンを早めに終了しようとして、{ $amount } の不正行為ペナルティを支払いました。
+monopoly-cheaters-payment-avoidance-blocked = { $player } は、{ $amount } の詐欺師の支払いペナルティをトリガーしました。
+monopoly-cheaters-reward-granted = { $player } は、{ $amount } の詐欺師の報酬を請求しました。
+monopoly-cheaters-reward-unavailable = { $player } はこのターンですでに詐欺師の報酬を獲得しています。
 
 # Auctions and mortgages
-monopoly-auction-no-bids = No bids for { $property }. It remains unsold.
-monopoly-auction-started = Auction started for { $property } (opening bid: { $amount }).
-monopoly-auction-turn = Auction turn: { $player } to act on { $property } (current bid: { $amount }).
-monopoly-auction-bid-placed = { $player } bid { $amount } for { $property }.
-monopoly-auction-pass-event = { $player } passed on { $property }.
-monopoly-auction-won = { $player } won the auction for { $property } at { $amount }.
-monopoly-property-mortgaged = { $player } mortgaged { $property } for { $amount }.
-monopoly-property-unmortgaged = { $player } unmortgaged { $property } for { $amount }.
-monopoly-house-built-house = { $player } built a house on { $property } for { $amount }. It now has { $level }.
-monopoly-house-built-hotel = { $player } built a hotel on { $property } for { $amount }.
-monopoly-house-sold = { $player } sold a building on { $property } for { $amount } (level: { $level }).
-monopoly-trade-offered = { $proposer } offered { $target } a trade: { $offer }.
-monopoly-trade-completed = Trade completed between { $proposer } and { $target }: { $offer }.
-monopoly-trade-declined = { $target } declined trade from { $proposer }: { $offer }.
-monopoly-trade-cancelled = Trade cancelled: { $offer }.
-monopoly-free-parking-jackpot = { $player } collected the Free Parking jackpot of { $amount }.
-monopoly-mortgaged-no-rent = { $player } landed on mortgaged { $property }; no rent is due.
-monopoly-builder-blocks-awarded = { $player } gained { $amount } builder blocks ({ $blocks } total).
-monopoly-builder-block-spent = { $player } spent a builder block ({ $blocks } remaining).
-monopoly-banking-transfer-success = { $from_player } transferred { $amount } to { $to_player }.
-monopoly-banking-transfer-failed = { $player } bank transfer failed ({ $reason }).
-monopoly-banking-balance-report = { $player } bank balance: { $cash }.
-monopoly-banking-ledger-report = Recent banking activity: { $entries }.
-monopoly-banking-ledger-empty = No banking transactions yet.
-monopoly-voice-command-error = Voice command error: { $reason }.
-monopoly-voice-command-accepted = Voice command accepted: { $intent }.
-monopoly-voice-command-repeat = Repeating last banking response code: { $response }.
-monopoly-voice-transfer-staged = Voice transfer staged: { $amount } to { $target }. Say voice: confirm transfer.
+monopoly-auction-no-bids = { $property } への入札はありません。売れ残ってます。
+monopoly-auction-started = { $property }のオークションが開始されました（初値：{ $amount }）。
+monopoly-auction-turn = オークションターン: { $player } が { $property } に基づいて行動します (現在の入札: { $amount })。
+monopoly-auction-bid-placed = { $player } が { $amount } に { $property } を入札しました。
+monopoly-auction-pass-event = { $player } は { $property } に引き継がれました。
+monopoly-auction-won = { $player } は、{ $amount } で { $property } のオークションを落札しました。
+monopoly-property-mortgaged = { $player }は{ $property }を{ $amount }のために抵当に入れました。
+monopoly-property-unmortgaged = { $player } { $amount } 用の抵当権のない { $property }。
+monopoly-house-built-house = { $player }は{ $amount }のために{ $property }上に家を建てました。 { $level }が追加されました。
+monopoly-house-built-hotel = { $player }は{ $amount }のために{ $property }上にホテルを建設しました。
+monopoly-house-sold = { $player } は、{ $property } 上の建物を { $amount } (レベル: { $level }) で販売しました。
+monopoly-trade-offered = { $proposer } は { $target } に取引を提案しました: { $offer }。
+monopoly-trade-completed = { $proposer } と { $target } の間で取引が完了しました: { $offer }。
+monopoly-trade-declined = { $target } は { $proposer }: { $offer } からの取引を拒否しました。
+monopoly-trade-cancelled = 取引キャンセル: { $offer }。
+monopoly-free-parking-jackpot = { $player }は{ $amount }の無料駐車場ジャックポットを集めました。
+monopoly-mortgaged-no-rent = { $player }は抵当に入った{ $property }に着陸しました。家賃はかかりません。
+monopoly-builder-blocks-awarded = { $player } は { $amount } ビルダー ブロックを獲得しました ({ $blocks } 合計)。
+monopoly-builder-block-spent = { $player } はビルダー ブロックを消費しました ({ $blocks } 残り)。
+monopoly-banking-transfer-success = { $from_player }は{ $amount }を{ $to_player }に譲渡しました。
+monopoly-banking-transfer-failed = { $player } 銀行振込に失敗しました ({ $reason })。
+monopoly-banking-balance-report = { $player } 銀行残高: { $cash }。
+monopoly-banking-ledger-report = 最近の銀行活動: { $entries }。
+monopoly-banking-ledger-empty = まだ銀行取引はありません。
+monopoly-voice-command-error = 音声コマンド エラー: { $reason }。
+monopoly-voice-command-accepted = 受け入れられる音声コマンド: { $intent }。
+monopoly-voice-command-repeat = 最後の銀行応答コードを繰り返しています: { $response }。
+monopoly-voice-transfer-staged = ステージングされた音声転送: { $amount } から { $target }。 「音声確認転送」と言います。
 monopoly-mortgage-transfer-interest-paid = { $player } paid { $amount } in mortgage transfer interest.
 
 # Card engine
