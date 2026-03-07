@@ -508,6 +508,28 @@ def test_blackjack_whose_turn_between_hands_reports_waiting_bettors() -> None:
     assert "Waiting for bets from Guest." in spoken
 
 
+def test_blackjack_whose_turn_between_hands_uses_localized_waiting_message() -> None:
+    game = BlackjackGame()
+    host_user = MockUser("Host", locale="sr")
+    host_player = game.add_player("Host", host_user)
+    game.host = "Host"
+    guest_user = MockUser("Guest", locale="sr")
+    guest_player = game.add_player("Guest", guest_user)
+    game.status = "playing"
+    game.game_active = True
+    game.phase = "settle"
+    game.awaiting_next_bets = True
+    host_player.chips = 100
+    guest_player.chips = 100
+    host_player.next_bet_entered = True
+    guest_player.next_bet_entered = False
+
+    game._action_whose_turn(host_player, "whose_turn")
+
+    spoken = host_user.get_last_spoken() or ""
+    assert spoken == "Čeka se uplata od Guest."
+
+
 def test_blackjack_whose_turn_between_hands_all_bets_in_uses_default_whose_turn() -> None:
     game, host_player, host_user = create_game_with_host()
     guest_user = MockUser("Guest")
@@ -976,9 +998,24 @@ def test_blackjack_status_keybinds_do_not_rebuild_menus() -> None:
     game._handle_keybind_event(host_player, {"key": "t"})
     game._handle_keybind_event(host_player, {"key": "e"})
     game._handle_keybind_event(host_player, {"key": "s"})
+    game._handle_keybind_event(host_player, {"key": "b"})
 
     menu_events = [m for m in host_user.messages if m.type in {"show_menu", "update_menu"}]
     assert menu_events == []
+
+
+def test_blackjack_dealer_reveal_supports_serbian_locale_bundle() -> None:
+    game = BlackjackGame()
+    host_user = MockUser("Host", locale="sr")
+    game.add_player("Host", host_user)
+    game.host = "Host"
+    game.dealer_hand = [make_card(1, 10, 1), make_card(2, 1, 2)]
+
+    game._reveal_dealer_hand()
+
+    spoken = host_user.get_last_spoken() or ""
+    assert spoken != "blackjack-dealer-reveals"
+    assert "Delitelj otkriva" in spoken
 
 
 def test_blackjack_insurance_prompt_announced_to_player() -> None:

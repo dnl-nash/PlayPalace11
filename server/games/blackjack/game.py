@@ -780,6 +780,7 @@ class BlackjackGame(Game):
             "ctrl+w",
             "s",
             "shift+s",
+            "b",
             "ctrl+r",
             "r",
             "c",
@@ -1579,7 +1580,10 @@ class BlackjackGame(Game):
             ]
             if waiting:
                 waiting_names = Localization.format_list_and(user.locale, waiting)
-                user.speak(f"Waiting for bets from {waiting_names}.")
+                user.speak_l(
+                    "blackjack-waiting-for-bets",
+                    players=waiting_names,
+                )
                 return
 
         super()._action_whose_turn(player, action_id)
@@ -2104,6 +2108,7 @@ class BlackjackGame(Game):
                 "blackjack-dealer-reveals",
                 lambda locale: {
                     "card": card_name(self.dealer_hand[1], locale),
+                    "cards": read_cards(self.dealer_hand, locale),
                     "total": self._total_text(locale, total, is_soft),
                 },
             )

@@ -201,3 +201,4 @@ blackjack-status-line-hands = { $player }: { $chips } chips, hand 1 bet { $bet1 
 blackjack-status-dealer = Dealer: { $cards } ({ $total })
 blackjack-status-dealer-up = Dealer: showing { $card }
 blackjack-no-active-players = No active players.
+blackjack-waiting-for-bets = Waiting for bets from { $players }.

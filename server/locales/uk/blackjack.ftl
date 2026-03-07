@@ -197,6 +197,7 @@ blackjack-status-line-hands = { $player }: { $chips } chips, hand 1 bet { $bet1 
 blackjack-status-dealer = Dealer: { $cards } ({ $total })
 blackjack-status-dealer-up = Dealer: showing { $card }
 blackjack-no-active-players = No active players.
+blackjack-waiting-for-bets = Waiting for bets from { $players }.
 
 blackjack-insurance-prompt = Insurance available. You may insure for { $amount } chips or decline.
 blackjack-insurance-prompt-player = Insurance decision for { $player }.
