@@ -122,7 +122,7 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
         ssl_key: str | Path | None = None,
         config_path: str | Path | None = None,
         preload_locales: bool = False,
-        default_approval: bool = False,
+        auto_approve_new_accounts: bool = False,
     ):
         """Initialize the server and core managers.
 
@@ -135,7 +135,7 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
             ssl_key: Optional SSL private key path for TLS.
             config_path: Optional config.toml path override.
             preload_locales: Whether to block startup while compiling all locales.
-            default_approval: should new accounts have to be admin approved? If set to false, the upstream default, where players must wait for admin approval, will be used
+            auto_approve_new_accounts: Auto-approve new accounts (skip admin approval step)
         """
         self.host = host
         self.port = port
@@ -176,7 +176,7 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
         self._ws_max_message_size = DEFAULT_WS_MAX_MESSAGE_BYTES
         self._config_path = Path(config_path) if config_path else get_default_config_path()
         self._allow_insecure_ws = False
-        self._default_approval = default_approval
+        self._auto_approve_new_accounts = auto_approve_new_accounts
         self._preload_locales = preload_locales
         self._login_ip_limit = DEFAULT_LOGIN_ATTEMPTS_PER_MINUTE
         self._login_user_limit = DEFAULT_LOGIN_FAILURES_PER_MINUTE
@@ -365,8 +365,8 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
             return max(minimum, value_int)
 
         if auth_cfg:
-            self._default_approval = _coerce_bool(
-                auth_cfg.get("default_approval"), self._default_approval
+            self._auto_approve_new_accounts = _coerce_bool(
+                auth_cfg.get("auto_approve_new_accounts"), self._auto_approve_new_accounts
             )
             self._username_min_length = _read_limit(auth_cfg, "username_min_length", self._username_min_length)
             self._username_max_length = _read_limit(
@@ -1271,7 +1271,7 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
                 needs_approval = self._db.get_user_count() > 0
 
                 # Try to register
-                if not self._auth.register(username, password, approval=self._default_approval, locale=locale):
+                if not self._auth.register(username, password, approval=self._auto_approve_new_accounts, locale=locale):
                     self._record_login_failure(username)
                     # Registration failed (shouldn't happen if user not found, but handle anyway)
                     error_message = Localization.get(locale, "incorrect-username")
@@ -1330,10 +1330,10 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
             return
 
         # All self-registered users require approval.
-        needs_approval = True
+        needs_approval = not self._auto_approve_new_accounts
 
         # Try to register the user
-        if self._auth.register(username, password, approval=self._default_approval, locale=locale):
+        if self._auth.register(username, password, approval=self._auto_approve_new_accounts, locale=locale):
             await client.send({
                 "type": "speak",
                 "text": "Registration successful! Your account is waiting for approval.",
