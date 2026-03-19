@@ -126,11 +126,18 @@ class TestAuthIntegration:
         self.db.close()
         os.unlink(self.temp_file.name)
 
-    def test_register_and_authenticate(self):
-        """Test user registration and authentication."""
+    def test_register_and_authenticate_accounts_blocked(self):
+        """Test user registration and authentication with accounts disallowed by server owner."""
         # Register
-        assert self.auth.register("newuser", "password123")
-        assert not self.auth.register("newuser", "different")  # Already exists
+        assert not self.auth.register("newuser", "different",approval=False, block_new_accounts=True)  # should fail as new accounts are blocked
+
+
+    def test_register_and_authenticate_accounts_not_blocked(self):
+        """Test user registration and authentication with accounts allowed by server owner."""
+        # Register
+        assert self.auth.register("newuser", "password123", approval=False, block_new_accounts=False)
+        assert not self.auth.register("newuser", "different", approval=False, block_new_accounts=False)  # Already exists
+
 
         # Authenticate
         assert self.auth.authenticate("newuser", "password123") == AuthResult.SUCCESS
@@ -139,7 +146,7 @@ class TestAuthIntegration:
 
     def test_session_management(self):
         """Test session token creation and validation."""
-        self.auth.register("sessionuser", "pass")
+        self.auth.register("sessionuser", "pass", approval=True, block_new_accounts=False)
 
         # Create session
         token, _expires_at = self.auth.create_session("sessionuser", 60)
