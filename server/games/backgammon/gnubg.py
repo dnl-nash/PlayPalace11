@@ -182,12 +182,12 @@ def hint_to_actions(
                 actions.append((src, dst))
                 continue
             if src == -1:  # bar entry
-                # Bar entry: for Red, bar→idx means pips = idx+1;
-                # for White, bar→idx means pips = 24-idx
+                # Bar entry: Red enters at index 24-die, White at die-1
+                # So pips = 24-dst for Red, dst+1 for White
                 if color == "red":
-                    pips = dst + 1
-                else:
                     pips = 24 - dst
+                else:
+                    pips = dst + 1
             else:
                 pips = abs(dst - src)
 
@@ -234,7 +234,7 @@ def _expand_compound_move(
         # Non-doubles compound: d1 + d2 on one checker
         if pips == d1 + d2:
             if src == -1:  # bar
-                mid = (d1 - 1) if color == "red" else (24 - d1)
+                mid = (24 - d1) if color == "red" else (d1 - 1)
             else:
                 mid = src + d1 * move_dir
             return [(src, mid), (mid, dst)]

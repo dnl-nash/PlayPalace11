@@ -450,6 +450,7 @@ class BackgammonGame(Game):
 
         # Opening roll
         self._do_opening_roll()
+        BotHelper.jolt_bots(self, ticks=random.randint(12, 20))
 
     def _do_opening_roll(self) -> None:
         """Roll one die each for opening; higher goes first."""
@@ -590,7 +591,6 @@ class BackgammonGame(Game):
                 if not self._try_bear_off(player, point_idx):
                     gs.selected_source = None
                     self.play_sound("game_chess/setdown.ogg")
-                    self.update_player_menu(player)
             else:
                 self._try_move_to(player, selected, point_idx)
 
@@ -630,7 +630,6 @@ class BackgammonGame(Game):
 
         gs.selected_source = point_idx
         self.play_sound("game_chess/pickup.ogg")
-        self.update_player_menu(player)
 
     def _try_move_to(self, player: BackgammonPlayer, source: int, dest_point: int) -> None:
         """Try to move from selected source to destination point."""
@@ -743,7 +742,6 @@ class BackgammonGame(Game):
             user = self.get_user(player)
             if user:
                 user.speak_l("backgammon-illegal-move")
-            self.update_player_menu(player)
             return
 
         # Apply the move
@@ -1240,6 +1238,7 @@ class BackgammonGame(Game):
 
         self.broadcast_l("backgammon-new-game", number=gs.game_number)
         self._do_opening_roll()
+        BotHelper.jolt_bots(self, ticks=random.randint(12, 20))
 
     def _finish_match(self, winner: BackgammonPlayer | None) -> None:
         """End the match."""
