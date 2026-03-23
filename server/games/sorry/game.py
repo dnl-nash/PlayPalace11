@@ -422,6 +422,7 @@ class SorryGame(Game):
                 steps,
                 sound_template="game_squares/token{variant}.ogg",
                 variant_count=10,
+                step_interval_ticks=2,
             )
         elif move.move_type == "backward":
             steps = move.steps or 1
@@ -429,6 +430,7 @@ class SorryGame(Game):
                 steps,
                 sound_template="game_squares/token{variant}.ogg",
                 variant_count=10,
+                step_interval_ticks=2,
             )
         elif move.move_type == "start":
             self.play_sound("game_squares/token1.ogg")

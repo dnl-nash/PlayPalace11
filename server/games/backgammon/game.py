@@ -629,10 +629,16 @@ class BackgammonGame(Game):
             return
 
         # Check the point has our checkers
-        if gs.board.points[point_idx] * sign <= 0:
+        val = gs.board.points[point_idx]
+        if val == 0:
             user = self.get_user(player)
             if user:
                 user.speak_l("backgammon-no-checkers-there")
+            return
+        if val * sign < 0:
+            user = self.get_user(player)
+            if user:
+                user.speak_l("backgammon-not-your-checkers")
             return
 
         # Check if any legal move originates from this point
@@ -1248,6 +1254,7 @@ class BackgammonGame(Game):
         self._match_winner = winner
         if winner:
             self.broadcast_l("backgammon-match-winner", player=winner.name)
+        self.play_sound("game_pig/win.ogg")
         self.finish_game()
 
     def build_game_result(self) -> GameResult:
@@ -1286,10 +1293,6 @@ class BackgammonGame(Game):
         """Format the match result for the end screen."""
         d = result.custom_data
         lines = []
-        if d.get("winner_name"):
-            lines.append(Localization.get(
-                locale, "backgammon-match-winner", player=d["winner_name"],
-            ))
         lines.append(Localization.get(
             locale, "backgammon-end-score",
             red=d.get("red_name", "Red"),
@@ -1368,6 +1371,9 @@ class BackgammonGame(Game):
         self, user: User, move: BackgammonMove, mover_color: str, viewer_color: str
     ) -> None:
         """Speak a single sub-move to a user with point numbers in their perspective."""
+        if self.options.verbose_commentary:
+            self._speak_move_verbose(user, move, mover_color, viewer_color)
+            return
         gs = self.game_state
 
         if move.source == -1:
@@ -1432,6 +1438,80 @@ class BackgammonGame(Game):
                     count=dest_count,
                 )
 
+    def _speak_move_verbose(
+        self, user: User, move: BackgammonMove, mover_color: str, viewer_color: str
+    ) -> None:
+        """Speak a verbose sub-move: player name conjugation, captures, stack counts."""
+        gs = self.game_state
+        if mover_color == viewer_color:
+            is_self = "yes"
+        elif viewer_color == "":
+            is_self = "spectator"
+        else:
+            is_self = "no"
+        mover = self._get_player_by_color(mover_color)
+        opp = self._get_player_by_color(opponent_color(mover_color))
+        player_name = mover.name if mover else "?"
+        opponent_name = opp.name if opp else "?"
+
+        if move.source == -1:
+            # Bar entry
+            dest_pn = point_number_for_player(move.destination, viewer_color)
+            dest_count = point_count(gs, move.destination)
+            if move.is_hit:
+                user.speak_l(
+                    "backgammon-verbose-move-bar-hit",
+                    is_self=is_self,
+                    player=player_name,
+                    opponent=opponent_name,
+                    dest=dest_pn,
+                )
+            else:
+                user.speak_l(
+                    "backgammon-verbose-move-bar",
+                    is_self=is_self,
+                    player=player_name,
+                    dest=dest_pn,
+                    dest_count=dest_count,
+                )
+        elif move.is_bear_off:
+            src_pn = point_number_for_player(move.source, viewer_color)
+            src_count = point_count(gs, move.source)
+            user.speak_l(
+                "backgammon-verbose-move-bearoff",
+                is_self=is_self,
+                player=player_name,
+                src=src_pn,
+                src_count=src_count,
+            )
+        elif move.is_hit:
+            src_pn = point_number_for_player(move.source, viewer_color)
+            dest_pn = point_number_for_player(move.destination, viewer_color)
+            src_count = point_count(gs, move.source)
+            user.speak_l(
+                "backgammon-verbose-move-hit",
+                is_self=is_self,
+                player=player_name,
+                opponent=opponent_name,
+                src=src_pn,
+                dest=dest_pn,
+                src_count=src_count,
+            )
+        else:
+            src_pn = point_number_for_player(move.source, viewer_color)
+            dest_pn = point_number_for_player(move.destination, viewer_color)
+            src_count = point_count(gs, move.source)
+            dest_count = point_count(gs, move.destination)
+            user.speak_l(
+                "backgammon-verbose-move-normal",
+                is_self=is_self,
+                player=player_name,
+                src=src_pn,
+                dest=dest_pn,
+                src_count=src_count,
+                dest_count=dest_count,
+            )
+
     # ==========================================================================
     # Action visibility / enable callbacks
     # ==========================================================================
@@ -1476,7 +1556,7 @@ class BackgammonGame(Game):
 
         cnt = abs(val)
         owner = "red" if val > 0 else "white"
-        owner_name = Localization.get(locale, f"backgammon-color-{owner}")
+        owner_name = Localization.get(locale, f"color-{owner}")
         key = "backgammon-point-occupied-selected" if selected else "backgammon-point-occupied"
         return Localization.get(locale, key, point=pn, color=owner_name, count=cnt)
 
