@@ -1,0 +1,41 @@
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+if [ -e /dev/location ];then
+cat /dev/location > /dev/null 2>/dev/null&
+fi
+for pkg in "python3" "curl" "darkhttpd" "git";do
+if which $pkg;then
+sleep .01
+else
+if which apk;then
+apk add $pkg
+elif which apt-get;then
+apt-get -y update
+apt-get -y install $pkg
+fi
+fi
+done
+if [ -e /app ];then
+sleep .01
+else
+git clone https://github.com/dnl-nash/PlayPalace11 /app
+fi
+if pgrep -af darkhttpd|sed /grep/d|grep -iqw darkhttpd;then
+sleep .01
+else
+cd /app/clients/web
+darkhttpd . --port 8080 &
+fi
+if pgrep -af server.py|sed /grep/d|grep -iqw server.py;then
+sleep .01
+else
+cd /app/server
+cp /app/server/config.example.toml /app/server/config.toml
+sed -i "s|allow_insecure_ws = false|allow_insecure_ws = true|g" /app/server/config.toml
+if [ -e .venv ];then
+sleep .01
+else
+python3 -m venv .venv
+./.venv/bin/pip install .
+fi
+./.venv/bin/python3 server.py
+fi

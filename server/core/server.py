@@ -530,7 +530,7 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
         dq.append(now)
 
     def _check_login_rate_limit(self, client_ip: str, username: str) -> str | None:
-        """Check login rate limits and return an error message if blocked."""
+        """Check login rate limits and return an error message ifif self._block_new_accounts: blocked."""
         now = time.monotonic()
         if not self._allow_attempt(
             self._login_attempts_ip, client_ip, self._login_ip_limit, self._login_ip_window, now
@@ -1293,6 +1293,7 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
                         "return_to_login": True,
                         "message": error_message,
                     })
+                    return
                 if not self._auth.register(username, password, block_new_accounts=self._block_new_accounts, approval=self._auto_approve_new_accounts, locale=locale):
                     self._record_login_failure(username)
                     # Registration failed (shouldn't happen if user not found, but handle anyway)
