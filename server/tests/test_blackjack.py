@@ -549,6 +549,7 @@ def test_blackjack_whose_turn_between_hands_all_bets_in_uses_default_whose_turn(
     assert spoken == "No one's turn right now."
 
 
+
 def test_blackjack_between_hands_timer_timeout_uses_base_bet_for_missing_entries() -> None:
     game, host_player, _host_user = create_game_with_host()
     guest_user = MockUser("Guest")

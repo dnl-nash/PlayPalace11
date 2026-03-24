@@ -1360,6 +1360,7 @@ class BlackjackGame(Game):
         self.play_sound(SOUND_BET)
         self._start_next_hand_if_ready()
 
+
     def _action_set_next_bet(self, player: Player, amount_str: str, action_id: str) -> None:
         p = player if isinstance(player, BlackjackPlayer) else None
         if not p or self._is_set_next_bet_enabled(p):
@@ -1605,6 +1606,7 @@ class BlackjackGame(Game):
     def _action_check_scores(self, player: Player, action_id: str) -> None:
         self._suppress_keybind_rebuild(player)
         super()._action_check_scores(player, action_id)
+
 
     def _bot_input_set_next_bet(self, player: Player) -> str:
         p = player if isinstance(player, BlackjackPlayer) else None
