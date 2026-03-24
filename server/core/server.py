@@ -1336,6 +1336,19 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
             client: Client connection.
             packet: Incoming register payload.
         """
+         
+        if self._block_new_accounts:
+            error_message = Localization.get(locale, "accounts-blocked")
+            await client.send({"type": "play_sound", "name": "accounterror.ogg"})
+            await client.send({"type": "speak", "text": error_message, "buffer": "activity"})
+            await client.send({
+                "type": "disconnect",
+                "reconnect": False,
+                "show_message": True,
+                "return_to_login": True,
+                "message": error_message,
+            })
+            return
         username_raw = packet.get("username", "")
         password_raw = packet.get("password", "")
         # email and bio are sent but not stored yet
