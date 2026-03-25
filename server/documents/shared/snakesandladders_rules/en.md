@@ -47,17 +47,6 @@ The board has 9 ladders and 10 snakes at fixed positions:
 ### Customizable Options
 There are no customizable options for Snakes and Ladders. The board layout, die, and rules are fixed to the standard game. The host can choose between 2 and 4 players.
 
-### Example Turn
-You are on square 71. You roll a 4.
-
-You move forward 4 squares, landing on square 75. But wait -- there is no snake or ladder on 75 in this layout, so you simply stay there. Your turn ends and the next player rolls.
-
-Now imagine instead you are on square 67 and roll a 4. You move to square 71. Square 71 is the bottom of a ladder! You climb all the way up to square 91. A huge jump, and you are now very close to winning.
-
-But be careful. On a later turn, say you are on square 91 and roll a 4. You would land on square 95 -- the head of a snake. You slide all the way down to square 75. Brutal.
-
-Or suppose you are on square 98 and roll a 5. You would pass 100 by 3, so you bounce back to square 97. You need to roll exactly a 3 to win from there -- or a 2 to land on 100 via the normal move. Actually, from 97, a roll of 3 puts you on 100 exactly. A roll of 4, 5, or 6 would bounce you back again.
-
 ## Keyboard Shortcuts
 Shortcuts specific to Snakes and Ladders:
 
