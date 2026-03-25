@@ -80,6 +80,7 @@ class Bot(User):
         position: int | None = None,
         grid_enabled: bool = False,
         grid_width: int = 1,
+        play_selection_sound: bool = False,
     ) -> None:
         """No-op: bots do not render menus."""
         pass
@@ -90,6 +91,7 @@ class Bot(User):
         items: list[str | MenuItem],
         position: int | None = None,
         selection_id: str | None = None,
+        play_selection_sound: bool = False,
     ) -> None:
         """No-op: bots do not update menus."""
         pass

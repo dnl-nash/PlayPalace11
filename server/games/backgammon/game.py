@@ -150,6 +150,11 @@ class BackgammonGame(Game):
     # Queued bot actions from GNUBG (full turn planned at once)
     _bot_goals: list[tuple[int, int]] = field(default_factory=list)
 
+    # Ctrl+Up/Down navigation cursor
+    _nav_cursor: int | None = None
+    _nav_selected_source: int | None = None
+    _nav_skip_rebuild: bool = False
+
     @classmethod
     def get_name(cls) -> str:
         return "Backgammon"
@@ -277,6 +282,32 @@ class BackgammonGame(Game):
             show_in_actions_menu=False,
         ))
 
+        # Navigation (ctrl+up/down, hidden from menu)
+        action_set.add(Action(
+            id="navigate_next",
+            label="Next",
+            handler="_action_navigate_next",
+            is_enabled="_is_navigate_enabled",
+            is_hidden="_is_always_hidden",
+            show_in_actions_menu=False,
+        ))
+        action_set.add(Action(
+            id="navigate_prev",
+            label="Previous",
+            handler="_action_navigate_prev",
+            is_enabled="_is_navigate_enabled",
+            is_hidden="_is_always_hidden",
+            show_in_actions_menu=False,
+        ))
+        action_set.add(Action(
+            id="deselect",
+            label="Deselect",
+            handler="_action_deselect",
+            is_enabled="_is_deselect_enabled",
+            is_hidden="_is_always_hidden",
+            show_in_actions_menu=False,
+        ))
+
         return action_set
 
     def create_standard_action_set(self, player: Player) -> ActionSet:
@@ -354,6 +385,11 @@ class BackgammonGame(Game):
         self.define_keybind("c", "Dice", ["check_dice"], state=KeybindState.ACTIVE, include_spectators=True)
         self.define_keybind("h", "Hint", ["get_hint"], state=KeybindState.ACTIVE)
         self.define_keybind("shift+h", "Cube hint", ["get_cube_hint"], state=KeybindState.ACTIVE)
+        self.define_keybind("ctrl+down", "Next destination", ["navigate_next"], state=KeybindState.ACTIVE)
+        self.define_keybind("ctrl+right", "Next destination", ["navigate_next"], state=KeybindState.ACTIVE)
+        self.define_keybind("ctrl+up", "Previous destination", ["navigate_prev"], state=KeybindState.ACTIVE)
+        self.define_keybind("ctrl+left", "Previous destination", ["navigate_prev"], state=KeybindState.ACTIVE)
+        self.define_keybind("ctrl+backspace", "Deselect", ["deselect"], state=KeybindState.ACTIVE)
 
     # ==========================================================================
     # Grid helpers
@@ -376,11 +412,116 @@ class BackgammonGame(Game):
         return top + bottom
 
     # ==========================================================================
+    # Ctrl+Up/Down navigation
+    # ==========================================================================
+
+    def _action_navigate_next(self, player: Player, action_id: str) -> None:
+        if isinstance(player, BackgammonPlayer):
+            self._navigate(player, direction=1)
+
+    def _action_navigate_prev(self, player: Player, action_id: str) -> None:
+        if isinstance(player, BackgammonPlayer):
+            self._navigate(player, direction=-1)
+
+    def _action_deselect(self, player: Player, action_id: str) -> None:
+        if not isinstance(player, BackgammonPlayer):
+            return
+        gs = self.game_state
+        if gs.selected_source is not None:
+            gs.selected_source = None
+            self.play_sound("game_chess/setdown.ogg")
+            self.rebuild_all_menus()
+
+    def _navigate(self, player: BackgammonPlayer, direction: int) -> None:
+        """Cycle through navigation targets with ctrl+up/down.
+
+        With a piece selected: cycle destinations (blots first).
+        Without selection: cycle source squares with legal moves,
+        or bar entry destinations if on the bar.
+        """
+        gs = self.game_state
+        if gs.turn_phase != "moving" or player.color != gs.current_color:
+            return
+
+        color = player.color
+        selected = gs.selected_source
+
+        # Reset cursor when selection state changes
+        if selected != self._nav_selected_source:
+            self._nav_cursor = None
+            self._nav_selected_source = selected
+
+        if selected is not None:
+            targets = self._get_navigation_destinations(color, selected)
+        elif bar_count(gs, color) > 0:
+            targets = self._get_navigation_destinations(color, -1)
+        else:
+            targets = self._get_navigation_sources(color)
+
+        if not targets:
+            return
+
+        if self._nav_cursor is not None and self._nav_cursor in targets:
+            idx = targets.index(self._nav_cursor)
+            idx = (idx + direction) % len(targets)
+        else:
+            idx = 0 if direction == 1 else len(targets) - 1
+
+        self._nav_cursor = targets[idx]
+        self._nav_skip_rebuild = True
+        self.update_player_menu(
+            player, selection_id=f"point_{targets[idx]}",
+            play_selection_sound=True,
+        )
+
+    def _get_navigation_destinations(self, color: str, source: int) -> list[int]:
+        """Destinations for source, ordered: opponent blots, own blots, other."""
+        gs = self.game_state
+        sign = color_sign(color)
+
+        destinations: set[int] = set()
+        for die_val in self._get_usable_dice():
+            for m in generate_legal_moves(gs, color, die_val):
+                if m.source == source and not m.is_bear_off:
+                    destinations.add(m.destination)
+
+        opponent_blots: list[int] = []
+        own_blots: list[int] = []
+        other: list[int] = []
+
+        for dest in destinations:
+            val = gs.board.points[dest]
+            if val * sign < 0:
+                opponent_blots.append(dest)
+            elif val * sign > 0 and abs(val) == 1:
+                own_blots.append(dest)
+            else:
+                other.append(dest)
+
+        key = lambda idx: point_number_for_player(idx, color)
+        opponent_blots.sort(key=key)
+        own_blots.sort(key=key)
+        other.sort(key=key)
+
+        return opponent_blots + own_blots + other
+
+    def _get_navigation_sources(self, color: str) -> list[int]:
+        """Source points that have legal moves, sorted by point number."""
+        gs = self.game_state
+        sources: set[int] = set()
+        for die_val in self._get_usable_dice():
+            for m in generate_legal_moves(gs, color, die_val):
+                if m.source >= 0:
+                    sources.add(m.source)
+        return sorted(sources, key=lambda idx: point_number_for_player(idx, color))
+
+    # ==========================================================================
     # Menu overrides (grid mode)
     # ==========================================================================
 
-    def rebuild_player_menu(
-        self, player: "Player", *, position: int | None = None
+    def update_player_menu(
+        self, player: "Player", selection_id: str | None = None,
+        play_selection_sound: bool = False,
     ) -> None:
         if self._destroyed or self.status == "finished":
             return
@@ -390,6 +531,18 @@ class BackgammonGame(Game):
         if not user:
             return
 
+        point_items, other_items = self._build_menu_items(player, user)
+        if isinstance(player, BackgammonPlayer) and player.color == "white":
+            point_items = point_items[12:] + point_items[:12]
+
+        user.update_menu(
+            "turn_menu", point_items + other_items,
+            selection_id=selection_id,
+            play_selection_sound=play_selection_sound,
+        )
+
+    def _build_menu_items(self, player: "Player", user) -> tuple[list[MenuItem], list[MenuItem]]:
+        """Build point items and other items for the turn menu."""
         point_items: list[MenuItem] = []
         other_items: list[MenuItem] = []
         for resolved in self.get_all_visible_actions(player):
@@ -402,7 +555,21 @@ class BackgammonGame(Game):
                 point_items.append(item)
             else:
                 other_items.append(item)
+        return point_items, other_items
 
+    def rebuild_player_menu(
+        self, player: "Player", *, position: int | None = None,
+        play_selection_sound: bool = False,
+    ) -> None:
+        if self._destroyed or self.status == "finished":
+            return
+        if player.id in self._status_box_open:
+            return
+        user = self.get_user(player)
+        if not user:
+            return
+
+        point_items, other_items = self._build_menu_items(player, user)
         use_grid = len(point_items) == 24
 
         # Flip for White: swap the two 12-item row halves so both
@@ -418,6 +585,7 @@ class BackgammonGame(Game):
             position=position,
             grid_enabled=use_grid,
             grid_width=12 if use_grid else 1,
+            play_selection_sound=play_selection_sound,
         )
 
     # ==========================================================================
@@ -564,6 +732,13 @@ class BackgammonGame(Game):
                 self._action_point_click(player, action_id)
                 return
         super().execute_action(player, action_id, input_value=input_value, context=context)
+
+    def _should_rebuild_after_keybind(self, player, executed_any: bool) -> bool:
+        """Skip auto-rebuild when navigation already sent an update."""
+        if self._nav_skip_rebuild:
+            self._nav_skip_rebuild = False
+            return False
+        return super()._should_rebuild_after_keybind(player, executed_any)
 
     # ==========================================================================
     # Point click handler (roll + select + move)
@@ -1176,11 +1351,23 @@ class BackgammonGame(Game):
 
         player_name = player.name
         color = player.color
+        # When facing a double, query from the doubler's perspective so cube
+        # ownership is encoded correctly, then map to a clear take/drop answer.
+        facing_double = gs.turn_phase == "doubling" and color != gs.current_color
+        doubler_color = gs.current_color
 
         def _query():
-            hint_text = proc.get_cube_hint_text(gs, color)
-            if hint_text:
-                return {"message_key": "backgammon-cube-hint", "player": player_name, "hint": hint_text}
+            if facing_double:
+                decision = proc.get_cube_decision(gs, doubler_color)
+                if decision:
+                    # "no-double" / "double-take" → take (double was bad or position is viable)
+                    # "too-good" / "double-pass" → drop (position is lost)
+                    advice = "take" if decision in ("double-take", "no-double") else "drop"
+                    return {"message_key": "backgammon-cube-hint-response", "player": player_name, "advice": advice}
+            else:
+                hint_text = proc.get_cube_hint_text(gs, color)
+                if hint_text:
+                    return {"message_key": "backgammon-cube-hint", "player": player_name, "hint": hint_text}
             return None
 
         from .bot import _gnubg_pool
@@ -1639,6 +1826,8 @@ class BackgammonGame(Game):
             return "backgammon-not-doubling-phase"
         if not isinstance(player, BackgammonPlayer):
             return "backgammon-not-doubling-phase"
+        if player.is_spectator:
+            return "backgammon-not-doubling-phase"
         if player.color == gs.current_color:
             return "backgammon-not-doubling-phase"
         return None
@@ -1654,6 +1843,32 @@ class BackgammonGame(Game):
     def _is_drop_double_hidden(self, player: Player, action_id: str = "") -> Visibility:
         return self._is_accept_double_hidden(player)
 
+
+    def _is_navigate_enabled(self, player: Player) -> str | None:
+        if self.status != "playing":
+            return "action-not-playing"
+        if not isinstance(player, BackgammonPlayer):
+            return "action-not-available"
+        gs = self.game_state
+        if gs.turn_phase != "moving":
+            return "action-not-available"
+        if player.color != gs.current_color:
+            return "action-not-your-turn"
+        return None
+
+    def _is_deselect_enabled(self, player: Player) -> str | None:
+        if self.status != "playing":
+            return "action-not-playing"
+        if not isinstance(player, BackgammonPlayer):
+            return "action-not-available"
+        gs = self.game_state
+        if gs.turn_phase != "moving":
+            return "action-not-available"
+        if player.color != gs.current_color:
+            return "action-not-your-turn"
+        if gs.selected_source is None:
+            return "action-not-available"
+        return None
 
     def _is_info_enabled(self, player: Player) -> str | None:
         if self.status != "playing":

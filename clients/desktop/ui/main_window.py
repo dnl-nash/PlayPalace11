@@ -692,6 +692,9 @@ class MainWindow(wx.Frame):
             return None
         if menu_is_empty:
             return key_map[key_code]
+        # Ctrl+Arrow: send to server as keybind (e.g. navigate destinations)
+        if event.ControlDown():
+            return key_map[key_code]
         event.Skip()
         return None
 
@@ -2034,9 +2037,12 @@ class MainWindow(wx.Frame):
         item_sounds = menu_data["item_sounds"]
         menu_id = menu_data["menu_id"]
         position = menu_data["position"]
+        play_selection_sound = packet.get("play_selection_sound", False)
 
         if self._menu_state_is_unchanged(menu_data):
             self._apply_menu_position(items, position)
+            if play_selection_sound:
+                self._play_menu_selection_sound(position, item_sounds)
             return
 
         self._apply_menu_settings(menu_data)
@@ -2053,6 +2059,8 @@ class MainWindow(wx.Frame):
             self._rebuild_menu(items, position)
 
         self._update_menu_sounds(item_sounds)
+        if play_selection_sound:
+            self._play_menu_selection_sound(position, item_sounds)
 
     def _parse_menu_packet(self, packet: dict) -> dict:
         """Parse menu packet into structured data."""
@@ -2138,6 +2146,16 @@ class MainWindow(wx.Frame):
     def _apply_menu_position(self, items: list[str], position: int | None) -> None:
         if position is not None and len(items) > 0 and 0 <= position < len(items):
             self.menu_list.SetSelection(position)
+            self.menu_list.EnsureVisible(position)
+
+    def _play_menu_selection_sound(self, position: int | None, item_sounds: list) -> None:
+        """Play the selection sound for the item at position."""
+        if not self.sound_manager or position is None:
+            return
+        if 0 <= position < len(item_sounds) and item_sounds[position]:
+            self.sound_manager.play(item_sounds[position])
+        else:
+            self.sound_manager.play_menuclick()
 
     def _set_menu_focus(self) -> None:
         focused = wx.Window.FindFocus()

@@ -129,6 +129,7 @@ class MockUser(User):
         position: int | None = None,
         grid_enabled: bool = False,
         grid_width: int = 1,
+        play_selection_sound: bool = False,
     ) -> None:
         """Record menu display state and message."""
         menu_data = {
@@ -148,6 +149,7 @@ class MockUser(User):
         items: list[str | MenuItem],
         position: int | None = None,
         selection_id: str | None = None,
+        play_selection_sound: bool = False,
     ) -> None:
         """Record menu update state and message."""
         if menu_id in self.menus:

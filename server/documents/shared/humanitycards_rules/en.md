@@ -1,8 +1,8 @@
-# Rules Of Humanity Cards
+# Rules Of Cards Against Humanity
 PlayPalace team, 2026.
 
 ## TL;DR
-Humanity Cards is a party game for 3 to 10 players. Each round, one player is the Card Czar. A black prompt card is read aloud, and every other player submits white answer cards from their hand to fill in the blanks. The Card Czar picks the funniest (or most fitting) submission, and that player scores a point. First to the target score wins.
+Cards Against Humanity is a party game for 3 to 10 players. Each round, one player is the Card Czar. A black prompt card is read aloud, and every other player submits white answer cards from their hand to fill in the blanks. The Card Czar picks the funniest (or most fitting) submission, and that player scores a point. First to the target score wins.
 
 ## Gameplay
 The game uses two decks: black cards (prompts) and white cards (answers). Black cards contain a sentence or question with one or more blanks. White cards contain words or phrases that players use to fill those blanks.
@@ -50,7 +50,7 @@ Once all four have submitted, Alice enters the judging phase. She hears the subm
 Alice picks number 3. The game announces: "Eve wins the round! Score: 1." Then it reveals everyone's answers. All players are dealt replacement cards, and the Card Czar rotates to Bob for the next round.
 
 ## Keyboard Shortcuts
-Shortcuts specific to Humanity Cards:
+Shortcuts specific to Cards Against Humanity:
 
 * 1 through 0: Toggle white cards 1 through 10 in your hand (selecting or deselecting them for submission).
 * Space: Submit your selected cards.
@@ -65,7 +65,5 @@ Shortcuts specific to Humanity Cards:
 * This is not a strategy game in the traditional sense. The Card Czar's taste is everything. Pay attention to what kind of humor each player tends to reward and tailor your picks accordingly.
 * Obvious answers are rarely winners. The funniest submissions often come from unexpected or absurd combinations. Do not always go for the answer that "makes sense."
 * If a prompt has two blanks, the order of your cards matters. The first card you select fills the first blank, and the second fills the second. Think about the rhythm of the sentence.
-* When you are the Card Czar, take your time. Read each submission carefully. The best card is not always the first one that makes you laugh.
-* With a larger hand size, you have more options but also more to sift through. If you find 10 cards overwhelming, the host can reduce the hand size to 7 or even 5.
-* The "Most Recent Winner" czar mode adds a strategic wrinkle: winning a round means you sit out the next one as judge. If you are one point away from winning, you might actually want someone else to win so you can keep playing and score the final point yourself. In practice, this rarely matters, but it is worth knowing.
-* Selecting more card packs increases variety but can also introduce cards that not everyone in the group will find funny. If you are playing with a mixed audience, the family edition pack keeps things cleaner.
+* As I mentioned,  you should adapt your responses according to the current card czar's taste.  Bear in mind however that the inverse (deliberately avoiding the leading player's submission even if it was funnier) is  considered unsportsmanlike in many circles.
+* Selecting more card packs increases variety but can also lower the coherence of answers. This might be funny, but it could also just make for a boring game.

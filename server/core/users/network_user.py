@@ -228,6 +228,7 @@ class NetworkUser(User):
         position: int | None = None,
         grid_enabled: bool = False,
         grid_width: int = 1,
+        play_selection_sound: bool = False,
     ) -> None:
         """Send a menu definition to the client."""
         converted_items = self._convert_items(items)
@@ -260,6 +261,8 @@ class NetworkUser(User):
         if position is not None:
             # Convert 1-based to 0-based for client
             packet["position"] = position - 1
+        if play_selection_sound:
+            packet["play_selection_sound"] = True
         self._queue_packet(packet)
 
     def update_menu(
@@ -268,6 +271,7 @@ class NetworkUser(User):
         items: list[str | MenuItem],
         position: int | None = None,
         selection_id: str | None = None,
+        play_selection_sound: bool = False,
     ) -> None:
         """Update an existing menu's items or selection."""
         converted_items = self._convert_items(items)
@@ -286,6 +290,8 @@ class NetworkUser(User):
             packet["position"] = position - 1
         if selection_id is not None:
             packet["selection_id"] = selection_id
+        if play_selection_sound:
+            packet["play_selection_sound"] = True
         self._queue_packet(packet)
 
     def remove_menu(self, menu_id: str) -> None:

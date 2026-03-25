@@ -102,6 +102,10 @@ backgammon-hint-not-now = Hints are only available during the moving phase.
 backgammon-hints-disabled = Hints are disabled. Enable them in game options.
 backgammon-hint-unavailable = Hint engine not available.
 backgammon-cube-hint = { $player } asks for cube advice: { $hint }
+backgammon-cube-hint-response = { $player } asks for cube advice: { $advice ->
+    [take] Take.
+   *[drop] Drop.
+}
 backgammon-cube-hint-not-now = Cube hints are only available before rolling or when facing a double.
 backgammon-cube-hints-disabled = Cube hints are disabled. Enable them in game options.
 backgammon-gnubg-fallback = GNUBG engine unavailable. Bot is using simple fallback.
