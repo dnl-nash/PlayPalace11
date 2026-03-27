@@ -94,26 +94,46 @@ game-player-deals = { $player } deli karte.
 card-name = { $rank }  { $suit }
 no-cards = Nema karata
 
-# Colors
+# Colors (with gendered forms: m = masculine, f = feminine)
 color-black = Crna
-color-blue = Plava
-color-brown = Braon
-color-gray = Siva
-color-green = Zelena
-color-indigo = indigo
-color-orange = Narandžasta
-color-pink = Ružičasta
-color-purple = Ljubičasta
-color-red = Crvena
-color-violet = Ljubičasta
-color-white = Bela
-color-yellow = Žuta
-
-# Gendered color forms (m = masculine, f = feminine) — same in English
-color-white-m = beli
-color-white-f = bela
 color-black-m = crni
 color-black-f = crna
+color-blue = Plava
+color-blue-m = plavi
+color-blue-f = plava
+color-brown = Braon
+color-brown-m = braon
+color-brown-f = braon
+color-gray = Siva
+color-gray-m = sivi
+color-gray-f = siva
+color-green = Zelena
+color-green-m = zeleni
+color-green-f = zelena
+color-indigo = indigo
+color-indigo-m = indigo
+color-indigo-f = indigo
+color-orange = Narandžasta
+color-orange-m = narandžasti
+color-orange-f = narandžasta
+color-pink = Ružičasta
+color-pink-m = ružičasti
+color-pink-f = ružičasta
+color-purple = Ljubičasta
+color-purple-m = ljubičasti
+color-purple-f = ljubičasta
+color-red = Crvena
+color-red-m = crveni
+color-red-f = crvena
+color-violet = Ljubičasta
+color-violet-m = ljubičasti
+color-violet-f = ljubičasta
+color-white = Bela
+color-white-m = beli
+color-white-f = bela
+color-yellow = Žuta
+color-yellow-m = žuti
+color-yellow-f = žuta
 
 # Suit names
 suit-diamonds = Karo
