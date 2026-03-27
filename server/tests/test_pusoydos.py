@@ -235,13 +235,13 @@ def _make_game(n_players=4, **opts):
 
 class TestGameInit:
     def test_start_4_players(self):
-        game, players = _make_game(4)
+        game, players = _make_game(4, instant_wins=False)
         game.on_start()
         assert game.status == "playing"
         assert game.round == 1
 
     def test_start_resets_state(self):
-        game, players = _make_game(4)
+        game, players = _make_game(4, instant_wins=False)
         game.on_start()
         for p in players:
             assert p.round_wins == 0
@@ -256,21 +256,21 @@ class TestGameInit:
 
 class TestDealing:
     def test_4_players_13_cards_each(self):
-        game, players = _make_game(4)
+        game, players = _make_game(4, instant_wins=False)
         game.on_start()
 
         for p in game._playing_players():
             assert len(p.hand) == 13
 
     def test_2_players_26_cards_each(self):
-        game, players = _make_game(2)
+        game, players = _make_game(2, instant_wins=False)
         game.on_start()
 
         for p in game._playing_players():
             assert len(p.hand) == 26
 
     def test_3_players_17_cards_each(self):
-        game, players = _make_game(3)
+        game, players = _make_game(3, instant_wins=False)
         game.on_start()
 
         for p in game._playing_players():
@@ -278,7 +278,7 @@ class TestDealing:
 
     def test_3_players_removes_3_of_spades(self):
         """With 3 players, 3 of Spades is removed so deck is 51 cards."""
-        game, players = _make_game(3)
+        game, players = _make_game(3, instant_wins=False)
         game.on_start()
 
         all_cards = []
@@ -291,7 +291,7 @@ class TestDealing:
 
 class TestFirstTurn:
     def test_3_of_clubs_goes_first(self):
-        game, players = _make_game(4)
+        game, players = _make_game(4, instant_wins=False)
         game.on_start()
 
 
@@ -300,7 +300,7 @@ class TestFirstTurn:
         assert any(c.rank == 3 and c.suit == 2 for c in current.hand)
 
     def test_must_include_3_of_clubs(self):
-        game, players = _make_game(4)
+        game, players = _make_game(4, instant_wins=False)
         game.on_start()
 
 
@@ -500,7 +500,7 @@ class TestBot:
         assert "pair" in types
 
     def test_bot_plays_first_turn(self):
-        game, _ = _make_game(4)
+        game, _ = _make_game(4, instant_wins=False)
         game.on_start()
 
 
@@ -512,7 +512,7 @@ class TestBot:
         assert any(c.rank == 3 and c.suit == 2 for c in selected)
 
     def test_bot_passes_when_cannot_beat(self):
-        game, _ = _make_game(4)
+        game, _ = _make_game(4, instant_wins=False)
         game.on_start()
 
         game.is_first_turn = False
@@ -539,7 +539,7 @@ class TestBot:
 
 class TestSerialization:
     def test_round_trip(self):
-        game, players = _make_game(4)
+        game, players = _make_game(4, instant_wins=False)
         game.on_start()
 
 
