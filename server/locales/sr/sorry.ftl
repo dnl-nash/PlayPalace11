@@ -20,12 +20,58 @@ sorry-move-split7 = Split 7: Pešak { $pawn_a } se pomera { $steps_a }, pešak {
 sorry-card-sorry = Izvini!
 sorry-draw-announcement = { $player } vuče { $card }.
 sorry-no-legal-moves = { $player } nema dozvoljenih poteza za { $card }.
-sorry-play-start = { $player } pomera pešaka { $pawn } sa početka.
-sorry-play-forward = { $player } pomera pešaka { $pawn } napred { $steps }.
-sorry-play-backward = { $player } pomera pešaka { $pawn } nazad { $steps }.
-sorry-play-swap = { $player } menja pešaka { $pawn } sa pešakom igrača { $target_player }  { $target_pawn }.
-sorry-play-sorry = Izvini! { $player } menja pešaka igrača { $target_player }  { $target_pawn } pešakom { $pawn }.
-sorry-play-split7 = { $player } razdvaja 7: pešak { $pawn_a } se pomera { $steps_a }, pešak { $pawn_b } se pomera { $steps_b }.
+sorry-play-start = { $player } moves pawn { $pawn } out of start. Pawn { $pawn } is now { $zone ->
+        [track] on track square { $position }
+        [home_path] on home path step { $home_steps }
+        [home] home
+       *[other] in start
+    }.
+sorry-play-forward = { $player } moves pawn { $pawn } forward { $steps }. Pawn { $pawn } is now { $zone ->
+        [track] on track square { $position }
+        [home_path] on home path step { $home_steps }
+        [home] home
+       *[other] in start
+    }.
+sorry-play-backward = { $player } moves pawn { $pawn } backward { $steps }. Pawn { $pawn } is now { $zone ->
+        [track] on track square { $position }
+        [home_path] on home path step { $home_steps }
+        [home] home
+       *[other] in start
+    }.
+sorry-play-swap = { $player } swaps pawn { $pawn } with { $target_player } pawn { $target_pawn }. Pawn { $pawn } is now { $zone ->
+        [track] on track square { $position }
+        [home_path] on home path step { $home_steps }
+        [home] home
+       *[other] in start
+    }, { $target_player } pawn { $target_pawn } is now { $target_zone ->
+        [track] on track square { $target_position }
+        [home_path] on home path step { $target_home_steps }
+        [home] home
+       *[other] in start
+    }.
+sorry-play-sorry = Sorry! { $player } replaces { $target_player } pawn { $target_pawn } with pawn { $pawn }. Pawn { $pawn } is now { $zone ->
+        [track] on track square { $position }
+        [home_path] on home path step { $home_steps }
+        [home] home
+       *[other] in start
+    }.
+sorry-play-split7 = { $player } splits 7: pawn { $pawn_a } moves { $steps_a }, pawn { $pawn_b } moves { $steps_b }. Pawn { $pawn_a } is now { $a_zone ->
+        [track] on track square { $a_position }
+        [home_path] on home path step { $a_home_steps }
+        [home] home
+       *[other] in start
+    }, pawn { $pawn_b } is now { $b_zone ->
+        [track] on track square { $b_position }
+        [home_path] on home path step { $b_home_steps }
+        [home] home
+       *[other] in start
+    }.
+
+
+
+# Home arrival announcements
+sorry-pawn-home = { $player } pawn { $pawn } has arrived home!
+sorry-you-pawn-home = Your pawn { $pawn } has arrived home!
 
 # Options
 sorry-option-rules-profile = Profil pravila: { $rules_profile }

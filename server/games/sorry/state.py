@@ -65,8 +65,10 @@ class SorryGameState:
     draw_pile: list[str] = field(default_factory=list)
     discard_pile: list[str] = field(default_factory=list)
     current_card: str | None = None
-    turn_phase: str = "draw"  # draw | choose_move | resolve
+    turn_phase: str = "draw"  # draw | choose_move | choose_split
     turn_number: int = 1
+    split_pawn_a: int | None = None
+    split_pawn_b: int | None = None
 
 
 def normalize_track_position(position: int) -> int:

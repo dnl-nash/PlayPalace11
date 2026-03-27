@@ -22,7 +22,9 @@ class MockUser(User):
     Used in unit tests and play tests to verify game behavior.
     """
 
-    def __init__(self, username: str, locale: str = "en", uuid: str | None = None, approved: bool = True):
+    def __init__(
+        self, username: str, locale: str = "en", uuid: str | None = None, approved: bool = True
+    ):
         """Initialize a mock user for tests."""
         self._uuid = uuid or generate_uuid()
         self._username = username
@@ -90,9 +92,7 @@ class MockUser(User):
         """Record a speech event."""
         self.messages.append(Message("speak", {"text": text, "buffer": buffer}))
 
-    def play_sound(
-        self, name: str, volume: int = 100, pan: int = 0, pitch: int = 100
-    ) -> None:
+    def play_sound(self, name: str, volume: int = 100, pan: int = 0, pitch: int = 100) -> None:
         """Record a sound playback event."""
         self.messages.append(
             Message(
@@ -129,6 +129,7 @@ class MockUser(User):
         position: int | None = None,
         grid_enabled: bool = False,
         grid_width: int = 1,
+        play_selection_sound: bool = False,
     ) -> None:
         """Record menu display state and message."""
         menu_data = {
@@ -148,6 +149,7 @@ class MockUser(User):
         items: list[str | MenuItem],
         position: int | None = None,
         selection_id: str | None = None,
+        play_selection_sound: bool = False,
     ) -> None:
         """Record menu update state and message."""
         if menu_id in self.menus:
@@ -188,9 +190,7 @@ class MockUser(User):
             "read_only": read_only,
         }
         self.editboxes[input_id] = editbox_data
-        self.messages.append(
-            Message("show_editbox", {"input_id": input_id, **editbox_data})
-        )
+        self.messages.append(Message("show_editbox", {"input_id": input_id, **editbox_data}))
 
     def remove_editbox(self, input_id: str) -> None:
         """Record editbox removal state and message."""

@@ -163,6 +163,14 @@ class WebSocketServer:
                         await self._on_message(client, packet)
                 except json.JSONDecodeError:
                     pass  # Ignore malformed messages
+                except Exception:
+                    # Safety net: log and continue so the connection survives.
+                    # The server layer should catch and handle errors before
+                    # they reach here, but this prevents silent disconnects.
+                    identifier = client.username or client.address
+                    PACKET_LOGGER.exception(
+                        "Unhandled error processing message from %s", identifier
+                    )
 
         except websockets.exceptions.ConnectionClosed:
             pass
@@ -172,9 +180,7 @@ class WebSocketServer:
             if self._on_disconnect:
                 await self._on_disconnect(client)
 
-    async def broadcast(
-        self, packet: dict, exclude: ClientConnection | None = None
-    ) -> None:
+    async def broadcast(self, packet: dict, exclude: ClientConnection | None = None) -> None:
         """Broadcast a packet to all authenticated clients."""
         for client in self._clients.values():
             if client.authenticated and client != exclude:

@@ -8,6 +8,12 @@ from server.games.sorry.game import SorryGame, SorryOptions
 from server.games.sorry.state import SAFETY_LENGTH
 
 
+def _flush_bot_delays(game: SorryGame) -> None:
+    for player in game.players:
+        if player.is_bot:
+            player.bot_think_ticks = 0
+
+
 def _set_track(pawn, position: int) -> None:
     pawn.zone = "track"
     pawn.track_position = position
@@ -82,6 +88,8 @@ def _run_bot_game(
         _assert_state_invariants(game)
         if game.status == "finished":
             return game, tick
+
+        _flush_bot_delays(game)
 
         if reload_every and tick > 0 and tick % reload_every == 0:
             payload = game.to_json()
@@ -165,8 +173,8 @@ def test_mixed_human_bot_table_progresses_cleanly() -> None:
     for pawn in bot_state.pawns[1:]:
         _set_home(pawn)
 
-    # Draw pile pops from the end: Alice gets 3, bot gets 5.
-    game.game_state.draw_pile = ["5", "3"]
+    # Draw pile pops from the end: Alice gets 3, bot gets 1.
+    game.game_state.draw_pile = ["1", "3"]
 
     # Human turns are not auto-driven on tick.
     game.on_tick()
@@ -182,9 +190,12 @@ def test_mixed_human_bot_table_progresses_cleanly() -> None:
     assert game.game_state.turn_phase == "draw"
     assert game.game_state.current_card is None
 
-    game.on_tick()
-    # Bot lands on another color's slide start (35) and slides to 39 in classic.
-    assert bot_state.pawns[0].track_position == 39
+    _flush_bot_delays(game)
+    game.on_tick()  # draw
+    _flush_bot_delays(game)
+    game.on_tick()  # choose move
+    # Bot lands on another color's slide start (31, offset 1) and slides to 34.
+    assert bot_state.pawns[0].track_position == 34
     assert game.current_player is not None
     assert game.current_player.id == human_player.id
     assert game.game_state.turn_phase == "draw"

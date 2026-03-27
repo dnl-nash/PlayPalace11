@@ -23,3 +23,8 @@ server/coverage-report.txt
 
 # Web client local deployment config
 clients/web/config.js
+
+# Documents infrastructure (server-local and changeset tracking)
+server/documents/independent/
+server/documents/_pending/
+server/documents/_exports/

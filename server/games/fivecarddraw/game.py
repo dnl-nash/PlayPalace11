@@ -21,7 +21,7 @@ from ...game_utils.poker_actions import compute_pot_limit_caps, clamp_total_to_c
 from ...game_utils import poker_log
 from ...game_utils.poker_state import order_after_button
 from ...game_utils.poker_showdown import order_winners_by_button, format_showdown_lines
-from ...game_utils.poker_payout import resolve_pot
+from ...game_utils.poker_payout import resolve_pots_with_payouts
 from ...messages.localization import Localization
 from server.core.ui.keybinds import KeybindState
 from .bot import bot_think
@@ -453,9 +453,7 @@ class FiveCardDrawGame(Game):
         self.current_bet_round += 1
         active_ids = [p.id for p in self.get_active_players() if p.chips > 0 and not p.folded]
         order = [p.id for p in self.get_active_players() if p.id in active_ids]
-        self.betting = PokerBettingRound(
-            order=order, max_raises=self.options.max_raises or None
-        )
+        self.betting = PokerBettingRound(order=order, max_raises=self.options.max_raises or None)
         self.betting.reset()
         if not order:
             self._showdown()
@@ -502,7 +500,9 @@ class FiveCardDrawGame(Game):
         if not self.betting:
             return
         active_ids = self._active_betting_ids()
-        next_id = self.betting.next_player(self.current_player.id if self.current_player else None, active_ids)
+        next_id = self.betting.next_player(
+            self.current_player.id if self.current_player else None, active_ids
+        )
         if next_id is None:
             return
         self.turn_index = self.turn_player_ids.index(next_id)
@@ -520,7 +520,6 @@ class FiveCardDrawGame(Game):
 
     def on_tick(self) -> None:
         super().on_tick()
-        self.process_scheduled_sounds()
         if not self.game_active:
             return
         if getattr(self, "_next_hand_wait_ticks", 0) > 0:
@@ -597,7 +596,9 @@ class FiveCardDrawGame(Game):
         to_call = self.betting.amount_to_call(p.id)
         total = to_call + amount
         if self.options.raise_mode != "no_limit":
-            caps = compute_pot_limit_caps(self.pot_manager.total_pot(), to_call, self.options.raise_mode)
+            caps = compute_pot_limit_caps(
+                self.pot_manager.total_pot(), to_call, self.options.raise_mode
+            )
             total = clamp_total_to_cap(total, caps)
         if total > p.chips:
             total = p.chips
@@ -641,7 +642,10 @@ class FiveCardDrawGame(Game):
             return
         to_call = self.betting.amount_to_call(p.id)
         min_raise = max(self.betting.last_raise_size, 1)
-        pay = clamp_total_to_cap(amount, compute_pot_limit_caps(self.pot_manager.total_pot(), to_call, self.options.raise_mode))
+        pay = clamp_total_to_cap(
+            amount,
+            compute_pot_limit_caps(self.pot_manager.total_pot(), to_call, self.options.raise_mode),
+        )
         p.chips -= pay
         p.all_in = p.chips == 0
         self.play_sound("game_3cardpoker/bet.ogg")
@@ -762,75 +766,107 @@ class FiveCardDrawGame(Game):
         amount = self.pot_manager.total_pot()
         if isinstance(winner, FiveCardDrawPlayer):
             winner.chips += amount
-        self.play_sound(random.choice(["game_blackjack/win1.ogg", "game_blackjack/win2.ogg", "game_blackjack/win3.ogg"]))  # nosec B311
+        self.play_sound(
+            random.choice(
+                ["game_blackjack/win1.ogg", "game_blackjack/win2.ogg", "game_blackjack/win3.ogg"]
+            )
+        )  # nosec B311
         self.broadcast_l("poker-player-wins-pot", player=winner.name, amount=amount)
         self._sync_team_scores()
         self._queue_new_hand()
 
     def _resolve_pots(self) -> None:
         self.last_showdown_winner_ids.clear()
-        pots = self.pot_manager.get_pots()
-        for pot_index, pot in enumerate(pots):
-            eligible_players = [self.get_player_by_id(pid) for pid in pot.eligible_player_ids]
-            eligible_players = [p for p in eligible_players if isinstance(p, FiveCardDrawPlayer)]
-            if not eligible_players:
-                continue
-            active_ids = [p.id for p in self.get_active_players()]
-            winners, best_score, share, remainder = resolve_pot(
-                pot.amount,
-                eligible_players,
-                active_ids,
-                self.table_state.get_button_id(active_ids),
-                lambda p: p.id,
-                lambda p: best_hand(p.hand)[0],
-            )
-            if not winners or not best_score:
-                continue
-            self.last_showdown_winner_ids.update(w.id for w in winners)
-            for w in winners:
-                w.chips += share
-            if remainder > 0:
-                winners[0].chips += remainder
-            desc = describe_hand(best_score, "en")
-            if len(winners) == 1:
-                winner = winners[0]
+        active_ids = [p.id for p in self.get_active_players()]
+        button_id = self.table_state.get_button_id(active_ids)
+        pot_results = resolve_pots_with_payouts(
+            self.pot_manager.get_pots(),
+            lambda player_id: (
+                player
+                if isinstance((player := self.get_player_by_id(player_id)), FiveCardDrawPlayer)
+                else None
+            ),
+            active_ids,
+            button_id,
+            lambda p: p.id,
+            lambda p: best_hand(p.hand)[0],
+            lambda winner, payout: setattr(winner, "chips", winner.chips + payout),
+        )
+        for pot_result in pot_results:
+            self.last_showdown_winner_ids.update(w.id for w in pot_result.winners)
+            desc = describe_hand(pot_result.best_score, "en")
+            if len(pot_result.winners) == 1:
+                winner = pot_result.winners[0]
                 cards = read_cards(winner.hand, "en")
-                if pot_index == 0 or len(pot.eligible_player_ids) <= 1:
-                    self.play_sound(random.choice(["game_blackjack/win1.ogg", "game_blackjack/win2.ogg", "game_blackjack/win3.ogg"]))  # nosec B311
+                if pot_result.pot_index == 0 or len(pot_result.eligible_player_ids) <= 1:
+                    self.play_sound(
+                        random.choice(
+                            [
+                                "game_blackjack/win1.ogg",
+                                "game_blackjack/win2.ogg",
+                                "game_blackjack/win3.ogg",
+                            ]
+                        )
+                    )  # nosec B311
                     self.broadcast_l(
                         "poker-player-wins-pot-hand",
                         player=winner.name,
-                        amount=pot.amount,
+                        amount=pot_result.pot_amount,
                         cards=cards,
                         hand=desc,
                     )
                 else:
-                    self.play_sound(random.choice(["game_blackjack/win1.ogg", "game_blackjack/win2.ogg", "game_blackjack/win3.ogg"]))  # nosec B311
+                    self.play_sound(
+                        random.choice(
+                            [
+                                "game_blackjack/win1.ogg",
+                                "game_blackjack/win2.ogg",
+                                "game_blackjack/win3.ogg",
+                            ]
+                        )
+                    )  # nosec B311
                     self.broadcast_l(
                         "poker-player-wins-side-pot-hand",
                         player=winner.name,
-                        amount=pot.amount,
-                        index=pot_index,
+                        amount=pot_result.pot_amount,
+                        index=pot_result.pot_index,
                         cards=cards,
                         hand=desc,
                     )
             else:
-                names = ", ".join(w.name for w in winners)
-                self.play_sound(random.choice(["game_blackjack/win1.ogg", "game_blackjack/win2.ogg", "game_blackjack/win3.ogg"]))  # nosec B311
-                if pot_index == 0:
-                    self.broadcast_l("poker-players-split-pot", players=names, amount=pot.amount, hand=desc)
+                names = ", ".join(w.name for w in pot_result.winners)
+                self.play_sound(
+                    random.choice(
+                        [
+                            "game_blackjack/win1.ogg",
+                            "game_blackjack/win2.ogg",
+                            "game_blackjack/win3.ogg",
+                        ]
+                    )
+                )  # nosec B311
+                if pot_result.pot_index == 0:
+                    self.broadcast_l(
+                        "poker-players-split-pot",
+                        players=names,
+                        amount=pot_result.pot_amount,
+                        hand=desc,
+                    )
                 else:
                     self.broadcast_l(
                         "poker-players-split-side-pot",
                         players=names,
-                        amount=pot.amount,
-                        index=pot_index,
+                        amount=pot_result.pot_amount,
+                        index=pot_result.pot_index,
                         hand=desc,
                     )
         self._sync_team_scores()
 
     def _announce_showdown_hands(self, skip_best: bool = False) -> None:
-        active = [p for p in self.get_active_players() if isinstance(p, FiveCardDrawPlayer) and not p.folded]
+        active = [
+            p
+            for p in self.get_active_players()
+            if isinstance(p, FiveCardDrawPlayer) and not p.folded
+        ]
         if len(active) <= 1:
             return
         skip_ids: set[str] = set()
@@ -862,11 +898,15 @@ class FiveCardDrawGame(Game):
     def _queue_new_hand(self) -> None:
         self._next_hand_wait_ticks = 100
 
-    def _order_winners_by_button(self, winners: list[FiveCardDrawPlayer]) -> list[FiveCardDrawPlayer]:
+    def _order_winners_by_button(
+        self, winners: list[FiveCardDrawPlayer]
+    ) -> list[FiveCardDrawPlayer]:
         if len(winners) <= 1:
             return winners
         active_ids = [p.id for p in self.get_active_players()]
-        return order_winners_by_button(winners, active_ids, self.table_state.get_button_id(active_ids), lambda p: p.id)
+        return order_winners_by_button(
+            winners, active_ids, self.table_state.get_button_id(active_ids), lambda p: p.id
+        )
 
     # ==========================================================================
     # Utility / status actions
@@ -1005,7 +1045,11 @@ class FiveCardDrawGame(Game):
         }
 
     def _all_in_ids(self) -> set[str]:
-        return {p.id for p in self.get_active_players() if isinstance(p, FiveCardDrawPlayer) and p.all_in}
+        return {
+            p.id
+            for p in self.get_active_players()
+            if isinstance(p, FiveCardDrawPlayer) and p.all_in
+        }
 
     def _require_active_player(self, player: Player) -> FiveCardDrawPlayer | None:
         if not isinstance(player, FiveCardDrawPlayer):
@@ -1113,7 +1157,10 @@ class FiveCardDrawGame(Game):
             max_discards = 4 if any(card.rank == 1 for card in player.hand) else 3
             if len(player.to_discard) >= max_discards and idx not in player.to_discard:
                 self.broadcast_personal_l(
-                    player, "draw-you-discard-limit", "draw-player-discard-limit", count=max_discards
+                    player,
+                    "draw-you-discard-limit",
+                    "draw-player-discard-limit",
+                    count=max_discards,
                 )
                 return
             player.to_discard.add(idx)

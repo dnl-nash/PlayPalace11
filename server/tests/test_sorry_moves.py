@@ -140,17 +140,18 @@ def test_classic_slide_triggers_on_other_color_and_bumps_path() -> None:
     state = build_initial_game_state(["p1", "p2"], shuffle_deck=False)
     p1 = state.player_states["p1"]
     p2 = state.player_states["p2"]
-    _set_track(p1.pawns[0], 19)
-    _set_track(p2.pawns[0], 20)
-    _set_track(p2.pawns[1], 22)
-    _set_track(p2.pawns[2], 24)
+    # p2's short slide starts at 16 (offset 1), ends at 19 (3 steps)
+    _set_track(p1.pawns[0], 15)
+    _set_track(p2.pawns[0], 17)
+    _set_track(p2.pawns[1], 18)
+    _set_track(p2.pawns[2], 19)
 
     moves = generate_legal_moves(state, p1, "1", Classic00390Rules())
     move = _find_move(moves, move_type="forward", pawn_index=1, steps=1)
     apply_move(state, p1, move, Classic00390Rules())
 
     assert p1.pawns[0].zone == "track"
-    assert p1.pawns[0].track_position == 24
+    assert p1.pawns[0].track_position == 19
     assert p2.pawns[0].zone == "start"
     assert p2.pawns[1].zone == "start"
     assert p2.pawns[2].zone == "start"
@@ -159,29 +160,32 @@ def test_classic_slide_triggers_on_other_color_and_bumps_path() -> None:
 def test_classic_slide_does_not_trigger_on_own_color_start() -> None:
     state = build_initial_game_state(["p1", "p2"], shuffle_deck=False)
     p1 = state.player_states["p1"]
-    _set_track(p1.pawns[0], 4)
+    # p1's short slide starts at 1 (offset 1); landing on own slide = no slide
+    _set_track(p1.pawns[0], 0)
 
     moves = generate_legal_moves(state, p1, "1", Classic00390Rules())
     move = _find_move(moves, move_type="forward", pawn_index=1, steps=1)
     apply_move(state, p1, move, Classic00390Rules())
 
-    assert p1.pawns[0].track_position == 5
+    assert p1.pawns[0].track_position == 1
 
 
 def test_a5065_slide_triggers_on_own_color_and_bumps_path() -> None:
     state = build_initial_game_state(["p1", "p2"], pawns_per_player=3, shuffle_deck=False)
     p1 = state.player_states["p1"]
     p2 = state.player_states["p2"]
-    _set_track(p1.pawns[0], 4)
-    _set_track(p1.pawns[1], 9)
-    _set_track(p2.pawns[0], 7)
+    # p1's short slide starts at 1 (offset 1), ends at 4 (3 steps)
+    # A5065: own color DOES trigger slide
+    _set_track(p1.pawns[0], 0)
+    _set_track(p1.pawns[1], 3)
+    _set_track(p2.pawns[0], 2)
 
     moves = generate_legal_moves(state, p1, "1", A5065CoreRules())
     move = _find_move(moves, move_type="forward", pawn_index=1, steps=1)
     apply_move(state, p1, move, A5065CoreRules())
 
     assert p1.pawns[0].zone == "track"
-    assert p1.pawns[0].track_position == 9
+    assert p1.pawns[0].track_position == 4
     assert p1.pawns[1].zone == "start"
     assert p2.pawns[0].zone == "start"
 
@@ -190,31 +194,34 @@ def test_a5065_slide_does_not_trigger_on_other_color_start() -> None:
     state = build_initial_game_state(["p1", "p2"], pawns_per_player=3, shuffle_deck=False)
     p1 = state.player_states["p1"]
     p2 = state.player_states["p2"]
-    _set_track(p1.pawns[0], 19)
-    _set_track(p2.pawns[0], 22)
+    # p2's short slide starts at 16 (offset 1); A5065: other color does NOT slide
+    _set_track(p1.pawns[0], 15)
+    _set_track(p2.pawns[0], 18)
 
     moves = generate_legal_moves(state, p1, "1", A5065CoreRules())
     move = _find_move(moves, move_type="forward", pawn_index=1, steps=1)
     apply_move(state, p1, move, A5065CoreRules())
 
-    assert p1.pawns[0].track_position == 20
+    assert p1.pawns[0].track_position == 16
     assert p2.pawns[0].zone == "track"
-    assert p2.pawns[0].track_position == 22
+    assert p2.pawns[0].track_position == 18
 
 
 def test_classic_swap_into_other_color_slide_triggers_slide() -> None:
     state = build_initial_game_state(["p1", "p2"], shuffle_deck=False)
     p1 = state.player_states["p1"]
     p2 = state.player_states["p2"]
+    # p2's short slide: 16→19 (offset 1, 3 steps)
+    # p1 pawn swaps onto 16, should slide to 19, bumping p1.pawns[1] at 18
     _set_track(p1.pawns[0], 0)
-    _set_track(p1.pawns[1], 22)
-    _set_track(p2.pawns[0], 20)
+    _set_track(p1.pawns[1], 18)
+    _set_track(p2.pawns[0], 16)
 
     moves = generate_legal_moves(state, p1, "11", Classic00390Rules())
     swap_move = _find_move(moves, move_type="swap", pawn_index=1)
     apply_move(state, p1, swap_move, Classic00390Rules())
 
-    assert p1.pawns[0].track_position == 24
+    assert p1.pawns[0].track_position == 19
     assert p1.pawns[1].zone == "start"
     assert p2.pawns[0].track_position == 0
 
@@ -249,32 +256,35 @@ def test_swap_move_exchanges_track_positions() -> None:
     assert p2.pawns[0].track_position == 1
 
 
-def test_card_seven_generates_split_moves() -> None:
+def test_card_seven_generates_split_pair_picks() -> None:
     state = build_initial_game_state(["p1", "p2"], shuffle_deck=False)
     p1 = state.player_states["p1"]
     _set_track(p1.pawns[0], 0)
     _set_track(p1.pawns[1], 5)
 
     moves = generate_legal_moves(state, p1, "7", Classic00390Rules())
-    split_moves = [move for move in moves if move.move_type == "split7"]
-    assert split_moves
-    assert any(
-        move.steps is not None
-        and move.secondary_steps is not None
-        and move.steps + move.secondary_steps == 7
-        for move in split_moves
+    pair_picks = [move for move in moves if move.move_type == "split7_pick"]
+    assert pair_picks
+    assert pair_picks[0].pawn_index == 1
+    assert pair_picks[0].secondary_pawn_index == 2
+
+
+def test_split_seven_pair_generates_options_and_applies() -> None:
+    from server.games.sorry.moves import generate_split_options_for_pair
+
+    state = build_initial_game_state(["p1", "p2"], shuffle_deck=False)
+    p1 = state.player_states["p1"]
+    _set_track(p1.pawns[0], 0)
+    _set_track(p1.pawns[1], 5)
+
+    options = generate_split_options_for_pair(p1, 1, 2)
+    assert options
+    assert all(
+        m.steps is not None and m.secondary_steps is not None and m.steps + m.secondary_steps == 7
+        for m in options
     )
 
-
-def test_split_seven_apply_moves_both_pawns() -> None:
-    state = build_initial_game_state(["p1", "p2"], shuffle_deck=False)
-    p1 = state.player_states["p1"]
-    _set_track(p1.pawns[0], 0)
-    _set_track(p1.pawns[1], 5)
-
-    moves = generate_legal_moves(state, p1, "7", Classic00390Rules())
-    move = next(move for move in moves if move.move_type == "split7")
-
+    move = options[0]
     before_a = p1.pawns[0].track_position
     before_b = p1.pawns[1].track_position
     apply_move(state, p1, move, Classic00390Rules())
@@ -303,6 +313,5 @@ def test_forward_enters_home_path_and_requires_exact_home_count() -> None:
     _set_home_path(p1.pawns[0], SAFETY_LENGTH)
     cannot_overshoot = generate_legal_moves(state, p1, "2", Classic00390Rules())
     assert not any(
-        move.move_type == "forward" and move.pawn_index == 1
-        for move in cannot_overshoot
+        move.move_type == "forward" and move.pawn_index == 1 for move in cannot_overshoot
     )
