@@ -225,7 +225,10 @@ class EventHandlingMixin:
             handler = getattr(self, "_perform_leave_game", None)
             if handler:
                 handler(player)
-        self.rebuild_player_menu(player)
+        elif self.status == "finished" and getattr(self, "_last_game_result", None):
+            self._show_end_screen(self._last_game_result)
+        else:
+            self.rebuild_player_menu(player)
 
     @staticmethod
     def _normalize_keybind(event: dict) -> str:
