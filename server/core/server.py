@@ -1446,10 +1446,14 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
             block_new_accounts=self._block_new_accounts,
             locale=locale,
         ):
+            if not approval:
+                approval_message = Localization.get(locale, "approval_needed")
+            else:
+                approval_message = Localization.get(locale, "account-approved-welcome")
             await client.send(
                 {
                     "type": "speak",
-                    "text": "Registration successful! Your account is waiting for approval.",
+                    "text": approval_message,
                     "buffer": "activity",
                 }
             )
