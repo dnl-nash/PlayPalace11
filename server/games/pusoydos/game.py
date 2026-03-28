@@ -187,6 +187,8 @@ class PusoyDosPlayer(Player):
     round_losses: int = 0
     score: int = 0
     eliminated: bool = False
+    # Confirm-to-pass timer (ticks remaining; 0 = not pending)
+    pass_confirm_ticks: int = 0
     # Card passing state
     cards_to_give: int = 0
     give_to_id: str = ""
@@ -200,6 +202,8 @@ class PusoyDosPlayer(Player):
 @dataclass
 @register_game
 class PusoyDosGame(Game, TurnTimerMixin):
+    relevant_preferences = ["confirm_destructive_actions"]
+
     players: list[PusoyDosPlayer] = field(default_factory=list)
     options: PusoyDosOptions = field(default_factory=PusoyDosOptions)
 
@@ -323,6 +327,7 @@ class PusoyDosGame(Game, TurnTimerMixin):
             p.hand = []
             p.selected_cards.clear()
             p.passed_this_trick = False
+            p.pass_confirm_ticks = 0
             p.cards_to_give = 0
             p.give_to_id = ""
             p.giving_cards = False
@@ -537,6 +542,10 @@ class PusoyDosGame(Game, TurnTimerMixin):
         if not player or not isinstance(player, PusoyDosPlayer):
             return
 
+        # Reset any pending pass confirmation for all players
+        for p in self._playing_players():
+            p.pass_confirm_ticks = 0
+
         # Edge case: trick winner left the game
         active_ids = [p.id for p in self._playing_players() if not p.eliminated]
         if self.trick_winner_id and self.trick_winner_id not in active_ids and self.current_combo is not None:
@@ -592,6 +601,11 @@ class PusoyDosGame(Game, TurnTimerMixin):
             if self.hand_wait_ticks == 0:
                 self._start_new_hand()
             return
+
+        # Tick down pass-confirm timers
+        for p in self._playing_players():
+            if p.pass_confirm_ticks > 0:
+                p.pass_confirm_ticks -= 1
 
         self.on_tick_turn_timer()
         BotHelper.on_tick(self)
@@ -903,6 +917,19 @@ class PusoyDosGame(Game, TurnTimerMixin):
             self._send_error(p, "pusoydos-error-must-play")
             return
 
+        # Confirm-to-pass: if the preference is enabled and not yet confirmed
+        if not p.is_bot and p.pass_confirm_ticks == 0:
+            user = self.get_user(p)
+            if user:
+                wants_confirm = user.preferences.get_effective(
+                    "confirm_destructive_actions", game_type=self.get_type()
+                )
+                if wants_confirm:
+                    p.pass_confirm_ticks = 200  # 10 seconds at 50ms/tick
+                    user.speak_l("pusoydos-confirm-pass", buffer="table")
+                    return
+
+        p.pass_confirm_ticks = 0
         p.passed_this_trick = True
         self._broadcast_pass(p)
         p.selected_cards.clear()
