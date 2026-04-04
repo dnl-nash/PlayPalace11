@@ -47,7 +47,7 @@ senet-status = { $p1 }: { $off1 } off. { $p2 }: { $off2 } off.{ $phase ->
     [throwing] {" "}Waiting to throw.
    *[moving] {" "}Roll: { $roll }.
 }
-senet-sticks = Current throw: { $result }.
+senet-sticks = { $result }
 senet-sticks-none = No throw yet.
 
 # Win
