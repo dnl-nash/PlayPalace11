@@ -1456,7 +1456,7 @@ class Server(AdministrationMixin, DocumentBrowsingMixin, TranscriberRoleMixin):
 
 
         # All self-registered users require approval.
-        needs_approval = not self._auto_approve_new_accounts
+        needs_approval = not self._auto_approve_new_accounts and self._db.get_user_count() > 0
         # Try to register the user
         if self._block_new_accounts:
             error_message = Localization.get(locale, "accounts-blocked")
